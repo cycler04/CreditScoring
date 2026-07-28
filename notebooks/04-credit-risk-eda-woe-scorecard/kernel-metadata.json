@@ -1,0 +1,35 @@
+{
+  "id": "beatafaron/credit-risk-eda-woe-scorecard-2",
+  "id_no": 74758170,
+  "title": "Credit Risk EDA | WOE  & Scorecard | 2",
+  "code_file": "credit-risk-eda-woe-scorecard-2.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [
+    "regression",
+    "finance",
+    "business",
+    "model comparison",
+    "logistic regression"
+  ],
+  "dataset_sources": [
+    "wordsforthewise/lending-club",
+    "rikdifos/credit-card-approval-prediction",
+    "ethon0426/lending-club-20072020q1",
+    "adarshsng/lending-club-loan-data-csv",
+    "husainsb/lendingclub-issued-loans",
+    "beatafaron/loan-credit-risk-and-population-stability"
+  ],
+  "kernel_sources": [
+    "beatafaron/utils-woe-iv",
+    "beatafaron/utils"
+  ],
+  "competition_sources": [],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:9a64aaf544db07179b1202109de9a638fb5b422fab0f9d12aca91ecdc556ce0e",
+  "machine_shape": "None"
+}

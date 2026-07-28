@@ -1,0 +1,23 @@
+{
+  "id": "jeffersusus/home-credit-lgb-cat-ensemble",
+  "id_no": 54582619,
+  "title": "Home Credit (LGB + Cat ensemble) ",
+  "code_file": "home-credit-lgb-cat-ensemble.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "gpu"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "home-credit-credit-risk-model-stability"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-private-byod/python@sha256:e23c22630b6d9c427cbe8c1aa205f5e70a0f46c9aa0d3c835c6f0469306fa1aa",
+  "machine_shape": "NvidiaTeslaT4"
+}

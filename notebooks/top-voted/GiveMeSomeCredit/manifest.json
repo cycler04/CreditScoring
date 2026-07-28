@@ -1,0 +1,79 @@
+{
+  "competition": "GiveMeSomeCredit",
+  "source": "Kaggle competition Code tab",
+  "sort": "voteCount descending",
+  "snapshot_date": "2026-07-28",
+  "limit": 10,
+  "items": [
+    {
+      "rank": 1,
+      "votes": 336,
+      "ref": "orange90/credit-scorecard-example",
+      "title": "Credit ScoreCard example",
+      "validation": "valid"
+    },
+    {
+      "rank": 2,
+      "votes": 233,
+      "ref": "riteshrhyme/starter-credit-card-scoring-bbe98584-0",
+      "title": "Starter: credit card scoring bbe98584-0",
+      "validation": "valid"
+    },
+    {
+      "rank": 3,
+      "votes": 205,
+      "ref": "simonpfish/comp-stats-group-data-project-final",
+      "title": "Comp Stats Group Data Project - Final",
+      "validation": "valid"
+    },
+    {
+      "rank": 4,
+      "votes": 199,
+      "ref": "caesarlupum/modeling-give-me-some-credit",
+      "title": "Modeling: Give Me Some Credit",
+      "validation": "valid"
+    },
+    {
+      "rank": 5,
+      "votes": 107,
+      "ref": "nicholasgah/eda-credit-scoring-top-100-on-leaderboard",
+      "title": "EDA - Credit Scoring, Top 100 on Leaderboard",
+      "validation": "valid"
+    },
+    {
+      "rank": 6,
+      "votes": 94,
+      "ref": "bannourchaker/credit-top5-solution-evaluation-all",
+      "title": "credit-top5_solution-evaluation-all",
+      "validation": "valid"
+    },
+    {
+      "rank": 7,
+      "votes": 57,
+      "ref": "uditnagar5/give-me-some-credit-eda-xgboost-lightgbm-shap",
+      "title": "Give Me Some Credit: EDA, XGBoost, LightGBM & SHAP",
+      "validation": "legacy_schema_warning"
+    },
+    {
+      "rank": 8,
+      "votes": 53,
+      "ref": "prasadposture121/financial-distress-prediction",
+      "title": "Financial Distress Prediction",
+      "validation": "valid"
+    },
+    {
+      "rank": 9,
+      "votes": 51,
+      "ref": "mt77pp/mljar-automl-givemesomecredit",
+      "title": "MLJAR AutoML - GiveMeSomeCredit",
+      "validation": "valid"
+    },
+    {
+      "rank": 10,
+      "votes": 46,
+      "ref": "mostig/starter-give-me-some-credit",
+      "title": "Starter: Give Me Some Credit",
+      "validation": "valid"
+    }
+  ]
+}

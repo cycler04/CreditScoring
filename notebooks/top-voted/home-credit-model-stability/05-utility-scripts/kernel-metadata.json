@@ -1,0 +1,42 @@
+{
+  "id": "batprem/home-credit-risk-mode-utility-scripts",
+  "id_no": 50639607,
+  "title": "Home Credit Risk Mode: utility scripts",
+  "code_file": "home-credit-risk-mode-utility-scripts.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "gpu"
+  ],
+  "dataset_sources": [
+    "",
+    "batprem/hcr-codes",
+    "batprem/home-credit-baseline-training-model-2"
+  ],
+  "kernel_sources": [
+    "darynarr/scikit-learn-1-4-0",
+    "batprem/homecredit-notebook",
+    "batprem/home-credit-baseline",
+    "motono0223/autogluon-pkgs",
+    "motono0223/ray-pkgs",
+    "motono0223/home-credit-automl-training",
+    "andreynesterov/home-credit-baseline-training-lightautoml",
+    "andreynesterov/lightautoml-038-dependencies",
+    "batprem/home-credit-automl-inference",
+    "batprem/home-credit-baseline-inference",
+    "andreynesterov/home-credit-baseline-training-no-dates",
+    "andreynesterov/home-credit-baseline-data",
+    "andreynesterov/home-credit-baseline-training",
+    "batprem/lgb-xgb-cat-ensemble-baseline"
+  ],
+  "competition_sources": [
+    "home-credit-credit-risk-model-stability"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-private-byod/python@sha256:54edb36433adec1db1cadce7bc9d87bf55b6b0cd1c15244a1a75e5e1d282db6c",
+  "machine_shape": "Gpu"
+}

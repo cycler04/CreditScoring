@@ -1,0 +1,24 @@
+{
+  "id": "titericz/giba-post-processing-user-id-boost",
+  "id_no": 1585589,
+  "title": "Giba Post Processing - User_id Boost",
+  "code_file": "giba-post-processing-user-id-boost.R",
+  "language": "r",
+  "kernel_type": "script",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [],
+  "dataset_sources": [
+    "",
+    "titericz/homecredit-best-solution"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [
+    "home-credit-default-risk"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/rstats@sha256:52937f97db1d60cc30110f82402aec2d3dec26569f3ae4239adbe334f10492ad",
+  "machine_shape": "None"
+}

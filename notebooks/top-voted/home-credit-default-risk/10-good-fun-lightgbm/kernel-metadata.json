@@ -1,0 +1,21 @@
+{
+  "id": "ogrellier/good-fun-with-ligthgbm",
+  "id_no": 993505,
+  "title": "Good_fun_with_LigthGBM",
+  "code_file": "good-fun-with-ligthgbm.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "home-credit-default-risk"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:6dd711c2b4a1cb394f9c16db1697f54f27d5fad7a1dd4c596d3042209a5db80d",
+  "machine_shape": "None"
+}

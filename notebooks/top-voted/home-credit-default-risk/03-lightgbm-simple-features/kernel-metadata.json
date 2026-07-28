@@ -1,0 +1,24 @@
+{
+  "id": "jsaguiar/lightgbm-with-simple-features",
+  "id_no": 1065107,
+  "title": "LightGBM with Simple Features",
+  "code_file": "lightgbm-with-simple-features.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "finance",
+    "gradient boosting"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "home-credit-default-risk"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:9784f028e349eb16c0db263ac6d6aa9f75b79e4429c20da5e73879a88e219e39",
+  "machine_shape": "None"
+}

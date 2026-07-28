@@ -1,0 +1,21 @@
+{
+  "id": "tunguz/xgb-simple-features",
+  "id_no": 1181496,
+  "title": "XGB Simple Features",
+  "code_file": "xgb-simple-features.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "home-credit-default-risk"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:03cf26e189a824d5e27687a4d79435740820912a4a684c268157c0a30426ae21",
+  "machine_shape": "None"
+}

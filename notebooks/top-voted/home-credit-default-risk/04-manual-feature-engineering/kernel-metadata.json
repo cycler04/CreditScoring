@@ -1,0 +1,24 @@
+{
+  "id": "willkoehrsen/introduction-to-manual-feature-engineering",
+  "id_no": 1080033,
+  "title": "Introduction to Manual Feature Engineering",
+  "code_file": "introduction-to-manual-feature-engineering.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "beginner",
+    "feature engineering"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "home-credit-default-risk"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:93d8dca0dec26d400c75e69c7177f4fae209d6d1971286b5bd7a75511d23c67e",
+  "machine_shape": "None"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "bannourchaker/credit-top5-solution-evaluation-all",
+  "id_no": 23854468,
+  "title": "credit-top5_solution-evaluation-all",
+  "code_file": "credit-top5-solution-evaluation-all.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "GiveMeSomeCredit"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:a8d5a4054bb279d816ccaa4c62c1de66eeae2f3cfd6e41fb54438d5c3b0c1ef7",
+  "machine_shape": "None"
+}

@@ -1,0 +1,18 @@
+{
+  "competition": "home-credit-default-risk",
+  "source": "Kaggle competition Code tab",
+  "sort": "voteCount descending",
+  "snapshot_date": "2026-07-28",
+  "items": [
+    {"rank": 1, "votes": 9276, "ref": "willkoehrsen/start-here-a-gentle-introduction", "validation": "valid"},
+    {"rank": 2, "votes": 2977, "ref": "codename007/home-credit-complete-eda-feature-importance", "validation": "valid"},
+    {"rank": 3, "votes": 2209, "ref": "jsaguiar/lightgbm-with-simple-features", "validation": "script"},
+    {"rank": 4, "votes": 1981, "ref": "willkoehrsen/introduction-to-manual-feature-engineering", "validation": "valid"},
+    {"rank": 5, "votes": 1356, "ref": "ogrellier/feature-selection-with-null-importances", "validation": "valid"},
+    {"rank": 6, "votes": 1032, "ref": "willkoehrsen/intro-to-model-tuning-grid-and-random-search", "validation": "valid"},
+    {"rank": 7, "votes": 1013, "ref": "willkoehrsen/automated-feature-engineering-basics", "validation": "valid"},
+    {"rank": 8, "votes": 889, "ref": "gpreda/home-credit-default-risk-extensive-eda", "validation": "valid"},
+    {"rank": 9, "votes": 837, "ref": "willkoehrsen/introduction-to-feature-selection", "validation": "valid"},
+    {"rank": 10, "votes": 754, "ref": "ogrellier/good-fun-with-ligthgbm", "validation": "script"}
+  ]
+}

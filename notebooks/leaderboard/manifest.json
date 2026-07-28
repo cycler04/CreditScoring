@@ -1,0 +1,94 @@
+{
+  "scope": "Top three teams from each credit competition referenced by this project",
+  "warning": "Downloaded artifacts are public team-member kernels, not necessarily exact final submissions. Kaggle exports all accessible artifacts as scripts, not ipynb notebooks.",
+  "competitions": [
+    {
+      "slug": "GiveMeSomeCredit",
+      "teams": [
+        {
+          "rank": 1,
+          "team": "Perfect Storm",
+          "score": 0.86955,
+          "status": "not_found",
+          "kernels": []
+        },
+        {
+          "rank": 2,
+          "team": "Gxav",
+          "score": 0.86929,
+          "status": "not_found",
+          "kernels": []
+        },
+        {
+          "rank": 3,
+          "team": "occupy",
+          "score": 0.86928,
+          "status": "not_found",
+          "kernels": []
+        }
+      ]
+    },
+    {
+      "slug": "home-credit-default-risk",
+      "teams": [
+        {
+          "rank": 1,
+          "team": "Home Aloan",
+          "score": 0.80570,
+          "status": "public_member_code_downloaded",
+          "kernels": [
+            "tunguz/xgb-simple-features",
+            "ogrellier/lighgbm-with-selected-features",
+            "ogrellier/good-fun-with-ligthgbm"
+          ]
+        },
+        {
+          "rank": 2,
+          "team": "ikiri_DS",
+          "score": 0.80561,
+          "status": "public_member_code_downloaded",
+          "kernels": [
+            "titericz/giba-post-processing-user-id-boost"
+          ]
+        },
+        {
+          "rank": 3,
+          "team": "alijs & Evgeny",
+          "score": 0.80511,
+          "status": "not_found",
+          "kernels": []
+        }
+      ]
+    },
+    {
+      "slug": "home-credit-credit-risk-model-stability",
+      "teams": [
+        {
+          "rank": 1,
+          "team": "yuuniee",
+          "score": 0.60549,
+          "status": "public_team_code_downloaded",
+          "kernels": [
+            "yuuniekiri/fork-of-home-credit-risk-lightgbm",
+            "yuuniekiri/fork-of-home-credit-catboost-inference",
+            "yuuniekiri/fork-of-home-credit-lightautoml-inference"
+          ]
+        },
+        {
+          "rank": 2,
+          "team": "Amazing Badger",
+          "score": 0.60312,
+          "status": "not_found",
+          "kernels": []
+        },
+        {
+          "rank": 3,
+          "team": "ZAT",
+          "score": 0.59946,
+          "status": "not_found",
+          "kernels": []
+        }
+      ]
+    }
+  ]
+}

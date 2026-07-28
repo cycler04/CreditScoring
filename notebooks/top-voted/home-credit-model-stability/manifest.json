@@ -1,0 +1,18 @@
+{
+  "competition": "home-credit-credit-risk-model-stability",
+  "source": "Kaggle competition Code tab",
+  "sort": "voteCount descending",
+  "snapshot_date": "2026-07-28",
+  "items": [
+    {"rank": 1, "votes": 5103, "ref": "jetakow/home-credit-2024-starter-notebook", "validation": "valid"},
+    {"rank": 2, "votes": 1400, "ref": "greysky/home-credit-baseline", "validation": "valid"},
+    {"rank": 3, "votes": 979, "ref": "hideyukizushi/home-aftersubmissionsopen-3-11-2024-lb-567", "validation": "valid"},
+    {"rank": 4, "votes": 899, "ref": "pereradulina/credit-risk-prediction-with-lightgbm-and-catboost", "validation": "valid"},
+    {"rank": 5, "votes": 696, "ref": "batprem/home-credit-risk-mode-utility-scripts", "validation": "valid"},
+    {"rank": 6, "votes": 619, "ref": "tritionalval/this-is-the-way", "validation": "valid"},
+    {"rank": 7, "votes": 575, "ref": "hngbimnh/fork-of-this-is-the-way", "validation": "valid"},
+    {"rank": 8, "votes": 537, "ref": "ravi20076/homecredit-starter-inference-v1", "validation": "valid"},
+    {"rank": 9, "votes": 533, "ref": "andreasbis/metric-hack-implementation", "validation": "valid"},
+    {"rank": 10, "votes": 520, "ref": "jeffersusus/home-credit-lgb-cat-ensemble", "validation": "valid"}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "codename007/home-credit-complete-eda-feature-importance",
+  "id_no": 992671,
+  "title": "Home Credit : Complete EDA + Feature Importance ??",
+  "code_file": "home-credit-complete-eda-feature-importance.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "beginner",
+    "exploratory data analysis",
+    "data visualization",
+    "binary classification"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "home-credit-default-risk"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:6dd711c2b4a1cb394f9c16db1697f54f27d5fad7a1dd4c596d3042209a5db80d",
+  "machine_shape": "None"
+}

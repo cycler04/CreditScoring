@@ -1,0 +1,17 @@
+nhưng hiện tại gọi là giai đoạn Pre-Sprint 0 — dự án Credit Scoring.
+Mục tiêu tuần:
+- Có knowledge base cơ bản về cho vay và credit scoring.
+- Biết label và feature thường đến từ đâu.
+- Tìm hiểu trước về các phương pháp EDA và xây mô hình ML khi có dữ liệu.
+
+ví dụ 1 số notebook để bắt đầu tìm hiểu nhé:
+https://www.kaggle.com/code/willkoehrsen/start-here-a-gentle-introduction
+https://www.kaggle.com/code/codename007/home-credit-complete-eda-feature-importance
+https://www.kaggle.com/code/beatafaron/credit-risk-eda-woe-scorecard-2
+cuộc thi:
+https://www.kaggle.com/competitions/home-credit-credit-risk-model-stability
+
+Dataset tham khảo
+https://www.kaggle.com/code/beatafaron/credit-risk-eda-defaults-segments-trends-1/notebook
+https://www.kaggle.com/competitions/GiveMeSomeCredit/overview
+https://www.kaggle.com/competitions/home-credit-default-risk

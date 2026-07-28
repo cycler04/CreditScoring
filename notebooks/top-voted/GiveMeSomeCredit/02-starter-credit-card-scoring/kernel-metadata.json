@@ -1,0 +1,21 @@
+{
+  "id": "riteshrhyme/starter-credit-card-scoring-bbe98584-0",
+  "id_no": 3829270,
+  "title": "Starter: credit card scoring bbe98584-0",
+  "code_file": "starter-credit-card-scoring-bbe98584-0.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "GiveMeSomeCredit"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:2d7668563c0156cd53247c766217fb4926c43fcb11c1828dd60a9abc8a430fa2",
+  "machine_shape": "None"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "prasadposture121/financial-distress-prediction",
+  "id_no": 34321408,
+  "title": "Financial Distress Prediction",
+  "code_file": "financial-distress-prediction.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "GiveMeSomeCredit"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:79b228acb7e351f62e60e0c7c5e4794a08757208b44adc496000bdc45fdf6e31",
+  "machine_shape": "None"
+}

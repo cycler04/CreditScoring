@@ -1,0 +1,25 @@
+{
+  "id": "willkoehrsen/start-here-a-gentle-introduction",
+  "id_no": 1034046,
+  "title": "Start Here: A Gentle Introduction",
+  "code_file": "start-here-a-gentle-introduction.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "beginner",
+    "exploratory data analysis",
+    "classification"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "home-credit-default-risk"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:6cf88ef21d663c3bff1f767c43b8bcc02676927f2f371b8e5a773cf35e2aa517",
+  "machine_shape": "None"
+}

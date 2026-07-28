@@ -1,0 +1,34 @@
+{
+  "id": "ravi20076/homecredit-starter-inference-v1",
+  "id_no": 50734341,
+  "title": "HomeCredit|Starter|Inference|V1",
+  "code_file": "homecredit-starter-inference-v1.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "tabular",
+    "banking",
+    "binary classification",
+    "gpu"
+  ],
+  "dataset_sources": [
+    "ravi20076/homecreditquality2024ancillary",
+    "ravi20076/pythonlibrarieswheelfiles"
+  ],
+  "kernel_sources": [
+    "darynarr/scikit-learn-1-4-0",
+    "motono0223/autogluon-pkgs",
+    "motono0223/ray-pkgs",
+    "andreynesterov/lightautoml-038-dependencies"
+  ],
+  "competition_sources": [
+    "home-credit-credit-risk-model-stability"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-private-byod/python@sha256:54edb36433adec1db1cadce7bc9d87bf55b6b0cd1c15244a1a75e5e1d282db6c",
+  "machine_shape": "Gpu"
+}

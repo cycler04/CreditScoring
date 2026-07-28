@@ -1,0 +1,23 @@
+{
+  "id": "pereradulina/credit-risk-prediction-with-lightgbm-and-catboost",
+  "id_no": 56717890,
+  "title": "Credit Risk Prediction with LightGBM and CatBoost",
+  "code_file": "credit-risk-prediction-with-lightgbm-and-catboost.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "gpu"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "home-credit-credit-risk-model-stability"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-private-byod/python@sha256:7251358b29231b2d9eab6dfe950c0cfcc37fdf4fc1fe998b4d8e2caf393f3e8a",
+  "machine_shape": "Gpu"
+}

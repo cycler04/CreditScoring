@@ -1,0 +1,26 @@
+{
+  "id": "uditnagar5/give-me-some-credit-eda-xgboost-lightgbm-shap",
+  "id_no": 10308339,
+  "title": "Give Me Some Credit: EDA, XGBoost, LightGBM & SHAP",
+  "code_file": "give-me-some-credit-eda-xgboost-lightgbm-shap.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "exploratory data analysis",
+    "feature engineering",
+    "classification",
+    "data visualization"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "GiveMeSomeCredit"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:9f7d0e02de1b4fbe89098db04849a84213471a5b87a8cbaafff32e1c4fe36392",
+  "machine_shape": "None"
+}

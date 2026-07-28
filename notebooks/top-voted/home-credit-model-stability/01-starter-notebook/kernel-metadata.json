@@ -1,0 +1,21 @@
+{
+  "id": "jetakow/home-credit-2024-starter-notebook",
+  "id_no": 50151372,
+  "title": "Home Credit 2024 Starter Notebook",
+  "code_file": "home-credit-2024-starter-notebook.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "home-credit-credit-risk-model-stability"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:618db94e0a0ecfecbf8f52abb510c5b9fb718f0f057a9f37988bebfc3051f849",
+  "machine_shape": "None"
+}

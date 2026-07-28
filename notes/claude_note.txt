@@ -1,0 +1,17 @@
+Xong. 16 file, 164 KB, link nội bộ không đứt.
+
+Cấu trúc
+
+docs/00-tong-quan/ — knowledge base, giải 3 mục tiêu tuần: cơ bản cho vay/PD-LGD-EAD/Basel, label từ đâu, feature từ đâu, EDA playbook, modeling playbook (WoE+LR vs GBDT), metrics/monitoring, kế hoạch 5 ngày + checklist.
+docs/10-kaggle-reports/ — 7 report, mỗi link 1 file, kèm bảng so sánh 3 dataset và 4 notebook.
+Cách lấy dữ liệu: Kaggle render JS, fetch thẳng chỉ ra title. Đi vòng qua reader proxy → lấy nguyên văn trang cuộc thi (#5 #6 #7). Hai notebook Beata Faron có link GitHub → tải .ipynb gốc, trích toàn bộ markdown+code (#3 #4). Notebook #1 #2 chỉ lấy được mục lục đầy đủ + metadata — phần suy luận đã đánh dấu ⚠️ trong file.
+
+Phát hiện đáng chú ý
+
+Notebook #3/#4 (LendingClub, WoE & Scorecard) leak nặng: 10/12 feature được chọn cuối cùng chỉ tồn tại sau giải ngân (recoveries, total_rec_*, out_prncp, last_pymnt_amnt...). AUC ~0.99 báo cáo trong notebook không phải năng lực dự báo. Quy trình thì đáng học, kết quả thì không. Chi tiết + cách sửa trong Report #3.
+Cùng notebook đó có 2 công thức sai (score→PD, PD→score cutoff) — đã ghi rõ công thức đúng.
+Con số hay nhất để nhớ: cùng biến total_rec_late_fee, equal-width binning cho IV = 0.0004, decision-tree binning cho IV = 0.2404. IV thấp không chứng minh biến vô dụng.
+Stability metric của Home Credit: mean(gini) + 88·min(0,a) − 0.5·std(residuals). Hệ số 88 = thà gini thấp mà phẳng còn hơn cao mà tụt. Dùng lại được cho monitoring nội bộ.
+Đề xuất tuần: tập tay trên GiveMeSomeCredit (14 MB, 10 feature, chạy vài giây) thay vì Home Credit Default Risk (2.68 GB, 10 bảng). Kế hoạch 5 ngày ở 07-ke-hoach-tuan-checklist.md, kèm danh sách câu hỏi phải hỏi nghiệp vụ trước Sprint 1.
+
+Lưu ý: notebook #1 #2 mới có mục lục, chưa có code cell. Muốn đầy đủ thì mở trực tiếp trên Kaggle rồi bổ sung — nói nếu cần.

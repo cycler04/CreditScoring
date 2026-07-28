@@ -1,0 +1,23 @@
+{
+  "id": "mt77pp/mljar-automl-givemesomecredit",
+  "id_no": 15886597,
+  "title": "MLJAR AutoML - GiveMeSomeCredit",
+  "code_file": "mljar-automl-givemesomecredit.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [
+    "pandas"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "GiveMeSomeCredit"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:576cb2833a48cd4badc3c23b3b4bb455f265fed516e8260178064e984690b30e",
+  "machine_shape": "None"
+}

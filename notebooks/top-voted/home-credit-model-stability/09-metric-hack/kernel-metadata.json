@@ -1,0 +1,27 @@
+{
+  "id": "andreasbis/metric-hack-implementation",
+  "id_no": 57484799,
+  "title": "Metric Hack Implementation",
+  "code_file": "metric-hack-implementation.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [
+    "tritionalval/script1",
+    "tritionalval/0-585"
+  ],
+  "competition_sources": [
+    "home-credit-credit-risk-model-stability"
+  ],
+  "model_sources": [
+    "sunghoshim/homecredit-models-public/Other/lgb/1",
+    "sunghoshim/homecredit-models-public/Other/cat/1"
+  ],
+  "docker_image": "gcr.io/kaggle-private-byod/python@sha256:7251358b29231b2d9eab6dfe950c0cfcc37fdf4fc1fe998b4d8e2caf393f3e8a",
+  "machine_shape": "NvidiaTeslaT4"
+}

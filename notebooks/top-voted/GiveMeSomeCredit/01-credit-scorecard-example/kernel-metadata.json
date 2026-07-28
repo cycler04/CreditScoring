@@ -1,0 +1,21 @@
+{
+  "id": "orange90/credit-scorecard-example",
+  "id_no": 9815471,
+  "title": "Credit ScoreCard example",
+  "code_file": "credit-scorecard-example.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "GiveMeSomeCredit"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:3955da6976c9d10a271fb822aaf0170c57ca7c38d880549619669a735e12df2e",
+  "machine_shape": "None"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "beatafaron/credit-risk-eda-defaults-segments-trends-1",
+  "id_no": 73833140,
+  "title": "Credit Risk EDA | Defaults, Segments & Trends | 1",
+  "code_file": "credit-risk-eda-defaults-segments-trends-1.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [
+    "finance",
+    "business",
+    "logistic regression",
+    "exploratory data analysis",
+    "statistical analysis"
+  ],
+  "dataset_sources": [
+    "wordsforthewise/lending-club",
+    "rikdifos/credit-card-approval-prediction",
+    "ethon0426/lending-club-20072020q1",
+    "adarshsng/lending-club-loan-data-csv",
+    "husainsb/lendingclub-issued-loans",
+    "beatafaron/loan-credit-risk-and-population-stability"
+  ],
+  "kernel_sources": [
+    "beatafaron/utils"
+  ],
+  "competition_sources": [],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-private-byod/python@sha256:1003a82bef5df3c098b2041d936cb5f1836e52d7b610e8f0f4dedc194fb3b773",
+  "machine_shape": "Gpu"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "caesarlupum/modeling-give-me-some-credit",
+  "id_no": 8388929,
+  "title": "Modeling: Give Me Some Credit  \ud83d\udcc8\ud83d\udcc9",
+  "code_file": "modeling-give-me-some-credit.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "beginner",
+    "dailychallenge"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "GiveMeSomeCredit"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:d9ff719a828251a914583158eab6293aecd9b06cb9db3f9e83a70f495bab9290",
+  "machine_shape": "None"
+}

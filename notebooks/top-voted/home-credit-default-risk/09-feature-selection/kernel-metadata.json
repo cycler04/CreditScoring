@@ -1,0 +1,25 @@
+{
+  "id": "willkoehrsen/introduction-to-feature-selection",
+  "id_no": 1156791,
+  "title": "Introduction to Feature Selection",
+  "code_file": "introduction-to-feature-selection.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "programming"
+  ],
+  "dataset_sources": [
+    "willkoehrsen/home-credit-manual-engineered-features"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [
+    "home-credit-default-risk"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:c5dcb001b761de80cc002be9005b8611222a43088c2e3b2565764fd4c5c37235",
+  "machine_shape": "None"
+}
