@@ -13,5 +13,5 @@ https://www.kaggle.com/competitions/home-credit-credit-risk-model-stability
 
 Dataset tham khảo
 https://www.kaggle.com/code/beatafaron/credit-risk-eda-defaults-segments-trends-1/notebook
-https://www.kaggle.com/competitions/GiveMeSomeCredit/overview
+https://www.kaggle.com/competitions/GiveMeSomeCredit/overview -> Main target
 https://www.kaggle.com/competitions/home-credit-default-risk
