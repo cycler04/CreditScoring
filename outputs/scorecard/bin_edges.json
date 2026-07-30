@@ -1,0 +1,64 @@
+{
+  "RevolvingUtilizationOfUnsecuredLines": [
+    "-Infinity",
+    0.13183673471212387,
+    0.300896093249321,
+    0.5005520880222321,
+    0.6989784836769104,
+    0.9410382807254791,
+    "Infinity"
+  ],
+  "age": [
+    "-Infinity",
+    36.5,
+    43.5,
+    52.5,
+    55.5,
+    63.5,
+    "Infinity"
+  ],
+  "NumberOfTime30-59DaysPastDueNotWorse": [
+    "-Infinity",
+    0.5,
+    1.5,
+    "Infinity"
+  ],
+  "DebtRatio": [
+    "-Infinity",
+    0.41383324563503265,
+    "Infinity"
+  ],
+  "MonthlyIncome": [
+    "-Infinity",
+    3332.5,
+    5559.5,
+    6666.5,
+    "Infinity"
+  ],
+  "NumberOfOpenCreditLinesAndLoans": [
+    "-Infinity",
+    2.5,
+    "Infinity"
+  ],
+  "NumberOfTimes90DaysLate": [
+    "-Infinity",
+    0.5,
+    "Infinity"
+  ],
+  "NumberRealEstateLoansOrLines": [
+    "-Infinity",
+    0.5,
+    "Infinity"
+  ],
+  "NumberOfTime60-89DaysPastDueNotWorse": [
+    "-Infinity",
+    "Infinity"
+  ],
+  "NumberOfDependents": [
+    "-Infinity",
+    0.5,
+    1.5,
+    2.5,
+    "Infinity"
+  ]
+}

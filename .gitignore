@@ -4,7 +4,3 @@ __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
 
-datasets/*
-!datasets/README.md
-outputs/*
-!outputs/README.md

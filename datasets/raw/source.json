@@ -1,0 +1,12 @@
+{
+  "selected_source": "competition:GiveMeSomeCredit",
+  "competition": "GiveMeSomeCredit",
+  "public_mirror": "brycecf/give-me-some-credit-dataset",
+  "note": "Downloaded directly from the official Kaggle competition.",
+  "sha256": {
+    "Data Dictionary.xls": "d388d6b11ed63fee95432048187c8c064b8ca38e40d7e8aab9edd36af240b092",
+    "cs-test.csv": "bab363a2a807218d32a51f5fc9668b8be7977795065edd386abc8546abaa5b78",
+    "cs-training.csv": "1bd46da486a5708c58c7b01a034fae2a13b327f6f7b62ea7ba4fe3b5824b24ac",
+    "sampleEntry.csv": "578b4b01d0f6ed7f97f1988afff0c41194e72bf4b25707119903d4de3dc1dcea"
+  }
+}
