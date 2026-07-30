@@ -1,0 +1,4 @@
+interface:
+  display_name: "Synthesize Research Report"
+  short_description: "Synthesize evidence into concise R&D reports"
+  default_prompt: "Use $synthesize-research-report to combine research notes and experiment results into a report."

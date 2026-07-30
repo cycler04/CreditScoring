@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Paper"
+  short_description: "Read and evaluate research papers rigorously"
+  default_prompt: "Use $research-paper to read a paper and produce an evidence-backed research note."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Run Research Experiment"
+  short_description: "Plan and run reproducible R&D experiments"
+  default_prompt: "Use $run-research-experiment to run a small reproducible experiment and record the evidence."

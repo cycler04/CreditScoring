@@ -1,0 +1,4 @@
+interface:
+  display_name: "Write Research Report"
+  short_description: "Turn research evidence into reusable Markdown"
+  default_prompt: "Use $write-research-report to synthesize this research into a reusable Markdown report."

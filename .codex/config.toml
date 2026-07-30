@@ -1,0 +1,4 @@
+# High autonomy inside the workspace; irreversible or external actions still ask.
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
