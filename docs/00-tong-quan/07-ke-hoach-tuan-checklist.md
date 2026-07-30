@@ -30,7 +30,7 @@ Pipeline chạy lại bằng `./scripts/run_all.sh`; cấu trúc và cách chạ
 - [x] EDA trên training split: target, missing, anomaly và bad rate decile của
   10 biến; có [notebook](../../outputs/eda/give_me_some_credit_eda.ipynb).
 - [x] Baseline Logistic Regression và LightGBM; kết quả lần chạy hiện tại ở
-  [metrics.csv](../../outputs/models/metrics.csv).
+  [metrics.csv](../../outputs/models/metrics/metrics.csv).
 - [x] WoE/IV cho 10 biến; tối đa 6 bin số + 1 bin missing và WoE đơn điệu.
 - [x] Scorecard integer 300–850, cutoff approval 60%/70%/80% và score PSI.
 - [x] Các hàm tái sử dụng nằm trong `src/credit_scoring/`; kiểm thử bằng

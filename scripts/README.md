@@ -66,7 +66,10 @@ Output chính:
 |---|---|
 | `datasets/processed/` | Dữ liệu clean và split membership |
 | `outputs/eda/` | Target, missing, anomaly, decile, plots và notebook |
-| `outputs/models/metrics.csv` | AUC, Gini, KS |
+| `outputs/models/metrics/metrics.csv` | AUC, Gini, KS |
+| `outputs/models/metrics/roc_auc_curve.png` | ROC-AUC trên test split của ba mô hình |
+| `outputs/models/metrics/gini_curve.png` | Cumulative gains và Gini trên test split |
+| `outputs/models/metrics/ks_curve.png` | KS separation trên test split |
 | `outputs/models/*.joblib` | Logistic Regression và LightGBM |
 | `outputs/scorecard/iv_summary.csv` | IV và trạng thái monotonic |
 | `outputs/scorecard/scorecard.csv` | Bảng điểm 300–850 |
@@ -109,6 +112,26 @@ Tải lại top 10 theo vote cho Home Credit Default Risk và Model Stability:
 ```bash
 ./scripts/download_top_voted_other_competitions.sh
 ```
+
+## Đồng bộ artifact lên tho2
+
+```bash
+./scripts/push_to_tho2.sh
+```
+
+Script copy `docs/`, `notebooks/`, `datasets/` và `outputs/` tới
+`vinrobotics:~/Dung_Workspace/testing/`. Transfer có thể tiếp tục sau khi gián
+đoạn và script kiểm tra số file cùng tổng số byte của từng thư mục sau khi copy.
+Script không xóa file chỉ có ở remote.
+
+Kéo các thư mục đó từ tho2 về local:
+
+```bash
+./scripts/pull_from_tho2.sh
+```
+
+Script cập nhật local từ `vinrobotics:~/Dung_Workspace/testing/`, tiếp tục được
+transfer gián đoạn và không xóa file chỉ có ở local.
 
 ## Kiểm tra
 

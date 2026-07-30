@@ -18,5 +18,7 @@ bash -n "${PROJECT_ROOT}/scripts/download_notebooks.sh"
 bash -n "${PROJECT_ROOT}/scripts/download_leaderboard_notebooks.sh"
 bash -n "${PROJECT_ROOT}/scripts/download_top_voted_givemesomecredit.sh"
 bash -n "${PROJECT_ROOT}/scripts/download_top_voted_other_competitions.sh"
+bash -n "${PROJECT_ROOT}/scripts/pull_from_tho2.sh"
+bash -n "${PROJECT_ROOT}/scripts/push_to_tho2.sh"
 "${UV_BIN}" run --project "${PROJECT_ROOT}" python -m compileall -q \
   "${PROJECT_ROOT}/src" "${PROJECT_ROOT}/scripts" "${PROJECT_ROOT}/tests"

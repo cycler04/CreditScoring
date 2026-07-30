@@ -32,7 +32,8 @@ Python 3.14 được khóa trong `.python-version`; dependency đầy đủ đư
 Kết quả chính:
 
 - `outputs/eda/`: target, missing, anomaly, bad rate decile và plots.
-- `outputs/models/metrics.csv`: AUC, Gini, KS của LR, LightGBM, LR-WoE.
+- `outputs/models/metrics/metrics.csv`: AUC, Gini, KS của LR, LightGBM, LR-WoE.
+- `outputs/models/metrics/`: biểu đồ ROC-AUC, Gini và KS trên test split.
 - `outputs/scorecard/`: IV, WoE, bins, scorecard 300–850, cutoff và PSI.
 - `outputs/run_summary.json`: tóm tắt lần chạy.
 

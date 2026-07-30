@@ -30,7 +30,7 @@ Kaggle/public mirror
 - `datasets/raw/`: input tải về, không track.
 - `datasets/processed/`: dữ liệu trung gian nếu phát sinh, không track.
 - `outputs/eda/`: bảng và plot EDA.
-- `outputs/models/`: metric và model artifact.
+- `outputs/models/`: model artifact; metric và biểu đồ nằm trong `metrics/`.
 - `outputs/scorecard/`: IV, WoE, bins, scorecard, cutoff và PSI.
 - `outputs/run_summary.json`: tóm tắt lần chạy.
 

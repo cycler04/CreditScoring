@@ -111,7 +111,7 @@ một bin riêng.
 3. EDA trên training split.
 4. Logistic Regression thô và LightGBM.
 5. WoE/IV, Logistic Regression trên WoE và scorecard.
-6. Approval cutoffs và score PSI.
+6. ROC-AUC trên test split, approval cutoffs và score PSI.
 
 Nên gọi qua `scripts/run_pipeline.py` thay vì gọi trực tiếp.
 

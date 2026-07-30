@@ -10,6 +10,7 @@ import lightgbm as lgb
 import nbformat
 import numpy as np
 import pandas as pd
+from matplotlib.figure import Figure
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score, roc_curve
@@ -71,13 +72,146 @@ def _model_metrics(
     }
 
 
+def _write_roc_auc_curve(
+    y_true: pd.Series,
+    predictions: dict[str, np.ndarray],
+    output_path: Path,
+) -> None:
+    """Write a combined test-split ROC curve for the fitted models."""
+    figure = Figure(figsize=(8, 6), layout="constrained")
+    axes = figure.subplots()
+    for model_name, scores in predictions.items():
+        fpr, tpr, _ = roc_curve(y_true, scores)
+        auc = roc_auc_score(y_true, scores)
+        axes.plot(fpr, tpr, linewidth=2, label=f"{model_name} (AUC={auc:.3f})")
+
+    axes.plot([0, 1], [0, 1], linestyle="--", color="grey", label="Random")
+    axes.set(
+        title="ROC curves — test split",
+        xlabel="False positive rate",
+        ylabel="True positive rate",
+        xlim=(0, 1),
+        ylim=(0, 1.01),
+    )
+    axes.grid(alpha=0.25)
+    axes.legend(loc="lower right")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    figure.savefig(output_path, dpi=160)
+
+
+def _cumulative_class_rates(
+    y_true: pd.Series,
+    scores: np.ndarray,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Return population, bad, and good cumulative rates ordered by risk."""
+    target = y_true.to_numpy()
+    order = np.argsort(-scores, kind="stable")
+    ordered_target = target[order]
+    ordered_scores = scores[order]
+    bad_count = int(ordered_target.sum())
+    good_count = len(ordered_target) - bad_count
+    if bad_count == 0 or good_count == 0:
+        raise ValueError("Metric diagrams require both target classes")
+
+    threshold_ends = np.flatnonzero(
+        np.r_[ordered_scores[:-1] != ordered_scores[1:], True]
+    )
+    population_rate = (threshold_ends + 1) / len(target)
+    cumulative_bad_rate = np.cumsum(ordered_target)[threshold_ends] / bad_count
+    cumulative_good_rate = (
+        np.cumsum(1 - ordered_target)[threshold_ends] / good_count
+    )
+    return (
+        np.insert(population_rate, 0, 0.0),
+        np.insert(cumulative_bad_rate, 0, 0.0),
+        np.insert(cumulative_good_rate, 0, 0.0),
+    )
+
+
+def _write_gini_curve(
+    y_true: pd.Series,
+    predictions: dict[str, np.ndarray],
+    output_path: Path,
+) -> None:
+    """Write cumulative-gains curves with test-split Gini values."""
+    figure = Figure(figsize=(8, 6), layout="constrained")
+    axes = figure.subplots()
+    for model_name, scores in predictions.items():
+        population_rate, cumulative_bad_rate, _ = _cumulative_class_rates(
+            y_true, scores
+        )
+        gini = 2 * roc_auc_score(y_true, scores) - 1
+        axes.plot(
+            population_rate,
+            cumulative_bad_rate,
+            linewidth=2,
+            label=f"{model_name} (Gini={gini:.3f})",
+        )
+
+    bad_rate = float(y_true.mean())
+    axes.plot(
+        [0, bad_rate, 1],
+        [0, 1, 1],
+        linestyle=":",
+        color="black",
+        label="Perfect",
+    )
+    axes.plot([0, 1], [0, 1], linestyle="--", color="grey", label="Random")
+    axes.set(
+        title="Cumulative gains (Gini) — test split",
+        xlabel="Cumulative population share",
+        ylabel="Cumulative bad share",
+        xlim=(0, 1),
+        ylim=(0, 1.01),
+    )
+    axes.grid(alpha=0.25)
+    axes.legend(loc="lower right")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    figure.savefig(output_path, dpi=160)
+
+
+def _write_ks_curve(
+    y_true: pd.Series,
+    predictions: dict[str, np.ndarray],
+    output_path: Path,
+) -> None:
+    """Write cumulative-distribution separation curves for test-split KS."""
+    figure = Figure(figsize=(8, 6), layout="constrained")
+    axes = figure.subplots()
+    for model_name, scores in predictions.items():
+        population_rate, cumulative_bad_rate, cumulative_good_rate = (
+            _cumulative_class_rates(y_true, scores)
+        )
+        separation = cumulative_bad_rate - cumulative_good_rate
+        ks = float(np.max(separation))
+        axes.plot(
+            population_rate,
+            separation,
+            linewidth=2,
+            label=f"{model_name} (KS={ks:.3f})",
+        )
+
+    axes.axhline(0, linestyle="--", color="grey", linewidth=1)
+    axes.set(
+        title="KS separation curves — test split",
+        xlabel="Cumulative population share",
+        ylabel="Cumulative bad share − cumulative good share",
+        xlim=(0, 1),
+        ylim=(0, 1.01),
+    )
+    axes.grid(alpha=0.25)
+    axes.legend(loc="upper right")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    figure.savefig(output_path, dpi=160)
+
+
 def _fit_baselines(
     train: pd.DataFrame,
     valid: pd.DataFrame,
     test: pd.DataFrame,
     feature_columns: list[str],
     output_dir: Path,
-) -> pd.DataFrame:
+) -> tuple[pd.DataFrame, dict[str, np.ndarray]]:
     output_dir.mkdir(parents=True, exist_ok=True)
     x_train, y_train = train[feature_columns], train[TARGET]
     x_valid, y_valid = valid[feature_columns], valid[TARGET]
@@ -147,7 +281,7 @@ def _fit_baselines(
         },
         index=y_test.index,
     ).sort_index().to_csv(output_dir / "test_predictions.csv", index_label="row_index")
-    return pd.DataFrame(rows)
+    return pd.DataFrame(rows), predictions
 
 
 def _monotonic_table(
@@ -211,7 +345,7 @@ def _fit_scorecard(
     test: pd.DataFrame,
     features: list[str],
     output_dir: Path,
-) -> tuple[pd.DataFrame, dict[str, object]]:
+) -> tuple[pd.DataFrame, dict[str, object], np.ndarray]:
     output_dir.mkdir(parents=True, exist_ok=True)
     edges: dict[str, np.ndarray] = {}
     tables: dict[str, pd.DataFrame] = {}
@@ -276,6 +410,7 @@ def _fit_scorecard(
 
     metrics = []
     scores_by_split: dict[str, pd.Series] = {}
+    test_pd_bad: np.ndarray | None = None
     for split_name, split_frame in [
         ("valid", valid),
         ("test", test),
@@ -288,6 +423,8 @@ def _fit_scorecard(
         scores_by_split[split_name] = _score_from_card(
             split_frame, features, edges, scorecard
         )
+        if split_name == "test":
+            test_pd_bad = pd_bad
 
     approval_rows = []
     test_scores = scores_by_split["test"]
@@ -325,7 +462,9 @@ def _fit_scorecard(
             scorecard.groupby("feature")["points"].max().sum()
         ),
     }
-    return pd.DataFrame(metrics), summary
+    if test_pd_bad is None:
+        raise RuntimeError("Missing test predictions for ROC curve")
+    return pd.DataFrame(metrics), summary, test_pd_bad
 
 
 def _write_eda_notebook(project_root: Path) -> None:
@@ -411,22 +550,39 @@ def run_pipeline(project_root: Path) -> dict[str, object]:
         output_root / "eda",
     )
     _write_eda_notebook(project_root)
-    baseline_metrics = _fit_baselines(
+    baseline_metrics, test_predictions = _fit_baselines(
         train,
         valid,
         test,
         feature_columns,
         output_root / "models",
     )
-    scorecard_metrics, scorecard_summary = _fit_scorecard(
+    scorecard_metrics, scorecard_summary, scorecard_test_predictions = _fit_scorecard(
         train,
         valid,
         test,
         original_features,
         output_root / "scorecard",
     )
+    test_predictions["logistic_woe"] = scorecard_test_predictions
+    metrics_dir = output_root / "models" / "metrics"
+    _write_roc_auc_curve(
+        test[TARGET],
+        test_predictions,
+        metrics_dir / "roc_auc_curve.png",
+    )
+    _write_gini_curve(
+        test[TARGET],
+        test_predictions,
+        metrics_dir / "gini_curve.png",
+    )
+    _write_ks_curve(
+        test[TARGET],
+        test_predictions,
+        metrics_dir / "ks_curve.png",
+    )
     metrics = pd.concat([baseline_metrics, scorecard_metrics], ignore_index=True)
-    metrics.to_csv(output_root / "models" / "metrics.csv", index=False)
+    metrics.to_csv(metrics_dir / "metrics.csv", index=False)
 
     summary = {
         "raw_csv": str(raw_csv.relative_to(project_root)),

@@ -13,6 +13,18 @@ import pandas as pd
 import seaborn as sns
 
 
+def summary_statistics(
+    frame: pd.DataFrame,
+    columns: list[str],
+) -> pd.DataFrame:
+    """Summarize central tendency, range, and missingness for numeric columns."""
+    selected = frame[columns]
+    summary = selected.agg(["min", "max", "mean", "median"]).T
+    summary["missing_count"] = selected.isna().sum()
+    summary["missing_rate_pct"] = (selected.isna().mean() * 100).round(2)
+    return summary.reset_index(names="feature")
+
+
 def bad_rate_by_decile(
     frame: pd.DataFrame,
     feature_columns: list[str],
@@ -69,6 +81,11 @@ def write_eda_outputs(
         .sort_values("missing_rate", ascending=False)
     )
     missing.to_csv(output_dir / "missing_summary.csv")
+
+    summary_statistics(
+        frame,
+        [target, *original_features],
+    ).to_csv(output_dir / "summary_statistics.csv", index=False)
 
     frame[original_features].describe(percentiles=[0.01, 0.5, 0.95, 0.99]).T.to_csv(
         output_dir / "numeric_summary.csv"

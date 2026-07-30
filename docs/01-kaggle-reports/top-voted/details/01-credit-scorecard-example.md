@@ -43,12 +43,10 @@ Các quan sát hữu ích:
 - Ba biến delinquency có cụm giá trị 96/98 bất thường.
 - `DebtRatio` rất lớn thường đi cùng `MonthlyIncome` thiếu hoặc bằng 0/1.
 - Utilization có đuôi cực dài.
-- Notebook không vội xóa toàn bộ anomaly; đây là thái độ EDA đúng hơn việc coi mọi
-  giá trị ngoài IQR là lỗi.
+- Notebook không vội xóa toàn bộ anomaly; đây là thái độ EDA đúng hơn việc coi mọi giá trị ngoài IQR là lỗi.
 
 Điểm yếu: median được tính trên toàn bộ tập train Kaggle. Không có missing
-indicator, không lưu fitted median thành artifact, và không có transform tương ứng
-cho `cs-test.csv`.
+indicator, không lưu fitted median thành artifact, và không có transform tương ứng cho `cs-test.csv`.
 
 ## Binning, IV và WoE
 
@@ -166,4 +164,3 @@ copy implementation nguyên trạng.
   truy cập 2026-07-29.
 - scikit-learn, [`train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html),
   truy cập 2026-07-29.
-
