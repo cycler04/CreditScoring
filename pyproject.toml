@@ -5,6 +5,7 @@ description = "Reproducible GiveMeSomeCredit EDA, modeling, and scorecard pipeli
 readme = "README.md"
 requires-python = ">=3.14,<3.15"
 dependencies = [
+    "duckdb>=1.5.5",
     "joblib==1.5.3",
     "kaggle==2.2.4",
     "lightgbm==4.7.0",
@@ -12,10 +13,13 @@ dependencies = [
     "nbformat==5.10.4",
     "numpy==2.5.1",
     "pandas==3.0.5",
+    "polars>=1.35.0",
+    "pyarrow>=25.0.0",
     "python-dotenv==1.2.2",
     "requests==2.34.2",
     "scikit-learn==1.9.0",
     "seaborn==0.13.2",
+    "xgboost==3.3.0",
 ]
 
 [build-system]
@@ -23,4 +27,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/credit_scoring"]
+packages = [
+    "src/credit_scoring",
+    "src/home_credit",
+    "src/home_credit_stability",
+]

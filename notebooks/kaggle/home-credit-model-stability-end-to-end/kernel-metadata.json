@@ -1,0 +1,17 @@
+{
+  "id": "cyclerlol/hcms-end-to-end-lightgbm",
+  "title": "HCMS End-to-End LightGBM",
+  "code_file": "home-credit-model-stability-end-to-end.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "home-credit-credit-risk-model-stability"
+  ],
+  "model_sources": []
+}
