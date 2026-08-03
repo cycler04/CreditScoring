@@ -1,0 +1,3 @@
+id,name,details,sample
+1,SK_ID_CURR,ID của đơn vay hiện tại trong application_test.csv; phải giữ đúng ID và thứ tự khi tạo submission.,100001
+2,TARGET,Xác suất dự đoán TARGET = 1 cho đơn vay; dùng giá trị liên tục trong khoảng từ 0 đến 1.,0.5

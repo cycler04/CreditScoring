@@ -41,7 +41,7 @@ Ví dụ:
 from pathlib import Path
 from credit_scoring.data import clean_features, load_training_data
 
-raw = load_training_data(Path("datasets/raw/cs-training.csv"))
+raw = load_training_data(Path("datasets/raw/give-me-some-credit/cs-training.csv"))
 clean, findings = clean_features(raw)
 ```
 

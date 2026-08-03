@@ -8,8 +8,9 @@ from pathlib import Path
 
 import pandas as pd
 
-from home_credit.aggregate import build_feature_matrix
-from home_credit.data import clean_application
+from home_credit_default_rate.aggregate import build_feature_matrix
+from home_credit_default_rate.data import clean_application
+from home_credit_default_rate.pipeline import _column_profile
 
 
 class HomeCreditDataTests(unittest.TestCase):
@@ -49,6 +50,41 @@ class HomeCreditDataTests(unittest.TestCase):
                 level="A",
             )
         pd.testing.assert_frame_equal(result, application)
+
+    def test_column_profile_adds_details_and_numeric_statistics(self) -> None:
+        frame = pd.DataFrame(
+            {
+                "numeric": [1.0, 2.0, 3.0, None],
+                "category": ["a", "b", "a", None],
+            }
+        )
+
+        profile = _column_profile(
+            frame,
+            {"numeric": "Numeric detail", "category": "Category detail"},
+        ).set_index("feature")
+
+        self.assertEqual(
+            list(profile.columns),
+            [
+                "details",
+                "dtype",
+                "missing_count",
+                "missing_rate",
+                "nunique",
+                "min",
+                "max",
+                "mean",
+                "median",
+            ],
+        )
+        self.assertEqual(profile.loc["numeric", "details"], "Numeric detail")
+        self.assertEqual(profile.loc["numeric", "min"], 1.0)
+        self.assertEqual(profile.loc["numeric", "max"], 3.0)
+        self.assertEqual(profile.loc["numeric", "mean"], 2.0)
+        self.assertEqual(profile.loc["numeric", "median"], 2.0)
+        self.assertTrue(pd.isna(profile.loc["category", "min"]))
+        self.assertTrue(pd.isna(profile.loc["category", "median"]))
 
 
 if __name__ == "__main__":

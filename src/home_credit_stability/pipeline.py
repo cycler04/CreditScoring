@@ -25,6 +25,15 @@ from credit_scoring.scorecard import (
     scorecard_from_lr,
     woe_iv,
 )
+from credit_scoring.visualization import (
+    write_bad_rate_by_period_plot,
+    write_cutoff_plot,
+    write_feature_importance_plot,
+    write_gini_by_period_plot,
+    write_gini_curve,
+    write_ks_curve,
+    write_roc_auc_curve,
+)
 
 from .aggregate import build_feature_matrix
 from .data import ID_COLUMN, TARGET, dataset_inventory
@@ -391,7 +400,14 @@ def run_pipeline(
 ) -> dict[str, object]:
     """Build all A/B/C matrices, fit baselines, and write audit artifacts."""
     processed_dir.mkdir(parents=True, exist_ok=True)
-    for subdir in ["eda", "models", "scorecard", "stability", "submissions"]:
+    for subdir in [
+        "eda",
+        "models",
+        "models/metrics",
+        "scorecard",
+        "stability",
+        "submissions",
+    ]:
         (output_dir / subdir).mkdir(parents=True, exist_ok=True)
     (output_dir / "models/feature_importance").mkdir(
         parents=True, exist_ok=True
@@ -414,6 +430,13 @@ def run_pipeline(
         }
     )
     bad_rate_week.to_csv(output_dir / "eda/bad_rate_by_week.csv", index=False)
+    write_bad_rate_by_period_plot(
+        bad_rate_week,
+        output_dir / "eda/bad_rate_by_week.png",
+        period_column="WEEK_NUM",
+        group_column="split",
+        title="Home Credit Model Stability — bad rate by week",
+    )
     inventory = dataset_inventory(raw_dir)
     pd.DataFrame(inventory["files"]).to_csv(
         output_dir / "eda/dataset_inventory.csv", index=False
@@ -495,11 +518,20 @@ def run_pipeline(
         stage_by_week = stage_result.by_week.copy()
         stage_by_week.insert(0, "level", level)
         stage_gini_parts.append(stage_by_week)
-        pd.DataFrame(
+        importance_table = pd.DataFrame(
             {"feature": x_train.columns, "importance": model.feature_importances_}
-        ).sort_values("importance", ascending=False).to_csv(
-            output_dir / f"models/feature_importance/lightgbm_{level}.csv",
-            index=False,
+        )
+        importance_table = importance_table.sort_values(
+            "importance", ascending=False
+        )
+        importance_path = (
+            output_dir / f"models/feature_importance/lightgbm_{level}"
+        )
+        importance_table.to_csv(importance_path.with_suffix(".csv"), index=False)
+        write_feature_importance_plot(
+            importance_table,
+            importance_path.with_suffix(".png"),
+            title=f"lightgbm_{level} — top feature importance",
         )
         if level == "C":
             final = {
@@ -539,6 +571,13 @@ def run_pipeline(
     )
     pd.concat(stage_gini_parts, ignore_index=True).to_csv(
         output_dir / "stability/stage_gini_by_week.csv", index=False
+    )
+    write_gini_by_period_plot(
+        pd.concat(stage_gini_parts, ignore_index=True),
+        output_dir / "stability/stage_gini_by_week.png",
+        period_column="WEEK_NUM",
+        group_column="level",
+        title="Stage A/B/C LightGBM Gini by week",
     )
 
     if final is None or final_frame is None:
@@ -603,6 +642,21 @@ def run_pipeline(
             "model": logistic,
         },
         output_dir / "models/logistic_raw.joblib",
+    )
+    logistic_importance = pd.DataFrame(
+        {
+            "feature": x_train.columns,
+            "coefficient": logistic.coef_[0],
+            "importance": np.abs(logistic.coef_[0]),
+        }
+    ).sort_values("importance", ascending=False)
+    logistic_importance.to_csv(
+        output_dir / "models/feature_importance/logistic_raw.csv", index=False
+    )
+    write_feature_importance_plot(
+        logistic_importance,
+        output_dir / "models/feature_importance/logistic_raw.png",
+        title="logistic_raw — absolute coefficient importance",
     )
 
     xgboost_features = (
@@ -673,6 +727,20 @@ def run_pipeline(
         },
         output_dir / "models/xgboost.joblib",
     )
+    xgboost_importance = pd.DataFrame(
+        {
+            "feature": xgboost_features,
+            "importance": xgboost_model.feature_importances_,
+        }
+    ).sort_values("importance", ascending=False)
+    xgboost_importance.to_csv(
+        output_dir / "models/feature_importance/xgboost.csv", index=False
+    )
+    write_feature_importance_plot(
+        xgboost_importance,
+        output_dir / "models/feature_importance/xgboost.png",
+        title="xgboost — top feature importance",
+    )
 
     importance_order = (
         pd.DataFrame(
@@ -699,6 +767,21 @@ def run_pipeline(
         name: woe_model.predict_proba(values)[:, 1]
         for name, values in transformed.items()
     }
+    woe_importance = pd.DataFrame(
+        {
+            "feature": transformed["train"].columns,
+            "coefficient": woe_model.coef_[0],
+            "importance": np.abs(woe_model.coef_[0]),
+        }
+    ).sort_values("importance", ascending=False)
+    woe_importance.to_csv(
+        output_dir / "models/feature_importance/logistic_woe.csv", index=False
+    )
+    write_feature_importance_plot(
+        woe_importance,
+        output_dir / "models/feature_importance/logistic_woe.png",
+        title="logistic_woe — absolute coefficient importance",
+    )
 
     for model_name, model_predictions in predictions.items():
         if model_name != "lightgbm":
@@ -710,6 +793,30 @@ def run_pipeline(
                 metrics.append(
                     _metric_row(model_name, split_name, labels, values)
                 )
+
+    test_predictions = {
+        model_name: model_predictions["test"]
+        for model_name, model_predictions in predictions.items()
+    }
+    metrics_dir = output_dir / "models/metrics"
+    write_roc_auc_curve(
+        test[TARGET],
+        test_predictions,
+        metrics_dir / "roc_auc_curve.png",
+        split_label="out-of-time test split",
+    )
+    write_gini_curve(
+        test[TARGET],
+        test_predictions,
+        metrics_dir / "gini_curve.png",
+        split_label="out-of-time test split",
+    )
+    write_ks_curve(
+        test[TARGET],
+        test_predictions,
+        metrics_dir / "ks_curve.png",
+        split_label="out-of-time test split",
+    )
 
     stability_parts = []
     stability_summaries = []
@@ -727,8 +834,16 @@ def run_pipeline(
         stability_summaries.append(written["summary"])
         if not written["excluded"].empty:
             excluded_parts.append(written["excluded"])
-    pd.concat(stability_parts, ignore_index=True).to_csv(
+    gini_by_week = pd.concat(stability_parts, ignore_index=True)
+    gini_by_week.to_csv(
         output_dir / "stability/gini_by_week.csv", index=False
+    )
+    write_gini_by_period_plot(
+        gini_by_week,
+        output_dir / "stability/gini_by_week.png",
+        period_column="WEEK_NUM",
+        group_column="model",
+        title="Out-of-time test Gini by week",
     )
     if excluded_parts:
         pd.concat(excluded_parts, ignore_index=True).to_csv(
@@ -853,8 +968,16 @@ def run_pipeline(
                     ),
                 }
             )
-    pd.DataFrame(cutoff_rows).to_csv(
+    cutoff_table = pd.DataFrame(cutoff_rows)
+    cutoff_table.to_csv(
         output_dir / "scorecard/cutoffs.csv", index=False
+    )
+    write_cutoff_plot(
+        cutoff_table,
+        output_dir / "scorecard/approval_bad_rate.png",
+        target_column="approval_target",
+        actual_column="approval_rate",
+        bad_rate_column="approved_bad_rate",
     )
     pd.DataFrame(cutoff_week_rows).to_csv(
         output_dir / "scorecard/cutoffs_by_week.csv", index=False
@@ -868,7 +991,11 @@ def run_pipeline(
         output_dir / "scorecard/score_psi_by_week.csv", index=False
     )
 
-    pd.DataFrame(metrics).to_csv(output_dir / "models/metrics.csv", index=False)
+    metrics_table = pd.DataFrame(metrics)
+    metrics_table.to_csv(output_dir / "models/metrics.csv", index=False)
+    metrics_table.to_csv(
+        output_dir / "models/metrics/metrics.csv", index=False
+    )
     submission = pd.DataFrame(
         {
             ID_COLUMN: competition[ID_COLUMN].astype(int),

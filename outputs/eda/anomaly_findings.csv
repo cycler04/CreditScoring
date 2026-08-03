@@ -1,7 +1,0 @@
-feature,rule,count,action
-age,age == 0,1,replace with NaN; median imputation happens inside model
-NumberOfTime30-59DaysPastDueNotWorse,"value in {96, 98}",269,create NumberOfTime30-59DaysPastDueNotWorseSpecialCode; replace source value with NaN
-NumberOfTimes90DaysLate,"value in {96, 98}",269,create NumberOfTimes90DaysLateSpecialCode; replace source value with NaN
-NumberOfTime60-89DaysPastDueNotWorse,"value in {96, 98}",269,create NumberOfTime60-89DaysPastDueNotWorseSpecialCode; replace source value with NaN
-RevolvingUtilizationOfUnsecuredLines,value > 10,241,retain for tree/WoE bins; robust-scale for LR
-DebtRatio,value > 10,28877,retain for tree/WoE bins; robust-scale for LR

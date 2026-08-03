@@ -1,0 +1,18 @@
+id,name,details,sample
+1,SK_ID_CURR,"ID of loan in our sample - one loan in our sample can have 0,1,2 or more related previous credits in credit bureau [Metadata note: hashed.]",298038
+2,SK_ID_BUREAU,Recoded ID of previous Credit Bureau credit related to our loan (unique coding for each loan application) [Metadata note: hashed.],5715510
+3,CREDIT_ACTIVE,Status of the Credit Bureau (CB) reported credits,Closed
+4,CREDIT_CURRENCY,Recoded currency of the Credit Bureau credit [Metadata note: recoded.],currency 1
+5,DAYS_CREDIT,How many days before current application did client apply for Credit Bureau credit [Metadata note: time only relative to the application.],-586
+6,CREDIT_DAY_OVERDUE,Number of days past due on CB credit at the time of application for related loan in our sample,0
+7,DAYS_CREDIT_ENDDATE,Remaining duration of CB credit (in days) at the time of application in Home Credit [Metadata note: time only relative to the application.],-339.0
+8,DAYS_ENDDATE_FACT,Days since CB credit ended at the time of application in Home Credit (only for closed credit) [Metadata note: time only relative to the application.],-553.0
+9,AMT_CREDIT_MAX_OVERDUE,Maximal amount overdue on the Credit Bureau credit so far (at application date of loan in our sample),0.0
+10,CNT_CREDIT_PROLONG,How many times was the Credit Bureau credit prolonged,0
+11,AMT_CREDIT_SUM,Current credit amount for the Credit Bureau credit,40791.33
+12,AMT_CREDIT_SUM_DEBT,Current debt on Credit Bureau credit,0.0
+13,AMT_CREDIT_SUM_LIMIT,Current credit limit of credit card reported in Credit Bureau,0.0
+14,AMT_CREDIT_SUM_OVERDUE,Current amount overdue on Credit Bureau credit,0.0
+15,CREDIT_TYPE,"Type of Credit Bureau credit (Car, cash,...)",Consumer credit
+16,DAYS_CREDIT_UPDATE,How many days before loan application did last information about the Credit Bureau credit come [Metadata note: time only relative to the application.],-553
+17,AMT_ANNUITY,Annuity of the Credit Bureau credit,67995.0

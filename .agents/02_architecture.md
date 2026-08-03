@@ -4,7 +4,7 @@
 
 ```text
 Kaggle/public mirror
-  -> datasets/raw/cs-training.csv
+  -> datasets/raw/give-me-some-credit/cs-training.csv
   -> load + clean
   -> stratified split 60/20/20
   -> EDA

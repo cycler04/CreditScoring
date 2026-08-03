@@ -1,0 +1,24 @@
+id,name,details,sample
+1,SK_ID_PREV,"ID of previous credit in Home credit related to loan in our sample. (One loan in our sample can have 0,1,2 or more previous loans in Home Credit) [Metadata note: hashed.]",2562384
+2,SK_ID_CURR,ID of loan in our sample [Metadata note: hashed.],378907
+3,MONTHS_BALANCE,Month of balance relative to application date (-1 means the freshest balance date) [Metadata note: time only relative to the application.],-6
+4,AMT_BALANCE,Balance during the month of previous credit,56.97
+5,AMT_CREDIT_LIMIT_ACTUAL,Credit card limit during the month of the previous credit,135000
+6,AMT_DRAWINGS_ATM_CURRENT,Amount drawing at ATM during the month of the previous credit,0.0
+7,AMT_DRAWINGS_CURRENT,Amount drawing during the month of the previous credit,877.5
+8,AMT_DRAWINGS_OTHER_CURRENT,Amount of other drawings during the month of the previous credit,0.0
+9,AMT_DRAWINGS_POS_CURRENT,Amount drawing or buying goods during the month of the previous credit,877.5
+10,AMT_INST_MIN_REGULARITY,Minimal installment for this month of the previous credit,1700.325
+11,AMT_PAYMENT_CURRENT,How much did the client pay during the month on the previous credit,1800.0
+12,AMT_PAYMENT_TOTAL_CURRENT,How much did the client pay during the month in total on the previous credit,1800.0
+13,AMT_RECEIVABLE_PRINCIPAL,Amount receivable for principal on the previous credit,0.0
+14,AMT_RECIVABLE,Amount receivable on the previous credit,0.0
+15,AMT_TOTAL_RECEIVABLE,Total amount receivable on the previous credit,0.0
+16,CNT_DRAWINGS_ATM_CURRENT,Number of drawings at ATM during this month on the previous credit,0.0
+17,CNT_DRAWINGS_CURRENT,Number of drawings during this month on the previous credit,1
+18,CNT_DRAWINGS_OTHER_CURRENT,Number of other drawings during this month on the previous credit,0.0
+19,CNT_DRAWINGS_POS_CURRENT,Number of drawings for goods during this month on the previous credit,1.0
+20,CNT_INSTALMENT_MATURE_CUM,Number of paid installments on the previous credit,35.0
+21,NAME_CONTRACT_STATUS,"Contract status (active signed,...) on the previous credit",Active
+22,SK_DPD,DPD (Days past due) during the month on the previous credit,0
+23,SK_DPD_DEF,DPD (Days past due) during the month with tolerance (debts with low loan amounts are ignored) of the previous credit,0

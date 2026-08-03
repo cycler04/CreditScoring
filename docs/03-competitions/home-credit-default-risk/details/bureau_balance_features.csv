@@ -1,0 +1,4 @@
+id,name,details,sample
+1,SK_ID_BUREAU,Recoded ID of Credit Bureau credit (unique coding for each application) - use this to join to CREDIT_BUREAU table [Metadata note: hashed.],5715448
+2,MONTHS_BALANCE,Month of balance relative to application date (-1 means the freshest balance date) [Metadata note: time only relative to the application.],0
+3,STATUS,"Status of Credit Bureau loan during the month (active, closed, DPD0-30,… [C means closed, X means status unknown, 0 means no DPD, 1 means maximal did during month between 1-30, 2 means DPD 31-60,… 5 means DPD 120+ or sold or written off ] )",C
