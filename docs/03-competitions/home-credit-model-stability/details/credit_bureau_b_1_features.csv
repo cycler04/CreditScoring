@@ -1,0 +1,46 @@
+id,name,details,sample
+1,case_id,Unique identifier of the credit application/case.,467
+2,amount_1115A,Credit amount of the active contract provided by the credit bureau.,78000
+3,classificationofcontr_1114M,Classificiation of the active contract.,ea6782cc
+4,contractdate_551D,Contract date of the active contract,2016-10-25
+5,contractmaturitydate_151D,End date of active contract.,2019-10-25
+6,contractst_516M,Contract status.,7241344e
+7,contracttype_653M,Contract Type,4257cbed
+8,credlmt_1052A,Credit limit of an active loan.,3000000
+9,credlmt_228A,Credit limit for closed loans.,10000
+10,credlmt_3940954A,Credit limit for active loan.,3000000
+11,credor_3940957M,Creditor's name,c5a72b57
+12,credquantity_1099L,Number of credits in credit bureau,2
+13,credquantity_984L,Number of closed credits in credit bureau.,1
+14,debtpastduevalue_732A,Amount of unpaid debt for existing contracts.,0
+15,debtvalue_227A,Outstanding amount for existing debt contracts.,26571.969
+16,dpd_550P,The number of days past due for active loans where a guarantee has been provided.,0
+17,dpd_733P,Days past due (DPD) for guaranteed loans that were terminated according to credit bureau data.,0
+18,dpdmax_851P,Maximal past due days for active contracts in the credit bureau.,0
+19,dpdmaxdatemonth_804T,Month when the maximum Day Past Due (DPD) occurred for active contracts on credit bureau's records.,11
+20,dpdmaxdateyear_742T,Year of the maximum Days Past Due (DPD) on an active credit contract in the credit bureau.,2016
+21,installmentamount_644A,Instalment amount of a closed and secured credit contract.,0
+22,installmentamount_833A,Instalment amount for a secured and active contract in credit bureau.,0
+23,instlamount_892A,Instalment amount for active credit contract.,2898.76
+24,interesteffectiverate_369L,Interest rate on active contract.,28.07
+25,interestrateyearly_538L,Annual interest rate for existing contract obtained from credit bureau.,25
+26,lastupdate_260D,Last update date for the active contracts.,2019-01-10
+27,maxdebtpduevalodued_3940955A,Days past due at the time of the maximum debt.,0
+28,num_group1,First-level ordering/index within a case.,2
+29,numberofinstls_810L,Number of instalments for the active contract.,36
+30,overdueamountmax_950A,Maximal past due amount for active contract.,0
+31,overdueamountmaxdatemonth_494T,Month when the maximum past due amount was recorded for an active contract with the credit bureau.,11
+32,overdueamountmaxdateyear_432T,Year when max past due amount occurred for active contract.,2016
+33,periodicityofpmts_997L,Frequency of instalments for active credit contracts.,Ежемесячные платежи - 30 дней
+34,periodicityofpmts_997M,Frequency of instalments for active credit contracts.,a0b598e4
+35,pmtdaysoverdue_1135P,Number of days past due for existing contracts in the credit bureau.,0
+36,pmtmethod_731M,Instalment payment method for existing contract in credit bureau.,e914c86c
+37,pmtnumpending_403L,Number of pending payments for active contract.,10
+38,purposeofcred_722M,Purpose of credit for active contracts.,96a8fdfe
+39,residualamount_1093A,Residual amount of closed guarantee contract.,0
+40,residualamount_127A,Residual amount of active guarantee contract.,0
+41,residualamount_3940956A,Residual amount for the active contract.,73044.18
+42,subjectrole_326M,Subject role in active credit contract.,a55475b1
+43,subjectrole_43M,Subject role in closed credit contract.,a55475b1
+44,totalamount_503A,Total amount of active secured credit for a client.,3000000
+45,totalamount_881A,Total amount of secured credit from closed contracts.,10000

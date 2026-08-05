@@ -1,0 +1,8 @@
+id,name,details,sample
+1,case_id,Unique identifier of the credit application/case.,43801
+2,amtdebitincoming_4809443A,Incoming debit card transactions amount.,12466.601
+3,amtdebitoutgoing_4809440A,Outgoing debit card transactions amount.,12291.2
+4,amtdepositbalance_4809441A,Deposit balance of client.,914.2
+5,amtdepositincoming_4809444A,Amount of incoming deposits to client's account.,0
+6,amtdepositoutgoing_4809442A,Amount of outgoing deposits from client's account.,304.80002
+7,num_group1,First-level ordering/index within a case.,0

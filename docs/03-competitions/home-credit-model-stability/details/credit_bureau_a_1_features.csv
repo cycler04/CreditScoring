@@ -1,0 +1,80 @@
+id,name,details,sample
+1,case_id,Unique identifier of the credit application/case.,388
+2,annualeffectiverate_199L,Interest rate of the closed contracts.,98.55
+3,annualeffectiverate_63L,Interest rate for the active contracts.,48.08
+4,classificationofcontr_13M,Classificiation of the active contract.,ea6782cc
+5,classificationofcontr_400M,Classificiation of the closed contract.,a55475b1
+6,contractst_545M,Contract status.,7241344e
+7,contractst_964M,Contract status of terminated credit contract.,a55475b1
+8,contractsum_5085717L,Sum of other contract values.,312451.85
+9,credlmt_230A,Credit limit of the closed credit contracts from credit bureau.,10000
+10,credlmt_935A,Credit limit for active loan.,135806
+11,dateofcredend_289D,End date of an active credit contract.,2020-08-06
+12,dateofcredend_353D,End date of a closed credit contract.,2006-03-26
+13,dateofcredstart_181D,Date when the credit contract was closed.,2005-09-28
+14,dateofcredstart_739D,Start date of a closed credit contract.,2018-08-06
+15,dateofrealrepmt_138D,Date of credit's closure (contract termination date).,2006-02-24
+16,debtoutstand_525A,Outstanding amount of existing contract.,374419.5
+17,debtoverdue_47A,Amount that is currently past due on a client's existing credit contract.,0
+18,description_351M,Categorization of clients by credit bureau.,a55475b1
+19,dpdmax_139P,Maximal days past due for active contract.,0
+20,dpdmax_757P,Maximum days past due for a closed contract.,0
+21,dpdmaxdatemonth_442T,Max DPD occurrence month for terminated contracts from credit bureau data.,3
+22,dpdmaxdatemonth_89T,Month when maximum days past due occurred on the active contract with the credit bureau.,8
+23,dpdmaxdateyear_596T,Year when maximum Days Past Due (DPD) occurred for the active contract.,2018
+24,dpdmaxdateyear_896T,Year of maximum Days Past Due of closed contract obtained from Credit Bureau.,2006
+25,financialinstitution_382M,Name of financial institution that is linked to a closed contract.,a55475b1
+26,financialinstitution_591M,Financial institution name of the active contract.,P204_66_73
+27,instlamount_768A,Instalment amount for the active contract in credit bureau.,8742.8
+28,instlamount_852A,Instalment amount for closed contract.,1933.6
+29,interestrate_508L,Interest rate for a closed contract in the credit bureau.,23
+30,lastupdate_1112D,Date of last update for an active contract from credit bureau.,2019-01-11
+31,lastupdate_388D,Date of last update for a closed contract in the credit bureau.,2006-02-24
+32,monthlyinstlamount_332A,Monthly instalment amount for active contract.,8742.8
+33,monthlyinstlamount_674A,Monthly amount of instalment payment on a closed contract.,0
+34,nominalrate_281L,Interest rate of the active contract.,40
+35,nominalrate_498L,Interest rate for closed contract.,98.55
+36,num_group1,First-level ordering/index within a case.,1
+37,numberofcontrsvalue_258L,Number of active contracts in credit bureau.,2
+38,numberofcontrsvalue_358L,Number of closed credit contracts.,1
+39,numberofinstls_229L,Number of instalments on closed contract.,12
+40,numberofinstls_320L,Number of instalments of the active contract.,60
+41,numberofoutstandinstls_520L,Number of outstanding instalment for closed contract.,0
+42,numberofoutstandinstls_59L,Number of outstanding instalments for the active contracts.,54
+43,numberofoverdueinstlmax_1039L,Number of outstanding instalments for active contracts.,0
+44,numberofoverdueinstlmax_1151L,Maximum number of past due installments for a closed contract.,0
+45,numberofoverdueinstlmaxdat_148D,Date of maximum number of past due instalments for the closed contract.,2011-09-04
+46,numberofoverdueinstlmaxdat_641D,Date of maximum number of past due instalments for the active contract.,2014-01-21
+47,numberofoverdueinstls_725L,Maximum number of past due instalments for an active contract.,0
+48,numberofoverdueinstls_834L,Number of past due instalments for a closed contract.,0
+49,outstandingamount_354A,Outstanding amount for closed credit contract in credit bureau.,0
+50,outstandingamount_362A,Active contract's outstanding amount.,260093.7
+51,overdueamount_31A,Past due amount for a closed contract.,0
+52,overdueamount_659A,Past due amount for active contract.,0
+53,overdueamountmax2_14A,Maximal past due amount for an active contract.,0
+54,overdueamountmax2_398A,Maximal overdue amount for a closed contract.,0
+55,overdueamountmax2date_1002D,Date of maximal past due amount for a closed contract,2011-04-20
+56,overdueamountmax2date_1142D,Date of maximal past due amount for an active contract.,2013-10-28
+57,overdueamountmax_155A,Maximal past due amount for active contract.,0
+58,overdueamountmax_35A,Maximal past due amount for a closed contract.,0
+59,overdueamountmaxdatemonth_284T,Month when the maximum past due amount occurred for a closed contract.,3
+60,overdueamountmaxdatemonth_365T,Month when maximum past due amount occurred for an active contract.,8
+61,overdueamountmaxdateyear_2T,Year when the maximum past due amount occurred for active contracts.,2018
+62,overdueamountmaxdateyear_994T,Year when maximum past due amount occurred for closed contract.,2006
+63,periodicityofpmts_1102L,Frequency of instalments for a closed contract.,30
+64,periodicityofpmts_837L,Frequency of instalments for an active contract.,30
+65,prolongationcount_1120L,Count of prolongations on terminated contract according to credit bureau.,2
+66,prolongationcount_599L,Count of active contract prolongations.,0
+67,purposeofcred_426M,Purpose of credit for active contract.,60c73645
+68,purposeofcred_874M,Purpose of credit on a closed contract.,a55475b1
+69,refreshdate_3813885D,Date when the credit bureau's public sources have been last updated.,2019-01-28
+70,residualamount_488A,Residual amount of a closed contract.,0
+71,residualamount_856A,Residual amount for the active contract.,114325.805
+72,subjectrole_182M,Subject role in active credit contract.,a55475b1
+73,subjectrole_93M,Subject role in closed credit contract.,a55475b1
+74,totalamount_6A,Total amount of closed contracts.,5750
+75,totalamount_996A,Total amount of active contracts in the credit bureau.,268897.62
+76,totaldebtoverduevalue_178A,Total amount of past due debt on active contracts.,0
+77,totaldebtoverduevalue_718A,Total overdue debt amount for closed credit contracts.,0
+78,totaloutstanddebtvalue_39A,Total outstanding debt for active contracts in the credit bureau.,374419.5
+79,totaloutstanddebtvalue_668A,Total outstanding debt for the closed contracts in the credit bureau.,0

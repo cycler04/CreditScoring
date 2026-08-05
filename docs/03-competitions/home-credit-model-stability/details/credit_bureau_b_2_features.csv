@@ -1,0 +1,7 @@
+id,name,details,sample
+1,case_id,Unique identifier of the credit application/case.,467
+2,num_group1,First-level ordering/index within a case.,0
+3,num_group2,Second-level ordering/index within a first-level record.,0
+4,pmts_date_1107D,"Payment date for an active contract according to credit bureau (num_group1 - contract, num_group2 - payment).",2018-11-15
+5,pmts_dpdvalue_108P,"Value of past due payment for active contract (num_group1 - existing contract, num_group2 - payment).",0
+6,pmts_pmtsoverdue_635A,"Active contract that has overdue payments (num_group1 - existing contract, num_group2 - payment).",0

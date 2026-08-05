@@ -1,0 +1,332 @@
+id,name,stage,source_family,details
+1,case_id,base,base,Unique identifier of the credit application/case.
+2,date_decision,base,base,Decision date of the current credit application.
+3,MONTH,base,base,Calendar-month index supplied in the base table.
+4,WEEK_NUM,base,base,Consecutive week index used by the competition stability metric.
+5,target,base,base,Binary competition target available only in train_base.
+6,STATIC_0__actualdpdtolerance_344P,A,static_0,depth-0 value copied to case grain of `actualdpdtolerance_344P`. Source meaning: DPD of client with tolerance.
+7,STATIC_0__amtinstpaidbefduel24m_4187115A,A,static_0,depth-0 value copied to case grain of `amtinstpaidbefduel24m_4187115A`. Source meaning: Number of instalments paid before due date in the last 24 months.
+8,STATIC_0__annuity_780A,A,static_0,depth-0 value copied to case grain of `annuity_780A`. Source meaning: Monthly annuity amount.
+9,STATIC_0__annuitynextmonth_57A,A,static_0,depth-0 value copied to case grain of `annuitynextmonth_57A`. Source meaning: Next month's amount of annuity.
+10,STATIC_0__avgdbddpdlast24m_3658932P,A,static_0,depth-0 value copied to case grain of `avgdbddpdlast24m_3658932P`. Source meaning: Average days past or before due of payment during the last 24 months.
+11,STATIC_0__avgdbddpdlast3m_4187120P,A,static_0,depth-0 value copied to case grain of `avgdbddpdlast3m_4187120P`. Source meaning: Average days past or before due of payment during the last 3 months.
+12,STATIC_0__avgdbdtollast24m_4525197P,A,static_0,depth-0 value copied to case grain of `avgdbdtollast24m_4525197P`. Source meaning: Average days of payment before due date within the last 24 months (with tolerance).
+13,STATIC_0__avgdpdtolclosure24_3658938P,A,static_0,"depth-0 value copied to case grain of `avgdpdtolclosure24_3658938P`. Source meaning: Average DPD (days past due) with tolerance within the past 24 months from the maximum closure date, assuming that the contract is finished. If the contract is ongoing, the calculation is based on the current date."
+14,STATIC_0__avginstallast24m_3658937A,A,static_0,depth-0 value copied to case grain of `avginstallast24m_3658937A`. Source meaning: Average instalments paid by the client over the past 24 months.
+15,STATIC_0__avglnamtstart24m_4525187A,A,static_0,depth-0 value copied to case grain of `avglnamtstart24m_4525187A`. Source meaning: Average loan amount in the last 24 months.
+16,STATIC_0__avgmaxdpdlast9m_3716943P,A,static_0,depth-0 value copied to case grain of `avgmaxdpdlast9m_3716943P`. Source meaning: Average Days Past Due (DPD) of the client in last 9 months.
+17,STATIC_0__avgoutstandbalancel6m_4187114A,A,static_0,depth-0 value copied to case grain of `avgoutstandbalancel6m_4187114A`. Source meaning: Average outstanding balance of applicant for the last 6 months.
+18,STATIC_0__avgpmtlast12m_4525200A,A,static_0,depth-0 value copied to case grain of `avgpmtlast12m_4525200A`. Source meaning: Average of payments made by the client in the last 12 months.
+19,STATIC_0__credamount_770A,A,static_0,depth-0 value copied to case grain of `credamount_770A`. Source meaning: Loan amount or credit card limit.
+20,STATIC_0__currdebt_22A,A,static_0,depth-0 value copied to case grain of `currdebt_22A`. Source meaning: Current debt amount of the client.
+21,STATIC_0__currdebtcredtyperange_828A,A,static_0,depth-0 value copied to case grain of `currdebtcredtyperange_828A`. Source meaning: Current amount of debt of the applicant.
+22,STATIC_0__disbursedcredamount_1113A,A,static_0,depth-0 value copied to case grain of `disbursedcredamount_1113A`. Source meaning: Disbursed credit amount after consolidation.
+23,STATIC_0__downpmt_116A,A,static_0,depth-0 value copied to case grain of `downpmt_116A`. Source meaning: Amount of downpayment.
+24,STATIC_0__inittransactionamount_650A,A,static_0,depth-0 value copied to case grain of `inittransactionamount_650A`. Source meaning: Initial transaction amount of the credit application.
+25,STATIC_0__lastapprcredamount_781A,A,static_0,depth-0 value copied to case grain of `lastapprcredamount_781A`. Source meaning: Credit amount from the client's last application.
+26,STATIC_0__lastotherinc_902A,A,static_0,depth-0 value copied to case grain of `lastotherinc_902A`. Source meaning: Amount of other income reported by the client in their last application.
+27,STATIC_0__lastotherlnsexpense_631A,A,static_0,depth-0 value copied to case grain of `lastotherlnsexpense_631A`. Source meaning: Monthly expenses on other loans from the last application.
+28,STATIC_0__lastrejectcredamount_222A,A,static_0,depth-0 value copied to case grain of `lastrejectcredamount_222A`. Source meaning: Credit amount on last rejected application.
+29,STATIC_0__maininc_215A,A,static_0,depth-0 value copied to case grain of `maininc_215A`. Source meaning: Client's primary income amount.
+30,STATIC_CB_0__contractssum_5085716L,A,static_cb_0,depth-0 value copied to case grain of `contractssum_5085716L`. Source meaning: Total sum of values of contracts retrieved from external credit bureau.
+31,STATIC_CB_0__days120_123L,A,static_cb_0,depth-0 value copied to case grain of `days120_123L`. Source meaning: Number of credit bureau queries for the last 120 days.
+32,STATIC_CB_0__days180_256L,A,static_cb_0,depth-0 value copied to case grain of `days180_256L`. Source meaning: Number of credit bureau queries for last 180 days.
+33,STATIC_CB_0__days30_165L,A,static_cb_0,depth-0 value copied to case grain of `days30_165L`. Source meaning: Number of credit bureau queries for the last 30 days.
+34,STATIC_CB_0__days360_512L,A,static_cb_0,depth-0 value copied to case grain of `days360_512L`. Source meaning: Number of Credit Bureau queries for last 360 days.
+35,STATIC_CB_0__days90_310L,A,static_cb_0,depth-0 value copied to case grain of `days90_310L`. Source meaning: Number of credit bureau queries for the last 90 days.
+36,STATIC_CB_0__firstquarter_103L,A,static_cb_0,depth-0 value copied to case grain of `firstquarter_103L`. Source meaning: Number of results obtained from credit bureau in the first quarter.
+37,STATIC_CB_0__for3years_128L,A,static_cb_0,depth-0 value copied to case grain of `for3years_128L`. Source meaning: Number of rejected applications in the past 3 years.
+38,STATIC_CB_0__for3years_504L,A,static_cb_0,depth-0 value copied to case grain of `for3years_504L`. Source meaning: Client's credit history data over the last three years.
+39,STATIC_CB_0__for3years_584L,A,static_cb_0,depth-0 value copied to case grain of `for3years_584L`. Source meaning: Number of cancellations in the last 3 years.
+40,STATIC_CB_0__formonth_118L,A,static_cb_0,depth-0 value copied to case grain of `formonth_118L`. Source meaning: Number of rejections in a month.
+41,STATIC_CB_0__formonth_206L,A,static_cb_0,depth-0 value copied to case grain of `formonth_206L`. Source meaning: Number of cancelations in the previous month.
+42,STATIC_CB_0__formonth_535L,A,static_cb_0,depth-0 value copied to case grain of `formonth_535L`. Source meaning: Credit history for the last month.
+43,STATIC_CB_0__forquarter_1017L,A,static_cb_0,depth-0 value copied to case grain of `forquarter_1017L`. Source meaning: Number of cancellations recorded in the credit bureau in the last quarter.
+44,STATIC_CB_0__forquarter_462L,A,static_cb_0,depth-0 value copied to case grain of `forquarter_462L`. Source meaning: Number of credit applications that were rejected in the last quarter.
+45,STATIC_CB_0__forquarter_634L,A,static_cb_0,depth-0 value copied to case grain of `forquarter_634L`. Source meaning: Credit history for the last quarter.
+46,STATIC_CB_0__fortoday_1092L,A,static_cb_0,depth-0 value copied to case grain of `fortoday_1092L`. Source meaning: Client's credit history for today.
+47,STATIC_CB_0__forweek_1077L,A,static_cb_0,depth-0 value copied to case grain of `forweek_1077L`. Source meaning: Number of cancelations in the last week.
+48,STATIC_CB_0__forweek_528L,A,static_cb_0,depth-0 value copied to case grain of `forweek_528L`. Source meaning: Credit history for the last week.
+49,STATIC_CB_0__forweek_601L,A,static_cb_0,depth-0 value copied to case grain of `forweek_601L`. Source meaning: Number of rejected applications in the last week.
+50,STATIC_CB_0__pmtaverage_3A,A,static_cb_0,depth-0 value copied to case grain of `pmtaverage_3A`. Source meaning: Average of tax deductions.
+51,STATIC_CB_0__pmtaverage_4527227A,A,static_cb_0,depth-0 value copied to case grain of `pmtaverage_4527227A`. Source meaning: Average of tax deductions.
+52,STATIC_CB_0__pmtaverage_4955615A,A,static_cb_0,depth-0 value copied to case grain of `pmtaverage_4955615A`. Source meaning: Average of tax deductions.
+53,STATIC_CB_0__pmtssum_45A,A,static_cb_0,depth-0 value copied to case grain of `pmtssum_45A`. Source meaning: Sum of tax deductions for the client.
+54,APPLPREV_1__ROW_COUNT,B,applprev_1,Number of raw family rows linked to the case.
+55,APPLPREV_1__actualdpd_943P__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `actualdpd_943P`. Source meaning: Days Past Due (DPD) of previous contract (actual).
+56,APPLPREV_1__actualdpd_943P__MAX,B,applprev_1,maximum of `actualdpd_943P`. Source meaning: Days Past Due (DPD) of previous contract (actual).
+57,APPLPREV_1__annuity_853A__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `annuity_853A`. Source meaning: Monthly annuity for previous applications.
+58,APPLPREV_1__annuity_853A__MAX,B,applprev_1,maximum of `annuity_853A`. Source meaning: Monthly annuity for previous applications.
+59,APPLPREV_1__byoccupationinc_3656910L__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `byoccupationinc_3656910L`. Source meaning: Applicant's income from previous applications.
+60,APPLPREV_1__byoccupationinc_3656910L__MAX,B,applprev_1,maximum of `byoccupationinc_3656910L`. Source meaning: Applicant's income from previous applications.
+61,APPLPREV_1__childnum_21L__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `childnum_21L`. Source meaning: Number of children in the previous application.
+62,APPLPREV_1__childnum_21L__MAX,B,applprev_1,maximum of `childnum_21L`. Source meaning: Number of children in the previous application.
+63,APPLPREV_1__credacc_actualbalance_314A__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `credacc_actualbalance_314A`. Source meaning: Actual balance on credit account.
+64,APPLPREV_1__credacc_actualbalance_314A__MAX,B,applprev_1,maximum of `credacc_actualbalance_314A`. Source meaning: Actual balance on credit account.
+65,APPLPREV_1__credacc_credlmt_575A__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `credacc_credlmt_575A`. Source meaning: Credit card credit limit provided for previous applications.
+66,APPLPREV_1__credacc_credlmt_575A__MAX,B,applprev_1,maximum of `credacc_credlmt_575A`. Source meaning: Credit card credit limit provided for previous applications.
+67,APPLPREV_1__credacc_maxhisbal_375A__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `credacc_maxhisbal_375A`. Source meaning: Maximal historical balance of previous credit account
+68,APPLPREV_1__credacc_maxhisbal_375A__MAX,B,applprev_1,maximum of `credacc_maxhisbal_375A`. Source meaning: Maximal historical balance of previous credit account
+69,APPLPREV_1__credacc_minhisbal_90A__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `credacc_minhisbal_90A`. Source meaning: Minimum historical balance of previous credit accounts.
+70,APPLPREV_1__credacc_minhisbal_90A__MAX,B,applprev_1,maximum of `credacc_minhisbal_90A`. Source meaning: Minimum historical balance of previous credit accounts.
+71,APPLPREV_1__credacc_transactions_402L__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `credacc_transactions_402L`. Source meaning: Number of transactions made with the previous credit account of the applicant.
+72,APPLPREV_1__credacc_transactions_402L__MAX,B,applprev_1,maximum of `credacc_transactions_402L`. Source meaning: Number of transactions made with the previous credit account of the applicant.
+73,APPLPREV_1__credamount_590A__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `credamount_590A`. Source meaning: Loan amount or card limit of previous applications.
+74,APPLPREV_1__credamount_590A__MAX,B,applprev_1,maximum of `credamount_590A`. Source meaning: Loan amount or card limit of previous applications.
+75,APPLPREV_1__currdebt_94A__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `currdebt_94A`. Source meaning: Previous application's current debt.
+76,APPLPREV_1__currdebt_94A__MAX,B,applprev_1,maximum of `currdebt_94A`. Source meaning: Previous application's current debt.
+77,APPLPREV_1__downpmt_134A__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `downpmt_134A`. Source meaning: Previous application downpayment amount.
+78,APPLPREV_1__downpmt_134A__MAX,B,applprev_1,maximum of `downpmt_134A`. Source meaning: Previous application downpayment amount.
+79,APPLPREV_1__isbidproduct_390L__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `isbidproduct_390L`. Source meaning: Flag for determining if the product is a cross-sell in previous applications.
+80,APPLPREV_1__isbidproduct_390L__MAX,B,applprev_1,maximum of `isbidproduct_390L`. Source meaning: Flag for determining if the product is a cross-sell in previous applications.
+81,APPLPREV_1__isdebitcard_527L__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `isdebitcard_527L`. Source meaning: Previous application flag indicating if product being applied for is a debit card.
+82,APPLPREV_1__isdebitcard_527L__MAX,B,applprev_1,maximum of `isdebitcard_527L`. Source meaning: Previous application flag indicating if product being applied for is a debit card.
+83,APPLPREV_1__mainoccupationinc_437A__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `mainoccupationinc_437A`. Source meaning: Client's main income amount in their previous application.
+84,APPLPREV_1__mainoccupationinc_437A__MAX,B,applprev_1,maximum of `mainoccupationinc_437A`. Source meaning: Client's main income amount in their previous application.
+85,APPLPREV_1__maxdpdtolerance_577P__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `maxdpdtolerance_577P`. Source meaning: Maximum DPD with tolerance (on previous application/s).
+86,APPLPREV_1__maxdpdtolerance_577P__MAX,B,applprev_1,maximum of `maxdpdtolerance_577P`. Source meaning: Maximum DPD with tolerance (on previous application/s).
+87,APPLPREV_1__outstandingdebt_522A__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `outstandingdebt_522A`. Source meaning: Amount of outstanding debt on the client's previous application.
+88,APPLPREV_1__outstandingdebt_522A__MAX,B,applprev_1,maximum of `outstandingdebt_522A`. Source meaning: Amount of outstanding debt on the client's previous application.
+89,APPLPREV_1__pmtnum_8L__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `pmtnum_8L`. Source meaning: Number of payments made for the previous application.
+90,APPLPREV_1__pmtnum_8L__MAX,B,applprev_1,maximum of `pmtnum_8L`. Source meaning: Number of payments made for the previous application.
+91,APPLPREV_1__revolvingaccount_394A__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `revolvingaccount_394A`. Source meaning: Revolving account that was present in the applicant's previous application.
+92,APPLPREV_1__revolvingaccount_394A__MAX,B,applprev_1,maximum of `revolvingaccount_394A`. Source meaning: Revolving account that was present in the applicant's previous application.
+93,APPLPREV_1__tenor_203L__MEAN,B,applprev_1,global non-null mean reconstructed from partial sums/counts of `tenor_203L`. Source meaning: Number of instalments in the previous application.
+94,APPLPREV_1__tenor_203L__MAX,B,applprev_1,maximum of `tenor_203L`. Source meaning: Number of instalments in the previous application.
+95,APPLPREV_1__approvaldate_319D__MIN_GAP,B,applprev_1,minimum decision-date gap of `approvaldate_319D`. Source meaning: Approval Date of Previous Application
+96,APPLPREV_1__approvaldate_319D__MAX_GAP,B,applprev_1,maximum decision-date gap of `approvaldate_319D`. Source meaning: Approval Date of Previous Application
+97,APPLPREV_1__creationdate_885D__MIN_GAP,B,applprev_1,minimum decision-date gap of `creationdate_885D`. Source meaning: Date when previous application was created.
+98,APPLPREV_1__creationdate_885D__MAX_GAP,B,applprev_1,maximum decision-date gap of `creationdate_885D`. Source meaning: Date when previous application was created.
+99,APPLPREV_1__dateactivated_425D__MIN_GAP,B,applprev_1,minimum decision-date gap of `dateactivated_425D`. Source meaning: Contract activation date of the applicant's previous application.
+100,APPLPREV_1__dateactivated_425D__MAX_GAP,B,applprev_1,maximum decision-date gap of `dateactivated_425D`. Source meaning: Contract activation date of the applicant's previous application.
+101,APPLPREV_1__dtlastpmt_581D__MIN_GAP,B,applprev_1,minimum decision-date gap of `dtlastpmt_581D`. Source meaning: Date of last payment made by the applicant.
+102,APPLPREV_1__dtlastpmt_581D__MAX_GAP,B,applprev_1,maximum decision-date gap of `dtlastpmt_581D`. Source meaning: Date of last payment made by the applicant.
+103,CREDIT_BUREAU_A_1__ROW_COUNT,B,credit_bureau_a_1,Number of raw family rows linked to the case.
+104,CREDIT_BUREAU_A_1__credlmt_230A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `credlmt_230A`. Source meaning: Credit limit of the closed credit contracts from credit bureau.
+105,CREDIT_BUREAU_A_1__credlmt_230A__MAX,B,credit_bureau_a_1,maximum of `credlmt_230A`. Source meaning: Credit limit of the closed credit contracts from credit bureau.
+106,CREDIT_BUREAU_A_1__credlmt_935A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `credlmt_935A`. Source meaning: Credit limit for active loan.
+107,CREDIT_BUREAU_A_1__credlmt_935A__MAX,B,credit_bureau_a_1,maximum of `credlmt_935A`. Source meaning: Credit limit for active loan.
+108,CREDIT_BUREAU_A_1__debtoutstand_525A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `debtoutstand_525A`. Source meaning: Outstanding amount of existing contract.
+109,CREDIT_BUREAU_A_1__debtoutstand_525A__MAX,B,credit_bureau_a_1,maximum of `debtoutstand_525A`. Source meaning: Outstanding amount of existing contract.
+110,CREDIT_BUREAU_A_1__debtoverdue_47A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `debtoverdue_47A`. Source meaning: Amount that is currently past due on a client's existing credit contract.
+111,CREDIT_BUREAU_A_1__debtoverdue_47A__MAX,B,credit_bureau_a_1,maximum of `debtoverdue_47A`. Source meaning: Amount that is currently past due on a client's existing credit contract.
+112,CREDIT_BUREAU_A_1__dpdmax_139P__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `dpdmax_139P`. Source meaning: Maximal days past due for active contract.
+113,CREDIT_BUREAU_A_1__dpdmax_139P__MAX,B,credit_bureau_a_1,maximum of `dpdmax_139P`. Source meaning: Maximal days past due for active contract.
+114,CREDIT_BUREAU_A_1__dpdmax_757P__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `dpdmax_757P`. Source meaning: Maximum days past due for a closed contract.
+115,CREDIT_BUREAU_A_1__dpdmax_757P__MAX,B,credit_bureau_a_1,maximum of `dpdmax_757P`. Source meaning: Maximum days past due for a closed contract.
+116,CREDIT_BUREAU_A_1__instlamount_768A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `instlamount_768A`. Source meaning: Instalment amount for the active contract in credit bureau.
+117,CREDIT_BUREAU_A_1__instlamount_768A__MAX,B,credit_bureau_a_1,maximum of `instlamount_768A`. Source meaning: Instalment amount for the active contract in credit bureau.
+118,CREDIT_BUREAU_A_1__instlamount_852A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `instlamount_852A`. Source meaning: Instalment amount for closed contract.
+119,CREDIT_BUREAU_A_1__instlamount_852A__MAX,B,credit_bureau_a_1,maximum of `instlamount_852A`. Source meaning: Instalment amount for closed contract.
+120,CREDIT_BUREAU_A_1__monthlyinstlamount_332A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `monthlyinstlamount_332A`. Source meaning: Monthly instalment amount for active contract.
+121,CREDIT_BUREAU_A_1__monthlyinstlamount_332A__MAX,B,credit_bureau_a_1,maximum of `monthlyinstlamount_332A`. Source meaning: Monthly instalment amount for active contract.
+122,CREDIT_BUREAU_A_1__monthlyinstlamount_674A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `monthlyinstlamount_674A`. Source meaning: Monthly amount of instalment payment on a closed contract.
+123,CREDIT_BUREAU_A_1__monthlyinstlamount_674A__MAX,B,credit_bureau_a_1,maximum of `monthlyinstlamount_674A`. Source meaning: Monthly amount of instalment payment on a closed contract.
+124,CREDIT_BUREAU_A_1__outstandingamount_354A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `outstandingamount_354A`. Source meaning: Outstanding amount for closed credit contract in credit bureau.
+125,CREDIT_BUREAU_A_1__outstandingamount_354A__MAX,B,credit_bureau_a_1,maximum of `outstandingamount_354A`. Source meaning: Outstanding amount for closed credit contract in credit bureau.
+126,CREDIT_BUREAU_A_1__outstandingamount_362A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `outstandingamount_362A`. Source meaning: Active contract's outstanding amount.
+127,CREDIT_BUREAU_A_1__outstandingamount_362A__MAX,B,credit_bureau_a_1,maximum of `outstandingamount_362A`. Source meaning: Active contract's outstanding amount.
+128,CREDIT_BUREAU_A_1__overdueamount_31A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `overdueamount_31A`. Source meaning: Past due amount for a closed contract.
+129,CREDIT_BUREAU_A_1__overdueamount_31A__MAX,B,credit_bureau_a_1,maximum of `overdueamount_31A`. Source meaning: Past due amount for a closed contract.
+130,CREDIT_BUREAU_A_1__overdueamount_659A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `overdueamount_659A`. Source meaning: Past due amount for active contract.
+131,CREDIT_BUREAU_A_1__overdueamount_659A__MAX,B,credit_bureau_a_1,maximum of `overdueamount_659A`. Source meaning: Past due amount for active contract.
+132,CREDIT_BUREAU_A_1__overdueamountmax2_14A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `overdueamountmax2_14A`. Source meaning: Maximal past due amount for an active contract.
+133,CREDIT_BUREAU_A_1__overdueamountmax2_14A__MAX,B,credit_bureau_a_1,maximum of `overdueamountmax2_14A`. Source meaning: Maximal past due amount for an active contract.
+134,CREDIT_BUREAU_A_1__overdueamountmax2_398A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `overdueamountmax2_398A`. Source meaning: Maximal overdue amount for a closed contract.
+135,CREDIT_BUREAU_A_1__overdueamountmax2_398A__MAX,B,credit_bureau_a_1,maximum of `overdueamountmax2_398A`. Source meaning: Maximal overdue amount for a closed contract.
+136,CREDIT_BUREAU_A_1__overdueamountmax_155A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `overdueamountmax_155A`. Source meaning: Maximal past due amount for active contract.
+137,CREDIT_BUREAU_A_1__overdueamountmax_155A__MAX,B,credit_bureau_a_1,maximum of `overdueamountmax_155A`. Source meaning: Maximal past due amount for active contract.
+138,CREDIT_BUREAU_A_1__overdueamountmax_35A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `overdueamountmax_35A`. Source meaning: Maximal past due amount for a closed contract.
+139,CREDIT_BUREAU_A_1__overdueamountmax_35A__MAX,B,credit_bureau_a_1,maximum of `overdueamountmax_35A`. Source meaning: Maximal past due amount for a closed contract.
+140,CREDIT_BUREAU_A_1__residualamount_488A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `residualamount_488A`. Source meaning: Residual amount of a closed contract.
+141,CREDIT_BUREAU_A_1__residualamount_488A__MAX,B,credit_bureau_a_1,maximum of `residualamount_488A`. Source meaning: Residual amount of a closed contract.
+142,CREDIT_BUREAU_A_1__residualamount_856A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `residualamount_856A`. Source meaning: Residual amount for the active contract.
+143,CREDIT_BUREAU_A_1__residualamount_856A__MAX,B,credit_bureau_a_1,maximum of `residualamount_856A`. Source meaning: Residual amount for the active contract.
+144,CREDIT_BUREAU_A_1__totalamount_6A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `totalamount_6A`. Source meaning: Total amount of closed contracts.
+145,CREDIT_BUREAU_A_1__totalamount_6A__MAX,B,credit_bureau_a_1,maximum of `totalamount_6A`. Source meaning: Total amount of closed contracts.
+146,CREDIT_BUREAU_A_1__totalamount_996A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `totalamount_996A`. Source meaning: Total amount of active contracts in the credit bureau.
+147,CREDIT_BUREAU_A_1__totalamount_996A__MAX,B,credit_bureau_a_1,maximum of `totalamount_996A`. Source meaning: Total amount of active contracts in the credit bureau.
+148,CREDIT_BUREAU_A_1__totaldebtoverduevalue_178A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `totaldebtoverduevalue_178A`. Source meaning: Total amount of past due debt on active contracts.
+149,CREDIT_BUREAU_A_1__totaldebtoverduevalue_178A__MAX,B,credit_bureau_a_1,maximum of `totaldebtoverduevalue_178A`. Source meaning: Total amount of past due debt on active contracts.
+150,CREDIT_BUREAU_A_1__totaldebtoverduevalue_718A__MEAN,B,credit_bureau_a_1,global non-null mean reconstructed from partial sums/counts of `totaldebtoverduevalue_718A`. Source meaning: Total overdue debt amount for closed credit contracts.
+151,CREDIT_BUREAU_A_1__totaldebtoverduevalue_718A__MAX,B,credit_bureau_a_1,maximum of `totaldebtoverduevalue_718A`. Source meaning: Total overdue debt amount for closed credit contracts.
+152,CREDIT_BUREAU_B_1__ROW_COUNT,B,credit_bureau_b_1,Number of raw family rows linked to the case.
+153,CREDIT_BUREAU_B_1__amount_1115A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `amount_1115A`. Source meaning: Credit amount of the active contract provided by the credit bureau.
+154,CREDIT_BUREAU_B_1__amount_1115A__MAX,B,credit_bureau_b_1,maximum of `amount_1115A`. Source meaning: Credit amount of the active contract provided by the credit bureau.
+155,CREDIT_BUREAU_B_1__credlmt_1052A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `credlmt_1052A`. Source meaning: Credit limit of an active loan.
+156,CREDIT_BUREAU_B_1__credlmt_1052A__MAX,B,credit_bureau_b_1,maximum of `credlmt_1052A`. Source meaning: Credit limit of an active loan.
+157,CREDIT_BUREAU_B_1__credlmt_228A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `credlmt_228A`. Source meaning: Credit limit for closed loans.
+158,CREDIT_BUREAU_B_1__credlmt_228A__MAX,B,credit_bureau_b_1,maximum of `credlmt_228A`. Source meaning: Credit limit for closed loans.
+159,CREDIT_BUREAU_B_1__credlmt_3940954A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `credlmt_3940954A`. Source meaning: Credit limit for active loan.
+160,CREDIT_BUREAU_B_1__credlmt_3940954A__MAX,B,credit_bureau_b_1,maximum of `credlmt_3940954A`. Source meaning: Credit limit for active loan.
+161,CREDIT_BUREAU_B_1__credquantity_1099L__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `credquantity_1099L`. Source meaning: Number of credits in credit bureau
+162,CREDIT_BUREAU_B_1__credquantity_1099L__MAX,B,credit_bureau_b_1,maximum of `credquantity_1099L`. Source meaning: Number of credits in credit bureau
+163,CREDIT_BUREAU_B_1__credquantity_984L__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `credquantity_984L`. Source meaning: Number of closed credits in credit bureau.
+164,CREDIT_BUREAU_B_1__credquantity_984L__MAX,B,credit_bureau_b_1,maximum of `credquantity_984L`. Source meaning: Number of closed credits in credit bureau.
+165,CREDIT_BUREAU_B_1__debtpastduevalue_732A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `debtpastduevalue_732A`. Source meaning: Amount of unpaid debt for existing contracts.
+166,CREDIT_BUREAU_B_1__debtpastduevalue_732A__MAX,B,credit_bureau_b_1,maximum of `debtpastduevalue_732A`. Source meaning: Amount of unpaid debt for existing contracts.
+167,CREDIT_BUREAU_B_1__debtvalue_227A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `debtvalue_227A`. Source meaning: Outstanding amount for existing debt contracts.
+168,CREDIT_BUREAU_B_1__debtvalue_227A__MAX,B,credit_bureau_b_1,maximum of `debtvalue_227A`. Source meaning: Outstanding amount for existing debt contracts.
+169,CREDIT_BUREAU_B_1__dpd_550P__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `dpd_550P`. Source meaning: The number of days past due for active loans where a guarantee has been provided.
+170,CREDIT_BUREAU_B_1__dpd_550P__MAX,B,credit_bureau_b_1,maximum of `dpd_550P`. Source meaning: The number of days past due for active loans where a guarantee has been provided.
+171,CREDIT_BUREAU_B_1__dpd_733P__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `dpd_733P`. Source meaning: Days past due (DPD) for guaranteed loans that were terminated according to credit bureau data.
+172,CREDIT_BUREAU_B_1__dpd_733P__MAX,B,credit_bureau_b_1,maximum of `dpd_733P`. Source meaning: Days past due (DPD) for guaranteed loans that were terminated according to credit bureau data.
+173,CREDIT_BUREAU_B_1__dpdmax_851P__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `dpdmax_851P`. Source meaning: Maximal past due days for active contracts in the credit bureau.
+174,CREDIT_BUREAU_B_1__dpdmax_851P__MAX,B,credit_bureau_b_1,maximum of `dpdmax_851P`. Source meaning: Maximal past due days for active contracts in the credit bureau.
+175,CREDIT_BUREAU_B_1__dpdmaxdatemonth_804T__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `dpdmaxdatemonth_804T`. Source meaning: Month when the maximum Day Past Due (DPD) occurred for active contracts on credit bureau's records.
+176,CREDIT_BUREAU_B_1__dpdmaxdatemonth_804T__MAX,B,credit_bureau_b_1,maximum of `dpdmaxdatemonth_804T`. Source meaning: Month when the maximum Day Past Due (DPD) occurred for active contracts on credit bureau's records.
+177,CREDIT_BUREAU_B_1__dpdmaxdateyear_742T__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `dpdmaxdateyear_742T`. Source meaning: Year of the maximum Days Past Due (DPD) on an active credit contract in the credit bureau.
+178,CREDIT_BUREAU_B_1__dpdmaxdateyear_742T__MAX,B,credit_bureau_b_1,maximum of `dpdmaxdateyear_742T`. Source meaning: Year of the maximum Days Past Due (DPD) on an active credit contract in the credit bureau.
+179,CREDIT_BUREAU_B_1__installmentamount_644A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `installmentamount_644A`. Source meaning: Instalment amount of a closed and secured credit contract.
+180,CREDIT_BUREAU_B_1__installmentamount_644A__MAX,B,credit_bureau_b_1,maximum of `installmentamount_644A`. Source meaning: Instalment amount of a closed and secured credit contract.
+181,CREDIT_BUREAU_B_1__installmentamount_833A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `installmentamount_833A`. Source meaning: Instalment amount for a secured and active contract in credit bureau.
+182,CREDIT_BUREAU_B_1__installmentamount_833A__MAX,B,credit_bureau_b_1,maximum of `installmentamount_833A`. Source meaning: Instalment amount for a secured and active contract in credit bureau.
+183,CREDIT_BUREAU_B_1__instlamount_892A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `instlamount_892A`. Source meaning: Instalment amount for active credit contract.
+184,CREDIT_BUREAU_B_1__instlamount_892A__MAX,B,credit_bureau_b_1,maximum of `instlamount_892A`. Source meaning: Instalment amount for active credit contract.
+185,CREDIT_BUREAU_B_1__maxdebtpduevalodued_3940955A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `maxdebtpduevalodued_3940955A`. Source meaning: Days past due at the time of the maximum debt.
+186,CREDIT_BUREAU_B_1__maxdebtpduevalodued_3940955A__MAX,B,credit_bureau_b_1,maximum of `maxdebtpduevalodued_3940955A`. Source meaning: Days past due at the time of the maximum debt.
+187,CREDIT_BUREAU_B_1__overdueamountmax_950A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `overdueamountmax_950A`. Source meaning: Maximal past due amount for active contract.
+188,CREDIT_BUREAU_B_1__overdueamountmax_950A__MAX,B,credit_bureau_b_1,maximum of `overdueamountmax_950A`. Source meaning: Maximal past due amount for active contract.
+189,CREDIT_BUREAU_B_1__pmtdaysoverdue_1135P__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `pmtdaysoverdue_1135P`. Source meaning: Number of days past due for existing contracts in the credit bureau.
+190,CREDIT_BUREAU_B_1__pmtdaysoverdue_1135P__MAX,B,credit_bureau_b_1,maximum of `pmtdaysoverdue_1135P`. Source meaning: Number of days past due for existing contracts in the credit bureau.
+191,CREDIT_BUREAU_B_1__residualamount_1093A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `residualamount_1093A`. Source meaning: Residual amount of closed guarantee contract.
+192,CREDIT_BUREAU_B_1__residualamount_1093A__MAX,B,credit_bureau_b_1,maximum of `residualamount_1093A`. Source meaning: Residual amount of closed guarantee contract.
+193,CREDIT_BUREAU_B_1__residualamount_127A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `residualamount_127A`. Source meaning: Residual amount of active guarantee contract.
+194,CREDIT_BUREAU_B_1__residualamount_127A__MAX,B,credit_bureau_b_1,maximum of `residualamount_127A`. Source meaning: Residual amount of active guarantee contract.
+195,CREDIT_BUREAU_B_1__residualamount_3940956A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `residualamount_3940956A`. Source meaning: Residual amount for the active contract.
+196,CREDIT_BUREAU_B_1__residualamount_3940956A__MAX,B,credit_bureau_b_1,maximum of `residualamount_3940956A`. Source meaning: Residual amount for the active contract.
+197,CREDIT_BUREAU_B_1__totalamount_503A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `totalamount_503A`. Source meaning: Total amount of active secured credit for a client.
+198,CREDIT_BUREAU_B_1__totalamount_503A__MAX,B,credit_bureau_b_1,maximum of `totalamount_503A`. Source meaning: Total amount of active secured credit for a client.
+199,CREDIT_BUREAU_B_1__totalamount_881A__MEAN,B,credit_bureau_b_1,global non-null mean reconstructed from partial sums/counts of `totalamount_881A`. Source meaning: Total amount of secured credit from closed contracts.
+200,CREDIT_BUREAU_B_1__totalamount_881A__MAX,B,credit_bureau_b_1,maximum of `totalamount_881A`. Source meaning: Total amount of secured credit from closed contracts.
+201,DEBITCARD_1__ROW_COUNT,B,debitcard_1,Number of raw family rows linked to the case.
+202,DEBITCARD_1__last180dayaveragebalance_704A__MEAN,B,debitcard_1,global non-null mean reconstructed from partial sums/counts of `last180dayaveragebalance_704A`. Source meaning: Average balance on debit card in the last 180 days.
+203,DEBITCARD_1__last180dayaveragebalance_704A__MAX,B,debitcard_1,maximum of `last180dayaveragebalance_704A`. Source meaning: Average balance on debit card in the last 180 days.
+204,DEBITCARD_1__last180dayturnover_1134A__MEAN,B,debitcard_1,global non-null mean reconstructed from partial sums/counts of `last180dayturnover_1134A`. Source meaning: Debit card's turnover within the last 180 days.
+205,DEBITCARD_1__last180dayturnover_1134A__MAX,B,debitcard_1,maximum of `last180dayturnover_1134A`. Source meaning: Debit card's turnover within the last 180 days.
+206,DEBITCARD_1__last30dayturnover_651A__MEAN,B,debitcard_1,global non-null mean reconstructed from partial sums/counts of `last30dayturnover_651A`. Source meaning: Debit card turnover for the last 30 days.
+207,DEBITCARD_1__last30dayturnover_651A__MAX,B,debitcard_1,maximum of `last30dayturnover_651A`. Source meaning: Debit card turnover for the last 30 days.
+208,DEBITCARD_1__openingdate_857D__MIN_GAP,B,debitcard_1,minimum decision-date gap of `openingdate_857D`. Source meaning: Debit card opening date.
+209,DEBITCARD_1__openingdate_857D__MAX_GAP,B,debitcard_1,maximum decision-date gap of `openingdate_857D`. Source meaning: Debit card opening date.
+210,DEPOSIT_1__ROW_COUNT,B,deposit_1,Number of raw family rows linked to the case.
+211,DEPOSIT_1__amount_416A__MEAN,B,deposit_1,global non-null mean reconstructed from partial sums/counts of `amount_416A`. Source meaning: Deposit amount.
+212,DEPOSIT_1__amount_416A__MAX,B,deposit_1,maximum of `amount_416A`. Source meaning: Deposit amount.
+213,DEPOSIT_1__contractenddate_991D__MIN_GAP,B,deposit_1,minimum decision-date gap of `contractenddate_991D`. Source meaning: End date of deposit contract.
+214,DEPOSIT_1__contractenddate_991D__MAX_GAP,B,deposit_1,maximum decision-date gap of `contractenddate_991D`. Source meaning: End date of deposit contract.
+215,DEPOSIT_1__openingdate_313D__MIN_GAP,B,deposit_1,minimum decision-date gap of `openingdate_313D`. Source meaning: Deposit account opening date.
+216,DEPOSIT_1__openingdate_313D__MAX_GAP,B,deposit_1,maximum decision-date gap of `openingdate_313D`. Source meaning: Deposit account opening date.
+217,OTHER_1__ROW_COUNT,B,other_1,Number of raw family rows linked to the case.
+218,OTHER_1__amtdebitincoming_4809443A__MEAN,B,other_1,global non-null mean reconstructed from partial sums/counts of `amtdebitincoming_4809443A`. Source meaning: Incoming debit card transactions amount.
+219,OTHER_1__amtdebitincoming_4809443A__MAX,B,other_1,maximum of `amtdebitincoming_4809443A`. Source meaning: Incoming debit card transactions amount.
+220,OTHER_1__amtdebitoutgoing_4809440A__MEAN,B,other_1,global non-null mean reconstructed from partial sums/counts of `amtdebitoutgoing_4809440A`. Source meaning: Outgoing debit card transactions amount.
+221,OTHER_1__amtdebitoutgoing_4809440A__MAX,B,other_1,maximum of `amtdebitoutgoing_4809440A`. Source meaning: Outgoing debit card transactions amount.
+222,OTHER_1__amtdepositbalance_4809441A__MEAN,B,other_1,global non-null mean reconstructed from partial sums/counts of `amtdepositbalance_4809441A`. Source meaning: Deposit balance of client.
+223,OTHER_1__amtdepositbalance_4809441A__MAX,B,other_1,maximum of `amtdepositbalance_4809441A`. Source meaning: Deposit balance of client.
+224,OTHER_1__amtdepositincoming_4809444A__MEAN,B,other_1,global non-null mean reconstructed from partial sums/counts of `amtdepositincoming_4809444A`. Source meaning: Amount of incoming deposits to client's account.
+225,OTHER_1__amtdepositincoming_4809444A__MAX,B,other_1,maximum of `amtdepositincoming_4809444A`. Source meaning: Amount of incoming deposits to client's account.
+226,OTHER_1__amtdepositoutgoing_4809442A__MEAN,B,other_1,global non-null mean reconstructed from partial sums/counts of `amtdepositoutgoing_4809442A`. Source meaning: Amount of outgoing deposits from client's account.
+227,OTHER_1__amtdepositoutgoing_4809442A__MAX,B,other_1,maximum of `amtdepositoutgoing_4809442A`. Source meaning: Amount of outgoing deposits from client's account.
+228,PERSON_1__ROW_COUNT,B,person_1,Number of raw family rows linked to the case.
+229,PERSON_1__childnum_185L__MEAN,B,person_1,global non-null mean reconstructed from partial sums/counts of `childnum_185L`. Source meaning: Number of children of the applicant.
+230,PERSON_1__childnum_185L__MAX,B,person_1,maximum of `childnum_185L`. Source meaning: Number of children of the applicant.
+231,PERSON_1__contaddr_matchlist_1032L__MEAN,B,person_1,global non-null mean reconstructed from partial sums/counts of `contaddr_matchlist_1032L`. Source meaning: Indicates whether the contact address is found in a code list.
+232,PERSON_1__contaddr_matchlist_1032L__MAX,B,person_1,maximum of `contaddr_matchlist_1032L`. Source meaning: Indicates whether the contact address is found in a code list.
+233,PERSON_1__contaddr_smempladdr_334L__MEAN,B,person_1,global non-null mean reconstructed from partial sums/counts of `contaddr_smempladdr_334L`. Source meaning: Indicates whether the contact address is the same as the employment address.
+234,PERSON_1__contaddr_smempladdr_334L__MAX,B,person_1,maximum of `contaddr_smempladdr_334L`. Source meaning: Indicates whether the contact address is the same as the employment address.
+235,PERSON_1__isreference_387L__MEAN,B,person_1,global non-null mean reconstructed from partial sums/counts of `isreference_387L`. Source meaning: Flag indicating whether the person is a reference contact.
+236,PERSON_1__isreference_387L__MAX,B,person_1,maximum of `isreference_387L`. Source meaning: Flag indicating whether the person is a reference contact.
+237,PERSON_1__mainoccupationinc_384A__MEAN,B,person_1,global non-null mean reconstructed from partial sums/counts of `mainoccupationinc_384A`. Source meaning: Amount of the main income of the client.
+238,PERSON_1__mainoccupationinc_384A__MAX,B,person_1,maximum of `mainoccupationinc_384A`. Source meaning: Amount of the main income of the client.
+239,PERSON_1__personindex_1023L__MEAN,B,person_1,global non-null mean reconstructed from partial sums/counts of `personindex_1023L`. Source meaning: Order of the person specified on the application form.
+240,PERSON_1__personindex_1023L__MAX,B,person_1,maximum of `personindex_1023L`. Source meaning: Order of the person specified on the application form.
+241,PERSON_1__persontype_1072L__MEAN,B,person_1,global non-null mean reconstructed from partial sums/counts of `persontype_1072L`. Source meaning: Person type.
+242,PERSON_1__persontype_1072L__MAX,B,person_1,maximum of `persontype_1072L`. Source meaning: Person type.
+243,PERSON_1__persontype_792L__MEAN,B,person_1,global non-null mean reconstructed from partial sums/counts of `persontype_792L`. Source meaning: Person type.
+244,PERSON_1__persontype_792L__MAX,B,person_1,maximum of `persontype_792L`. Source meaning: Person type.
+245,PERSON_1__remitter_829L__MEAN,B,person_1,global non-null mean reconstructed from partial sums/counts of `remitter_829L`. Source meaning: Flag indicating whether the client is a remitter.
+246,PERSON_1__remitter_829L__MAX,B,person_1,maximum of `remitter_829L`. Source meaning: Flag indicating whether the client is a remitter.
+247,PERSON_1__safeguarantyflag_411L__MEAN,B,person_1,global non-null mean reconstructed from partial sums/counts of `safeguarantyflag_411L`. Source meaning: Flag indicating if client is using a flexible product with additional safeguard garanty.
+248,PERSON_1__safeguarantyflag_411L__MAX,B,person_1,maximum of `safeguarantyflag_411L`. Source meaning: Flag indicating if client is using a flexible product with additional safeguard garanty.
+249,PERSON_1__birth_259D__MIN_GAP,B,person_1,minimum decision-date gap of `birth_259D`. Source meaning: Date of birth of the person.
+250,PERSON_1__birth_259D__MAX_GAP,B,person_1,maximum decision-date gap of `birth_259D`. Source meaning: Date of birth of the person.
+251,PERSON_1__birthdate_87D__MIN_GAP,B,person_1,minimum decision-date gap of `birthdate_87D`. Source meaning: Birth date of the person.
+252,PERSON_1__birthdate_87D__MAX_GAP,B,person_1,maximum decision-date gap of `birthdate_87D`. Source meaning: Birth date of the person.
+253,PERSON_1__empl_employedfrom_271D__MIN_GAP,B,person_1,minimum decision-date gap of `empl_employedfrom_271D`. Source meaning: Start date of employment.
+254,PERSON_1__empl_employedfrom_271D__MAX_GAP,B,person_1,maximum decision-date gap of `empl_employedfrom_271D`. Source meaning: Start date of employment.
+255,PERSON_1__contaddr_district_15M__NUNIQUE,B,person_1,sum of per-partition distinct counts of `contaddr_district_15M`. Source meaning: Zip code of a contact person's address.
+256,PERSON_1__contaddr_zipcode_807M__NUNIQUE,B,person_1,sum of per-partition distinct counts of `contaddr_zipcode_807M`. Source meaning: Zip code of contact address.
+257,PERSON_1__education_927M__NUNIQUE,B,person_1,sum of per-partition distinct counts of `education_927M`. Source meaning: Education level of the person.
+258,PERSON_1__empl_employedtotal_800L__NUNIQUE,B,person_1,sum of per-partition distinct counts of `empl_employedtotal_800L`. Source meaning: Employment length of a person.
+259,PERSON_1__empl_industry_691L__NUNIQUE,B,person_1,sum of per-partition distinct counts of `empl_industry_691L`. Source meaning: Employment Industry of the person.
+260,PERSON_1__empladdr_district_926M__NUNIQUE,B,person_1,sum of per-partition distinct counts of `empladdr_district_926M`. Source meaning: District where the employer's address is located.
+261,PERSON_1__empladdr_zipcode_114M__NUNIQUE,B,person_1,sum of per-partition distinct counts of `empladdr_zipcode_114M`. Source meaning: Zipcode of employer's address.
+262,PERSON_1__familystate_447L__NUNIQUE,B,person_1,sum of per-partition distinct counts of `familystate_447L`. Source meaning: Family state of the person.
+263,PERSON_1__gender_992L__NUNIQUE,B,person_1,sum of per-partition distinct counts of `gender_992L`. Source meaning: Gender of a person.
+264,PERSON_1__housetype_905L__NUNIQUE,B,person_1,sum of per-partition distinct counts of `housetype_905L`. Source meaning: House type of the person.
+265,PERSON_1__housingtype_772L__NUNIQUE,B,person_1,sum of per-partition distinct counts of `housingtype_772L`. Source meaning: Type of housing of the person.
+266,TAX_REGISTRY_A_1__ROW_COUNT,B,tax_registry_a_1,Number of raw family rows linked to the case.
+267,TAX_REGISTRY_A_1__amount_4527230A__MEAN,B,tax_registry_a_1,global non-null mean reconstructed from partial sums/counts of `amount_4527230A`. Source meaning: Tax deductions amount tracked by the government registry.
+268,TAX_REGISTRY_A_1__amount_4527230A__MAX,B,tax_registry_a_1,maximum of `amount_4527230A`. Source meaning: Tax deductions amount tracked by the government registry.
+269,TAX_REGISTRY_A_1__recorddate_4527225D__MIN_GAP,B,tax_registry_a_1,minimum decision-date gap of `recorddate_4527225D`. Source meaning: Date of tax deduction record.
+270,TAX_REGISTRY_A_1__recorddate_4527225D__MAX_GAP,B,tax_registry_a_1,maximum decision-date gap of `recorddate_4527225D`. Source meaning: Date of tax deduction record.
+271,TAX_REGISTRY_A_1__name_4527232M__NUNIQUE,B,tax_registry_a_1,sum of per-partition distinct counts of `name_4527232M`. Source meaning: Name of employer.
+272,TAX_REGISTRY_B_1__ROW_COUNT,B,tax_registry_b_1,Number of raw family rows linked to the case.
+273,TAX_REGISTRY_B_1__amount_4917619A__MEAN,B,tax_registry_b_1,global non-null mean reconstructed from partial sums/counts of `amount_4917619A`. Source meaning: Tax deductions amount tracked by the government registry.
+274,TAX_REGISTRY_B_1__amount_4917619A__MAX,B,tax_registry_b_1,maximum of `amount_4917619A`. Source meaning: Tax deductions amount tracked by the government registry.
+275,TAX_REGISTRY_B_1__deductiondate_4917603D__MIN_GAP,B,tax_registry_b_1,minimum decision-date gap of `deductiondate_4917603D`. Source meaning: Tax deduction date.
+276,TAX_REGISTRY_B_1__deductiondate_4917603D__MAX_GAP,B,tax_registry_b_1,maximum decision-date gap of `deductiondate_4917603D`. Source meaning: Tax deduction date.
+277,TAX_REGISTRY_B_1__name_4917606M__NUNIQUE,B,tax_registry_b_1,sum of per-partition distinct counts of `name_4917606M`. Source meaning: Name of employer.
+278,TAX_REGISTRY_C_1__ROW_COUNT,B,tax_registry_c_1,Number of raw family rows linked to the case.
+279,TAX_REGISTRY_C_1__pmtamount_36A__MEAN,B,tax_registry_c_1,global non-null mean reconstructed from partial sums/counts of `pmtamount_36A`. Source meaning: Tax deductions amount for credit bureau payments.
+280,TAX_REGISTRY_C_1__pmtamount_36A__MAX,B,tax_registry_c_1,maximum of `pmtamount_36A`. Source meaning: Tax deductions amount for credit bureau payments.
+281,TAX_REGISTRY_C_1__processingdate_168D__MIN_GAP,B,tax_registry_c_1,minimum decision-date gap of `processingdate_168D`. Source meaning: Date when the tax deduction is processed.
+282,TAX_REGISTRY_C_1__processingdate_168D__MAX_GAP,B,tax_registry_c_1,maximum decision-date gap of `processingdate_168D`. Source meaning: Date when the tax deduction is processed.
+283,TAX_REGISTRY_C_1__employername_160M__NUNIQUE,B,tax_registry_c_1,sum of per-partition distinct counts of `employername_160M`. Source meaning: Employer's name.
+284,APPLPREV_2__ROW_COUNT,C,applprev_2,Number of raw family rows linked to the case.
+285,APPLPREV_2__cacccardblochreas_147M__NUNIQUE,C,applprev_2,sum of per-partition distinct counts of `cacccardblochreas_147M`. Source meaning: Card blocking reason.
+286,APPLPREV_2__conts_type_509L__NUNIQUE,C,applprev_2,sum of per-partition distinct counts of `conts_type_509L`. Source meaning: Person contact type in previous application.
+287,APPLPREV_2__credacc_cards_status_52L__NUNIQUE,C,applprev_2,sum of per-partition distinct counts of `credacc_cards_status_52L`. Source meaning: Card status of the previous credit account.
+288,CREDIT_BUREAU_A_2__ROW_COUNT,C,credit_bureau_a_2,Number of raw family rows linked to the case.
+289,CREDIT_BUREAU_A_2__collater_valueofguarantee_1124L__MEAN,C,credit_bureau_a_2,global non-null mean reconstructed from partial sums/counts of `collater_valueofguarantee_1124L`. Source meaning: Value of collateral for active contract.
+290,CREDIT_BUREAU_A_2__collater_valueofguarantee_1124L__MAX,C,credit_bureau_a_2,maximum of `collater_valueofguarantee_1124L`. Source meaning: Value of collateral for active contract.
+291,CREDIT_BUREAU_A_2__collater_valueofguarantee_876L__MEAN,C,credit_bureau_a_2,global non-null mean reconstructed from partial sums/counts of `collater_valueofguarantee_876L`. Source meaning: Value of collateral for closed contract.
+292,CREDIT_BUREAU_A_2__collater_valueofguarantee_876L__MAX,C,credit_bureau_a_2,maximum of `collater_valueofguarantee_876L`. Source meaning: Value of collateral for closed contract.
+293,CREDIT_BUREAU_A_2__pmts_dpd_1073P__MEAN,C,credit_bureau_a_2,"global non-null mean reconstructed from partial sums/counts of `pmts_dpd_1073P`. Source meaning: Days past due of the payment for the active contract (num_group1 - existing contract, num_group2 - payment)."
+294,CREDIT_BUREAU_A_2__pmts_dpd_1073P__MAX,C,credit_bureau_a_2,"maximum of `pmts_dpd_1073P`. Source meaning: Days past due of the payment for the active contract (num_group1 - existing contract, num_group2 - payment)."
+295,CREDIT_BUREAU_A_2__pmts_dpd_303P__MEAN,C,credit_bureau_a_2,"global non-null mean reconstructed from partial sums/counts of `pmts_dpd_303P`. Source meaning: Days past due of the payment for terminated contract according to credit bureau (num_group1 - terminated contract, num_group2 - payment)."
+296,CREDIT_BUREAU_A_2__pmts_dpd_303P__MAX,C,credit_bureau_a_2,"maximum of `pmts_dpd_303P`. Source meaning: Days past due of the payment for terminated contract according to credit bureau (num_group1 - terminated contract, num_group2 - payment)."
+297,CREDIT_BUREAU_A_2__pmts_month_158T__MEAN,C,credit_bureau_a_2,"global non-null mean reconstructed from partial sums/counts of `pmts_month_158T`. Source meaning: Month of payment for a closed contract (num_group1 - existing contract, num_group2 - payment)."
+298,CREDIT_BUREAU_A_2__pmts_month_158T__MAX,C,credit_bureau_a_2,"maximum of `pmts_month_158T`. Source meaning: Month of payment for a closed contract (num_group1 - existing contract, num_group2 - payment)."
+299,CREDIT_BUREAU_A_2__pmts_month_706T__MEAN,C,credit_bureau_a_2,"global non-null mean reconstructed from partial sums/counts of `pmts_month_706T`. Source meaning: Month of payment for active contract (num_group1 - terminated contract, num_group2 - payment)."
+300,CREDIT_BUREAU_A_2__pmts_month_706T__MAX,C,credit_bureau_a_2,"maximum of `pmts_month_706T`. Source meaning: Month of payment for active contract (num_group1 - terminated contract, num_group2 - payment)."
+301,CREDIT_BUREAU_A_2__pmts_overdue_1140A__MEAN,C,credit_bureau_a_2,"global non-null mean reconstructed from partial sums/counts of `pmts_overdue_1140A`. Source meaning: Overdue payment for an active contract (num_group1 - existing contract, num_group2 - payment)."
+302,CREDIT_BUREAU_A_2__pmts_overdue_1140A__MAX,C,credit_bureau_a_2,"maximum of `pmts_overdue_1140A`. Source meaning: Overdue payment for an active contract (num_group1 - existing contract, num_group2 - payment)."
+303,CREDIT_BUREAU_A_2__pmts_overdue_1152A__MEAN,C,credit_bureau_a_2,"global non-null mean reconstructed from partial sums/counts of `pmts_overdue_1152A`. Source meaning: Overdue payment for a closed contract (num_group1 - terminated contract, num_group2 - payment)."
+304,CREDIT_BUREAU_A_2__pmts_overdue_1152A__MAX,C,credit_bureau_a_2,"maximum of `pmts_overdue_1152A`. Source meaning: Overdue payment for a closed contract (num_group1 - terminated contract, num_group2 - payment)."
+305,CREDIT_BUREAU_A_2__pmts_year_1139T__MEAN,C,credit_bureau_a_2,"global non-null mean reconstructed from partial sums/counts of `pmts_year_1139T`. Source meaning: Year of payment for an active contract (num_group1 - existing contract, num_group2 - payment)."
+306,CREDIT_BUREAU_A_2__pmts_year_1139T__MAX,C,credit_bureau_a_2,"maximum of `pmts_year_1139T`. Source meaning: Year of payment for an active contract (num_group1 - existing contract, num_group2 - payment)."
+307,CREDIT_BUREAU_A_2__pmts_year_507T__MEAN,C,credit_bureau_a_2,"global non-null mean reconstructed from partial sums/counts of `pmts_year_507T`. Source meaning: Payment year for a closed credit contract (num_group1 - terminated contract, num_group2 - payment)."
+308,CREDIT_BUREAU_A_2__pmts_year_507T__MAX,C,credit_bureau_a_2,"maximum of `pmts_year_507T`. Source meaning: Payment year for a closed credit contract (num_group1 - terminated contract, num_group2 - payment)."
+309,CREDIT_BUREAU_A_2__collater_typofvalofguarant_298M__NUNIQUE,C,credit_bureau_a_2,sum of per-partition distinct counts of `collater_typofvalofguarant_298M`. Source meaning: Collateral valuation type (active contract).
+310,CREDIT_BUREAU_A_2__collater_typofvalofguarant_407M__NUNIQUE,C,credit_bureau_a_2,sum of per-partition distinct counts of `collater_typofvalofguarant_407M`. Source meaning: Collateral valuation type (closed contract).
+311,CREDIT_BUREAU_A_2__collaterals_typeofguarante_359M__NUNIQUE,C,credit_bureau_a_2,sum of per-partition distinct counts of `collaterals_typeofguarante_359M`. Source meaning: Type of collateral that was used as a guarantee for a closed contract.
+312,CREDIT_BUREAU_A_2__collaterals_typeofguarante_669M__NUNIQUE,C,credit_bureau_a_2,sum of per-partition distinct counts of `collaterals_typeofguarante_669M`. Source meaning: Collateral type for the active contract.
+313,CREDIT_BUREAU_A_2__subjectroles_name_541M__NUNIQUE,C,credit_bureau_a_2,"sum of per-partition distinct counts of `subjectroles_name_541M`. Source meaning: Name of subject role in closed credit contract (num_group1 - terminated contract, num_group2 - subject roles)."
+314,CREDIT_BUREAU_A_2__subjectroles_name_838M__NUNIQUE,C,credit_bureau_a_2,"sum of per-partition distinct counts of `subjectroles_name_838M`. Source meaning: Name of subject role in active credit contract (num_group1 - existing contract, num_group2 - subject roles)."
+315,CREDIT_BUREAU_B_2__ROW_COUNT,C,credit_bureau_b_2,Number of raw family rows linked to the case.
+316,CREDIT_BUREAU_B_2__pmts_dpdvalue_108P__MEAN,C,credit_bureau_b_2,"global non-null mean reconstructed from partial sums/counts of `pmts_dpdvalue_108P`. Source meaning: Value of past due payment for active contract (num_group1 - existing contract, num_group2 - payment)."
+317,CREDIT_BUREAU_B_2__pmts_dpdvalue_108P__MAX,C,credit_bureau_b_2,"maximum of `pmts_dpdvalue_108P`. Source meaning: Value of past due payment for active contract (num_group1 - existing contract, num_group2 - payment)."
+318,CREDIT_BUREAU_B_2__pmts_pmtsoverdue_635A__MEAN,C,credit_bureau_b_2,"global non-null mean reconstructed from partial sums/counts of `pmts_pmtsoverdue_635A`. Source meaning: Active contract that has overdue payments (num_group1 - existing contract, num_group2 - payment)."
+319,CREDIT_BUREAU_B_2__pmts_pmtsoverdue_635A__MAX,C,credit_bureau_b_2,"maximum of `pmts_pmtsoverdue_635A`. Source meaning: Active contract that has overdue payments (num_group1 - existing contract, num_group2 - payment)."
+320,CREDIT_BUREAU_B_2__pmts_date_1107D__MIN_GAP,C,credit_bureau_b_2,"minimum decision-date gap of `pmts_date_1107D`. Source meaning: Payment date for an active contract according to credit bureau (num_group1 - contract, num_group2 - payment)."
+321,CREDIT_BUREAU_B_2__pmts_date_1107D__MAX_GAP,C,credit_bureau_b_2,"maximum decision-date gap of `pmts_date_1107D`. Source meaning: Payment date for an active contract according to credit bureau (num_group1 - contract, num_group2 - payment)."
+322,PERSON_2__ROW_COUNT,C,person_2,Number of raw family rows linked to the case.
+323,PERSON_2__empls_employedfrom_796D__MIN_GAP,C,person_2,"minimum decision-date gap of `empls_employedfrom_796D`. Source meaning: Start of employment (num_group1 - person, num_group2 - employment)."
+324,PERSON_2__empls_employedfrom_796D__MAX_GAP,C,person_2,"maximum decision-date gap of `empls_employedfrom_796D`. Source meaning: Start of employment (num_group1 - person, num_group2 - employment)."
+325,PERSON_2__addres_district_368M__NUNIQUE,C,person_2,sum of per-partition distinct counts of `addres_district_368M`. Source meaning: District of the person's address.
+326,PERSON_2__addres_role_871L__NUNIQUE,C,person_2,sum of per-partition distinct counts of `addres_role_871L`. Source meaning: Role of person's address.
+327,PERSON_2__addres_zip_823M__NUNIQUE,C,person_2,sum of per-partition distinct counts of `addres_zip_823M`. Source meaning: Zip code of the address.
+328,PERSON_2__conts_role_79M__NUNIQUE,C,person_2,sum of per-partition distinct counts of `conts_role_79M`. Source meaning: Type of contact role of a person.
+329,PERSON_2__empls_economicalst_849M__NUNIQUE,C,person_2,"sum of per-partition distinct counts of `empls_economicalst_849M`. Source meaning: The economical status of the person (num_group1 - person, num_group2 - employment)."
+330,PERSON_2__empls_employer_name_740M__NUNIQUE,C,person_2,"sum of per-partition distinct counts of `empls_employer_name_740M`. Source meaning: Employer's name (num_group1 - person, num_group2 - employment)."
+331,PERSON_2__relatedpersons_role_762T__NUNIQUE,C,person_2,"sum of per-partition distinct counts of `relatedpersons_role_762T`. Source meaning: Relationship type of a client's related person (num_group1 - person, num_group2 - related person)."

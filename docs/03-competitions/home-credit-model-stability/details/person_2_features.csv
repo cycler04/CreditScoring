@@ -1,0 +1,12 @@
+id,name,details,sample
+1,case_id,Unique identifier of the credit application/case.,5
+2,addres_district_368M,District of the person's address.,a55475b1
+3,addres_role_871L,Role of person's address.,CONTACT
+4,addres_zip_823M,Zip code of the address.,a55475b1
+5,conts_role_79M,Type of contact role of a person.,a55475b1
+6,empls_economicalst_849M,"The economical status of the person (num_group1 - person, num_group2 - employment).",a55475b1
+7,empls_employedfrom_796D,"Start of employment (num_group1 - person, num_group2 - employment).",2018-06-15
+8,empls_employer_name_740M,"Employer's name (num_group1 - person, num_group2 - employment).",a55475b1
+9,num_group1,First-level ordering/index within a case.,0
+10,num_group2,Second-level ordering/index within a first-level record.,0
+11,relatedpersons_role_762T,"Relationship type of a client's related person (num_group1 - person, num_group2 - related person).",OTHER_RELATIVE

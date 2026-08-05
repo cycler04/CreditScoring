@@ -1,0 +1,3 @@
+id,name,details,sample
+1,case_id,Unique identifier of the credit application/case.,57543
+2,score,Predicted probability required by the competition submission.,0.5

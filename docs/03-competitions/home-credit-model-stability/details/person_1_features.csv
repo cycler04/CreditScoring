@@ -1,0 +1,38 @@
+id,name,details,sample
+1,case_id,Unique identifier of the credit application/case.,0
+2,birth_259D,Date of birth of the person.,1986-07-01
+3,birthdate_87D,Birth date of the person.,1991-01-01
+4,childnum_185L,Number of children of the applicant.,0
+5,contaddr_district_15M,Zip code of a contact person's address.,P88_18_84
+6,contaddr_matchlist_1032L,Indicates whether the contact address is found in a code list.,False
+7,contaddr_smempladdr_334L,Indicates whether the contact address is the same as the employment address.,False
+8,contaddr_zipcode_807M,Zip code of contact address.,P167_100_165
+9,education_927M,Education level of the person.,P97_36_170
+10,empl_employedfrom_271D,Start date of employment.,2017-09-15
+11,empl_employedtotal_800L,Employment length of a person.,MORE_FIVE
+12,empl_industry_691L,Employment Industry of the person.,OTHER
+13,empladdr_district_926M,District where the employer's address is located.,P142_57_166
+14,empladdr_zipcode_114M,Zipcode of employer's address.,P167_100_165
+15,familystate_447L,Family state of the person.,MARRIED
+16,gender_992L,Gender of a person.,F
+17,housetype_905L,House type of the person.,OWNED
+18,housingtype_772L,Type of housing of the person.,PARENTAL
+19,incometype_1044T,Type of income of the person,SALARIED_GOVT
+20,isreference_387L,Flag indicating whether the person is a reference contact.,False
+21,language1_981M,The primary language of the person.,P10_39_147
+22,mainoccupationinc_384A,Amount of the main income of the client.,10800
+23,maritalst_703L,Marital status of the client.,SINGLE
+24,num_group1,First-level ordering/index within a case.,0
+25,personindex_1023L,Order of the person specified on the application form.,0
+26,persontype_1072L,Person type.,1
+27,persontype_792L,Person type.,1
+28,registaddr_district_1083M,District of person's registered address.,P88_18_84
+29,registaddr_zipcode_184M,Registered address's zip code of a person.,P167_100_165
+30,relationshiptoclient_415T,Relationship to the client.,SPOUSE
+31,relationshiptoclient_642T,Relationship to the client.,SPOUSE
+32,remitter_829L,Flag indicating whether the client is a remitter.,False
+33,role_1084L,Type of contact role.,CL
+34,role_993L,Person's role.,FULL
+35,safeguarantyflag_411L,Flag indicating if client is using a flexible product with additional safeguard garanty.,True
+36,sex_738L,Gender of the client.,F
+37,type_25L,Contact type of a person.,PRIMARY_MOBILE

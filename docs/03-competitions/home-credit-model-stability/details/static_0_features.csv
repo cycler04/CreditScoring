@@ -1,0 +1,169 @@
+id,name,details,sample
+1,case_id,Unique identifier of the credit application/case.,0
+2,actualdpdtolerance_344P,DPD of client with tolerance.,0
+3,amtinstpaidbefduel24m_4187115A,Number of instalments paid before due date in the last 24 months.,7374
+4,annuity_780A,Monthly annuity amount.,1917.6
+5,annuitynextmonth_57A,Next month's amount of annuity.,0
+6,applicationcnt_361L,Number of applications associated with the same email address as the client.,0
+7,applications30d_658L,Number of applications made by the client in the last 30 days.,0
+8,applicationscnt_1086L,Number of applications associated with the same phone number.,0
+9,applicationscnt_464L,Number of applications made in the last 30 days by other clients with the same employer as the applicant.,0
+10,applicationscnt_629L,Number of applications with the same employer in the last 7 days.,0
+11,applicationscnt_867L,Number of applications associated with the same mobile phone.,0
+12,avgdbddpdlast24m_3658932P,Average days past or before due of payment during the last 24 months.,-4
+13,avgdbddpdlast3m_4187120P,Average days past or before due of payment during the last 3 months.,-3
+14,avgdbdtollast24m_4525197P,Average days of payment before due date within the last 24 months (with tolerance).,-21
+15,avgdpdtolclosure24_3658938P,"Average DPD (days past due) with tolerance within the past 24 months from the maximum closure date, assuming that the contract is finished. If the contract is ongoing, the calculation is based on the current date.",0
+16,avginstallast24m_3658937A,Average instalments paid by the client over the past 24 months.,4178
+17,avglnamtstart24m_4525187A,Average loan amount in the last 24 months.,23682.8
+18,avgmaxdpdlast9m_3716943P,Average Days Past Due (DPD) of the client in last 9 months.,0
+19,avgoutstandbalancel6m_4187114A,Average outstanding balance of applicant for the last 6 months.,11059.4
+20,avgpmtlast12m_4525200A,Average of payments made by the client in the last 12 months.,6668.6
+21,bankacctype_710L,Type of applicant's bank account.,CA
+22,cardtype_51L,Type of credit card.,INSTANT
+23,clientscnt12m_3712952L,Number of clients that have used the same mobile phone as the applicant in the past 12 months.,0
+24,clientscnt3m_3712950L,Number of clients who have the same mobile phone number in the last 3 months.,0
+25,clientscnt6m_3712949L,Total number of clients who have used the same mobile number in the last 6 months.,0
+26,clientscnt_100L,Number of applications with matching employer's phone and client's.,0
+27,clientscnt_1022L,Number of clients sharing the same mobile phone.,0
+28,clientscnt_1071L,Number of applications where the alternative phone number matches that of the client.,0
+29,clientscnt_1130L,Number of applications where client's phone number matches the alternative phone contact.,0
+30,clientscnt_136L,Number of applications associated with same email address as client's email.,0
+31,clientscnt_157L,Number of clients whose employer has the same phone number as the client.,0
+32,clientscnt_257L,Number of clients that share an alternative phone number with the applicant.,0
+33,clientscnt_304L,Number of clients with the same phone number.,0
+34,clientscnt_360L,Number of clients that have the same alternative phone number and employer's phone number.,0
+35,clientscnt_493L,Number of clients with matching phone numbers for both the employer and the client.,0
+36,clientscnt_533L,Number of clients with same client's and alternative's phone number,0
+37,clientscnt_887L,Number of clients sharing the same employer's phone number.,0
+38,clientscnt_946L,Number of clients with matching mobile and employer's number.,0
+39,cntincpaycont9m_3716944L,Number of incoming payments in the past 9 months.,3
+40,cntpmts24_3658933L,Number of months with any incoming payment in last 24 months.,3
+41,commnoinclast6m_3546845L,Number of communications indicating low income in the last six months.,0
+42,credamount_770A,Loan amount or credit card limit.,30000
+43,credtype_322L,Type of credit.,CAL
+44,currdebt_22A,Current debt amount of the client.,0
+45,currdebtcredtyperange_828A,Current amount of debt of the applicant.,0
+46,datefirstoffer_1144D,Date of first customer relationship management (CRM) offer.,2019-01-07
+47,datelastinstal40dpd_247D,Date of last instalment that was more than 40 days past due (DPD).,2016-02-15
+48,datelastunpaid_3546854D,Date of the last unpaid instalment.,2018-12-31
+49,daysoverduetolerancedd_3976961L,Number of days that past after the due date (with tolerance).,0
+50,deferredmnthsnum_166L,Number of deferred months.,0
+51,disbursedcredamount_1113A,Disbursed credit amount after consolidation.,30000
+52,disbursementtype_67L,Type of disbursement.,GBA
+53,downpmt_116A,Amount of downpayment.,0
+54,dtlastpmtallstes_4499206D,Date of last payment made by the applicant.,2019-08-29
+55,eir_270L,Interest rate.,0.45
+56,equalitydataagreement_891L,"Flag indicating sudden changes in client's social-demographic data (e.g. education, family status, housing type).",True
+57,equalityempfrom_62L,Flag indicating a sudden change in the client's length of employment.,True
+58,firstclxcampaign_1125D,Date of the client's first campaign.,2019-01-07
+59,firstdatedue_489D,Date of the first due date.,2018-11-10
+60,homephncnt_628L,Number of distinct home phones on client's application.,0
+61,inittransactionamount_650A,Initial transaction amount of the credit application.,0
+62,inittransactioncode_186L,Transaction type of the initial credit transaction.,CASH
+63,interestrate_311L,The interest rate of the active credit contract.,0.45
+64,interestrategrace_34L,Interest rate during the grace period.,0
+65,isbidproduct_1095L,Flag indicating if the product is a cross-sell.,False
+66,isbidproductrequest_292L,Flag indicating if the product is a cross-sell.,False
+67,isdebitcard_729L,Flag indicating if the product is a debit card.,False
+68,lastactivateddate_801D,Contract activation date for previous applications.,2018-10-19
+69,lastapplicationdate_877D,Date of previous customer's application.,2013-04-03
+70,lastapprcommoditycat_1041M,Commodity category of the last loan applications made by the applicant.,a55475b1
+71,lastapprcommoditytypec_5251766M,Commodity type of the last application.,a55475b1
+72,lastapprcredamount_781A,Credit amount from the client's last application.,100000
+73,lastapprdate_640D,Date of approval on client's most recent previous application.,2019-01-11
+74,lastcancelreason_561M,Cancellation reason of the last application.,a55475b1
+75,lastdelinqdate_224D,Date of the last delinquency occurrence.,2018-12-31
+76,lastdependentsnum_448L,Number of dependents in the client's last loan application.,0
+77,lastotherinc_902A,Amount of other income reported by the client in their last application.,0.2
+78,lastotherlnsexpense_631A,Monthly expenses on other loans from the last application.,0
+79,lastrejectcommoditycat_161M,Category of commodity in the applicant's last rejected application.,a55475b1
+80,lastrejectcommodtypec_5251769M,Commodity type of the last rejected application.,a55475b1
+81,lastrejectcredamount_222A,Credit amount on last rejected application.,10000
+82,lastrejectdate_50D,Date of most recent rejected application by the applicant.,2013-04-03
+83,lastrejectreason_759M,Reason for rejection on the most recent rejected application.,a55475b1
+84,lastrejectreasonclient_4145040M,Reason for the client's last loan rejection.,a55475b1
+85,lastrepayingdate_696D,Date of the last payment made by the applicant.,2019-03-09
+86,lastst_736L,Status of the client's previous credit application.,D
+87,maininc_215A,Client's primary income amount.,50000
+88,mastercontrelectronic_519L,Flag indicating the existence of the master contract for the client.,0
+89,mastercontrexist_109L,Flag indicating whether or not the applicant has an existing master contract.,0
+90,maxannuity_159A,Maximum annuity previously obtained by client.,0
+91,maxannuity_4075009A,Maximal annuity offered to the client in the current application.,16820
+92,maxdbddpdlast1m_3658939P,Maximum number of days past due in the last month. A negative value indicates the number of days before the due date.,0
+93,maxdbddpdtollast12m_3658940P,Maximum number of days past due in last 12 months. A negative value implies days before due date.,0
+94,maxdbddpdtollast6m_4187119P,Maximum number of days past due in last 6 months. This predictor takes the value as a negative number when it represents days before due date.,-2
+95,maxdebt4_972A,Maximal principal debt of the client in the history older than 4 months.,0
+96,maxdpdfrom6mto36m_3546853P,Maximum Days Past Due (DPD) in the period ranging from 6 to 36 months.,0
+97,maxdpdinstldate_3546855D,Date of instalment on which client was most days past due.,2018-12-01
+98,maxdpdinstlnum_3546846P,Instalment number of which client was most days past due.,2
+99,maxdpdlast12m_727P,Maximum days past due in the past 12 months.,0
+100,maxdpdlast24m_143P,Maximal days past due in the last 24 months.,0
+101,maxdpdlast3m_392P,Maximum number of days past due in last 3 months.,0
+102,maxdpdlast6m_474P,Maximum days past due in the last 6 months.,0
+103,maxdpdlast9m_1059P,Maximum days past due in last 9 months.,0
+104,maxdpdtolerance_374P,Maximum number of days past due (with tolerance).,0
+105,maxinstallast24m_3658928A,Maximum instalment in the last 24 months,4178
+106,maxlnamtstart6m_4525199A,Maximum loan amount started in the last 6 months.,23682.8
+107,maxoutstandbalancel12m_4187113A,Maximum outstanding balance in the last 12 months.,14746.4
+108,maxpmtlast3m_4525190A,Maximum payment made by the client in the last 3 months.,19317.273
+109,mindbddpdlast24m_3658935P,Minimum days past due (or days before due) in last 24 months.,-7
+110,mindbdtollast24m_4525191P,Minimum days before due in last 24 months.,-64
+111,mobilephncnt_593L,Number of persons with the same mobile phone number.,1
+112,monthsannuity_845L,Monthly annuity amount for the applicant.,3
+113,numactivecreds_622L,Number of active credits.,0
+114,numactivecredschannel_414L,Number of active credits.,0
+115,numactiverelcontr_750L,Number of active revolving credits.,0
+116,numcontrs3months_479L,Number of contracts in last 3 months.,0
+117,numincomingpmts_3546848L,Number of incoming payments.,3
+118,numinstlallpaidearly3d_817L,Number of instalments paid at least 3 days prior to their due date.,0
+119,numinstls_657L,Number of instalments.,0
+120,numinstlsallpaid_934L,Number of paid instalments.,0
+121,numinstlswithdpd10_728L,Number of instalments that were overdue for 10 or more days.,0
+122,numinstlswithdpd5_4187116L,Number of instalments that were overdue by at least 5 days.,0
+123,numinstlswithoutdpd_562L,Number of instalments that were not past due date.,4
+124,numinstmatpaidtearly2d_4499204L,Number of instalments that have been paid more than 2 days before their due date.,3
+125,numinstpaid_4499208L,Number of paid instalments.,4
+126,numinstpaidearly3d_3546850L,Number of instalments paid more than three days before the due date.,0
+127,numinstpaidearly3dest_4493216L,Number of instalments that have been paid more than 3 days in advance of the due date.,0
+128,numinstpaidearly5d_1087L,Number of instalments paid more than 5 days prior to the due date.,2
+129,numinstpaidearly5dest_4493211L,Number of instalments that were paid more than 5 days before the due date.,0
+130,numinstpaidearly5dobd_4499205L,Number of installments paid more than 5 days prior to the due date.,3
+131,numinstpaidearly_338L,Number of installments paid prior to the due date.,2
+132,numinstpaidearlyest_4493214L,Number of instalments paid before the due date.,0
+133,numinstpaidlastcontr_4325080L,Number of paid installments from the client's last contract.,3
+134,numinstpaidlate1d_3546852L,Number of instalments paid more than 1 day past their due date.,0
+135,numinstregularpaid_973L,Number of fully paid regular installments in the client's previous contracts.,3
+136,numinstregularpaidest_4493210L,Number of fully paid regular installments on clients' previous contracts.,1
+137,numinsttopaygr_769L,Number of unpaid instalments.,0
+138,numinsttopaygrest_4493213L,Number of unpaid instalments.,0
+139,numinstunpaidmax_3546851L,Maximum number of unpaid instalments.,0
+140,numinstunpaidmaxest_4493212L,Maximum number of unpaid instalments.,0
+141,numnotactivated_1143L,Number of non-activated credits.,0
+142,numpmtchanneldd_318L,Number of previous loan contracts for the applicant that had direct debit as payment channel.,0
+143,numrejects9m_859L,Number of credit applications that were rejected in the last 9 months.,0
+144,opencred_647L,Number of active loans from the previous application.,False
+145,paytype1st_925L,Type of first payment of the client.,OTHER
+146,paytype_783L,Type of payment.,OTHER
+147,payvacationpostpone_4187118D,Date of last payment holiday instalment.,2019-07-25
+148,pctinstlsallpaidearl3d_427L,Percentage of installments paid at least 3 days prior to the due date.,0.66667
+149,pctinstlsallpaidlat10d_839L,Percentage of installments that were paid 10 or more days after the due date.,0
+150,pctinstlsallpaidlate1d_3546856L,Percentage of installments that are paid 1 or more days after the due date.,0
+151,pctinstlsallpaidlate4d_3546849L,Percentage of installments that were paid 4 or more days past their due date.,0
+152,pctinstlsallpaidlate6d_3546844L,Percentage of installments that were paid 6 or more days past their due date.,0
+153,pmtnum_254L,Total number of loan payments made by the client.,24
+154,posfpd10lastmonth_333P,Average FPD10 (Share of contracts with first installment past due more than 10 days) from point of sales that processed contract in the previous month.,0
+155,posfpd30lastmonth_3976960P,Average FPD30 (Share of contracts with first installment past due more than 30 days) from point of sales that processed contract in the previous month.,0
+156,posfstqpd30lastmonth_3976962P,"Average FSTPD30 (share of contracts with first, second, or third installment past due more than 30 days) from point of sale that processed contract in the last month.",0
+157,previouscontdistrict_112M,Contact district of the client's previous approved application.,a55475b1
+158,price_1097A,Credit price.,34503
+159,sellerplacecnt_915L,Number of sellerplaces where the same client's document was used.,0
+160,sellerplacescnt_216L,Number of sellerplaces where the same client's mobile phone was used.,0
+161,sumoutstandtotal_3546847A,Sum of total outstanding amount.,0
+162,sumoutstandtotalest_4493215A,Sum of total outstanding amount.,0
+163,totaldebt_9A,Total amount of debt.,0
+164,totalsettled_863A,Sum of all payments made by the client.,0
+165,totinstallast1m_4525188A,Total amount of monthly instalments paid in the previous month.,21769.674
+166,twobodfilling_608L,Type of application process.,BO
+167,typesuite_864L,Persons accompanying the client during the loan application process.,AL
+168,validfrom_1069D,Date since the client has an active campaign.,2019-02-06

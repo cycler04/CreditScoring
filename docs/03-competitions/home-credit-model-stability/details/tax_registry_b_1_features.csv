@@ -1,0 +1,6 @@
+id,name,details,sample
+1,case_id,Unique identifier of the credit application/case.,49435
+2,amount_4917619A,Tax deductions amount tracked by the government registry.,6885
+3,deductiondate_4917603D,Tax deduction date.,2019-10-16
+4,name_4917606M,Name of employer.,6b730375
+5,num_group1,First-level ordering/index within a case.,0

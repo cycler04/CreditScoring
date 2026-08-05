@@ -1,0 +1,42 @@
+id,name,details,sample
+1,case_id,Unique identifier of the credit application/case.,2
+2,actualdpd_943P,Days Past Due (DPD) of previous contract (actual).,0
+3,annuity_853A,Monthly annuity for previous applications.,640.2
+4,approvaldate_319D,Approval Date of Previous Application,2019-01-11
+5,byoccupationinc_3656910L,Applicant's income from previous applications.,1
+6,cancelreason_3545846M,Application cancellation reason.,a55475b1
+7,childnum_21L,Number of children in the previous application.,0
+8,creationdate_885D,Date when previous application was created.,2013-04-03
+9,credacc_actualbalance_314A,Actual balance on credit account.,30450
+10,credacc_credlmt_575A,Credit card credit limit provided for previous applications.,0
+11,credacc_maxhisbal_375A,Maximal historical balance of previous credit account,0
+12,credacc_minhisbal_90A,Minimum historical balance of previous credit accounts.,0
+13,credacc_status_367L,Account status of previous credit applications.,CL
+14,credacc_transactions_402L,Number of transactions made with the previous credit account of the applicant.,0
+15,credamount_590A,Loan amount or card limit of previous applications.,10000
+16,credtype_587L,Credit type of previous application.,CAL
+17,currdebt_94A,Previous application's current debt.,0
+18,dateactivated_425D,Contract activation date of the applicant's previous application.,2018-10-19
+19,district_544M,District of the address used in the previous loan application.,P136_108_173
+20,downpmt_134A,Previous application downpayment amount.,0
+21,dtlastpmt_581D,Date of last payment made by the applicant.,2019-01-10
+22,dtlastpmtallstes_3545839D,Date of the applicant's last payment.,2019-01-10
+23,education_1138M,Applicant's education level from their previous application.,P97_36_170
+24,employedfrom_700D,Employment start date from the previous application.,2010-02-15
+25,familystate_726L,Family State in previous application of applicant.,SINGLE
+26,firstnonzeroinstldate_307D,Date of first instalment in the previous application.,2013-05-04
+27,inittransactioncode_279L,Type of the initial transaction made in the previous application of the client.,CASH
+28,isbidproduct_390L,Flag for determining if the product is a cross-sell in previous applications.,False
+29,isdebitcard_527L,Previous application flag indicating if product being applied for is a debit card.,False
+30,mainoccupationinc_437A,Client's main income amount in their previous application.,8200
+31,maxdpdtolerance_577P,Maximum DPD with tolerance (on previous application/s).,0
+32,num_group1,First-level ordering/index within a case.,0
+33,outstandingdebt_522A,Amount of outstanding debt on the client's previous application.,0
+34,pmtnum_8L,Number of payments made for the previous application.,24
+35,postype_4733339M,Type of point of sale.,a55475b1
+36,profession_152M,Profession of the client during their previous loan application.,a55475b1
+37,rejectreason_755M,Reason for previous application rejection.,a55475b1
+38,rejectreasonclient_4145042M,Reason for rejection of the client's previous application.,a55475b1
+39,revolvingaccount_394A,Revolving account that was present in the applicant's previous application.,760645950
+40,status_219L,Previous application status.,D
+41,tenor_203L,Number of instalments in the previous application.,24

@@ -1,0 +1,6 @@
+id,name,details,sample
+1,case_id,Unique identifier of the credit application/case.,0
+2,date_decision,Decision date of the current credit application.,2019-01-03
+3,MONTH,Calendar-month index supplied in the base table.,201901
+4,WEEK_NUM,Consecutive week index used by the competition stability metric.,0
+5,target,Binary competition target available only in train_base.,0

@@ -1,0 +1,7 @@
+id,name,details,sample
+1,case_id,Unique identifier of the credit application/case.,2
+2,cacccardblochreas_147M,Card blocking reason.,a55475b1
+3,conts_type_509L,Person contact type in previous application.,PRIMARY_MOBILE
+4,credacc_cards_status_52L,Card status of the previous credit account.,CANCELLED
+5,num_group1,First-level ordering/index within a case.,0
+6,num_group2,Second-level ordering/index within a first-level record.,0

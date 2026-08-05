@@ -1,0 +1,20 @@
+id,name,details,sample
+1,case_id,Unique identifier of the credit application/case.,388
+2,collater_typofvalofguarant_298M,Collateral valuation type (active contract).,8fd95e4b
+3,collater_typofvalofguarant_407M,Collateral valuation type (closed contract).,a55475b1
+4,collater_valueofguarantee_1124L,Value of collateral for active contract.,0
+5,collater_valueofguarantee_876L,Value of collateral for closed contract.,0
+6,collaterals_typeofguarante_359M,Type of collateral that was used as a guarantee for a closed contract.,a55475b1
+7,collaterals_typeofguarante_669M,Collateral type for the active contract.,c7a5ad39
+8,num_group1,First-level ordering/index within a case.,0
+9,num_group2,Second-level ordering/index within a first-level record.,0
+10,pmts_dpd_1073P,"Days past due of the payment for the active contract (num_group1 - existing contract, num_group2 - payment).",0
+11,pmts_dpd_303P,"Days past due of the payment for terminated contract according to credit bureau (num_group1 - terminated contract, num_group2 - payment).",0
+12,pmts_month_158T,"Month of payment for a closed contract (num_group1 - existing contract, num_group2 - payment).",2
+13,pmts_month_706T,"Month of payment for active contract (num_group1 - terminated contract, num_group2 - payment).",2
+14,pmts_overdue_1140A,"Overdue payment for an active contract (num_group1 - existing contract, num_group2 - payment).",0
+15,pmts_overdue_1152A,"Overdue payment for a closed contract (num_group1 - terminated contract, num_group2 - payment).",0
+16,pmts_year_1139T,"Year of payment for an active contract (num_group1 - existing contract, num_group2 - payment).",2018
+17,pmts_year_507T,"Payment year for a closed credit contract (num_group1 - terminated contract, num_group2 - payment).",2006
+18,subjectroles_name_541M,"Name of subject role in closed credit contract (num_group1 - terminated contract, num_group2 - subject roles).",a55475b1
+19,subjectroles_name_838M,"Name of subject role in active credit contract (num_group1 - existing contract, num_group2 - subject roles).",ab3c25cf
