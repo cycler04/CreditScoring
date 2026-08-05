@@ -16,7 +16,7 @@ chúng chiếm 71,46% tổng impurity importance của Random Forest tham chiế
 `EXT_SOURCE_1` cũng có chênh lệch missing lớn nhất giữa train và test: 56,38% so với
 42,12%.
 
-**Finding chính:** mô hình cần xử lý đồng thời ba vấn đề: 
+**Finding chính:** mô hình cần xử lý đồng thời ba vấn đề:
 
 - lệch lớp, missing mang ngữ
   nghĩa nghiệp vụ và category/sentinel đại diện cho trạng thái quy trình.
@@ -57,16 +57,11 @@ Ba tương quan Pearson có độ lớn cao nhất với target là `EXT_SOURCE_
 xếp ba biến này đầu tiên, với importance lần lượt 0,3040; 0,3389; 0,0718. Tổng ba biến
 là 71,46% và top 10 feature là 85,12% tổng importance.
 
-Độ lớn tương quan riêng lẻ đều dưới 0,18, vì vậy không có một biến tuyến tính nào tự
-nó giải thích target. Đồng thời, missing của `EXT_SOURCE_1` giảm từ 56,38% ở train
-xuống 42,12% ở test, chênh 14,26 điểm phần trăm. `EXT_SOURCE_3` chênh 2,04 điểm; median
-chênh lệch tuyệt đối của các cột có missing ở cả hai tập chỉ 0,27 điểm. Đây là dấu
-hiệu cần kiểm tra distribution shift và calibration riêng theo trạng thái missing,
-không phải bằng chứng rằng test “tốt hơn” train.
+Độ lớn tương quan riêng lẻ đều dưới 0,18, vì vậy không có một biến tuyến tính nào tự nó giải thích target. Đồng thời, missing của `EXT_SOURCE_1` giảm từ 56,38% ở train xuống 42,12% ở test, chênh 14,26 điểm phần trăm. 
 
-Random Forest này chỉ phục vụ EDA: 50 cây, depth 8, fit trên toàn bộ
-`application_train`, category được mã hóa bằng integer code. Importance chưa qua
-cross-validation, có bias theo cardinality và không nên được dùng một mình để chọn
+`EXT_SOURCE_3` chênh 2,04 điểm; median chênh lệch tuyệt đối của các cột có missing ở cả hai tập chỉ 0,27 điểm. Đây là dấu hiệu cần kiểm tra distribution shift và calibration riêng theo trạng thái missing, không phải bằng chứng rằng test “tốt hơn” train.
+
+Random Forest này chỉ phục vụ EDA: 50 cây, depth 8, fit trên toàn bộ `application_train`, category được mã hóa bằng integer code. Importance chưa qua cross-validation, có bias theo cardinality và không nên được dùng một mình để chọn
 feature.
 
 ### 3. Category tạo phân khúc bad rate rõ, nhưng dễ trở thành proxy

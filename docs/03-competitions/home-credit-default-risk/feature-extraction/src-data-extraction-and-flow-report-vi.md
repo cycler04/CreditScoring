@@ -14,8 +14,7 @@ Pipeline lấy hai bảng application làm **xương sống một dòng cho mỗ
 Các bảng lịch sử one-to-many không được join trực tiếp. Chúng được DuckDB đọc từ CSV,
 tổng hợp về đúng một dòng cho mỗi `SK_ID_CURR`, cache thành Parquet, rồi mới left join
 vào application. Sau đó chỉ các dòng có `TARGET` mới được chia ngẫu nhiên phân tầng
-60/20/20; mọi phép học từ dữ liệu như imputation, scaling, one-hot, binning, WoE và
-chọn feature đều fit trên train split.
+60/20/20; mọi phép học từ dữ liệu như imputation, scaling, one-hot, binning, WoE và chọn feature đều fit trên train split.
 
 ```mermaid
 flowchart TD
@@ -42,8 +41,7 @@ flowchart TD
     N --> P[4 file submission]
 ```
 
-**Verified từ artifact local:** Stage C giữ nguyên 356.255 application, gồm 307.511
-dòng có nhãn và 48.744 dòng competition test. Matrix có 177 cột: `SK_ID_CURR`,
+**Verified từ artifact local:** Stage C giữ nguyên 356.255 application, gồm 307.511 dòng có nhãn và 48.744 dòng competition test. Matrix có 177 cột: `SK_ID_CURR`,
 `TARGET` và 175 feature. `SK_ID_CURR` trong ba split là duy nhất và không mất dòng.
 
 ## 2. Thành phần và trách nhiệm
@@ -124,8 +122,7 @@ nếu file thiếu. `load_tables()` mặc định chỉ nạp:
 - `application_test.csv`: 48.744 dòng × 121 cột, không có `TARGET`.
 
 Hai bảng được đọc bằng `pandas.read_csv(..., low_memory=False)`. Sáu bảng lịch sử
-không được nạp đồng thời vào pandas vì chúng lớn hơn nhiều; chúng đi qua DuckDB ở
-Bước 5.
+không được nạp đồng thời vào pandas vì chúng lớn hơn nhiều; chúng đi qua DuckDB ở  Bước 5.
 
 ### Bước 3 — ghép train/test trước khi làm sạch xác định
 
@@ -212,10 +209,7 @@ Matrix được ghi vào `feature_matrix_A.parquet`, `feature_matrix_B.parquet` 
 `feature_matrix.parquet`. Cả ba artifact local đều có 356.255 dòng.
 
 **Cơ chế cache:** nếu `aggregates/<name>.parquet` đã tồn tại, SQL không chạy lại.
-Điều này giúp rerun nhanh, nhưng cache không mang hash raw/query và không tự invalid
-khi CSV hoặc code aggregate thay đổi. Khi đổi source hoặc công thức, cần xóa đúng các
-file aggregate bị ảnh hưởng rồi chạy lại; đây là thao tác xóa dữ liệu nên phải kiểm tra
-phạm vi trước khi thực hiện.
+Điều này giúp rerun nhanh, nhưng cache không mang hash raw/query và không tự invalid khi CSV hoặc code aggregate thay đổi. Khi đổi source hoặc công thức, cần xóa đúng các file aggregate bị ảnh hưởng rồi chạy lại; đây là thao tác xóa dữ liệu nên phải kiểm tra phạm vi trước khi thực hiện.
 
 ### Bước 7 — tách labeled data và competition test
 

@@ -1,9 +1,9 @@
 # Tổng quan dữ liệu — Home Credit Default Risk
 
-> **Bài toán:** dự đoán xác suất khách hàng gặp khó khăn thanh toán cho đơn vay hiện tại  
-> **Đơn vị dự đoán:** một dòng cho mỗi `SK_ID_CURR`  
-> **Nhãn:** `TARGET` trong `application_train.csv`  
-> **Metric của competition:** ROC-AUC  
+> **Bài toán:** dự đoán xác suất khách hàng gặp khó khăn thanh toán cho đơn vay hiện tại
+> **Đơn vị dự đoán:** một dòng cho mỗi `SK_ID_CURR`
+> **Nhãn:** `TARGET` trong `application_train.csv`
+> **Metric của competition:** ROC-AUC
 > **Snapshot dữ liệu kiểm tra:** 03/08/2026
 
 ## 1. Tổng quan ngắn
@@ -20,17 +20,17 @@ Home Credit Default Risk là bài toán phân loại nhị phân trên dữ li�
 
 Các số dòng/cột dưới đây được kiểm tra trực tiếp từ snapshot CSV local. Mỗi liên kết ở cột cuối là một data dictionary riêng có schema `id,name,details,sample`.
 
-| Bảng | Grain của một dòng | Khóa/liên kết | Dòng | Cột | Chi tiết feature |
-|---|---|---|---:|---:|---|
-| `application_train.csv` | Một đơn vay hiện tại dùng để train | `SK_ID_CURR`; có `TARGET` | 307.511 | 122 | [CSV](./details/application_train_features.csv) |
-| `application_test.csv` | Một đơn vay hiện tại cần dự đoán | `SK_ID_CURR` | 48.744 | 121 | [CSV](./details/application_test_features.csv) |
-| `bureau.csv` | Một khoản tín dụng tại tổ chức khác | `SK_ID_BUREAU`, `SK_ID_CURR` | 1.716.428 | 17 | [CSV](./details/bureau_features.csv) |
-| `bureau_balance.csv` | Một tháng của một khoản Credit Bureau | `SK_ID_BUREAU`, `MONTHS_BALANCE` | 27.299.925 | 3 | [CSV](./details/bureau_balance_features.csv) |
-| `previous_application.csv` | Một đơn vay trước đây tại Home Credit | `SK_ID_PREV`, `SK_ID_CURR` | 1.670.214 | 37 | [CSV](./details/previous_application_features.csv) |
-| `POS_CASH_balance.csv` | Một snapshot tháng của khoản POS/cash loan trước đây | `SK_ID_PREV`, `SK_ID_CURR`, `MONTHS_BALANCE` | 10.001.358 | 8 | [CSV](./details/pos_cash_balance_features.csv) |
-| `credit_card_balance.csv` | Một snapshot tháng của thẻ tín dụng trước đây | `SK_ID_PREV`, `SK_ID_CURR`, `MONTHS_BALANCE` | 3.840.312 | 23 | [CSV](./details/credit_card_balance_features.csv) |
-| `installments_payments.csv` | Một payment record/kỳ phải trả của khoản vay trước | `SK_ID_PREV`, `SK_ID_CURR` | 13.605.401 | 8 | [CSV](./details/installments_payments_features.csv) |
-| `sample_submission.csv` | Một prediction cho mỗi đơn trong test | `SK_ID_CURR`, `TARGET` | 48.744 | 2 | [CSV](./details/sample_submission_features.csv) |
+| Bảng                         | Grain của một dòng                                        | Khóa/liên kết                                   |      Dòng | Cột | Chi tiết feature                                  |
+| ----------------------------- | ------------------------------------------------------------ | -------------------------------------------------- | ---------: | ---: | -------------------------------------------------- |
+| `application_train.csv`     | Một đơn vay hiện tại dùng để train                   | `SK_ID_CURR`; có `TARGET`                     |    307.511 |  122 | [CSV](./details/application_train_features.csv)     |
+| `application_test.csv`      | Một đơn vay hiện tại cần dự đoán                    | `SK_ID_CURR`                                     |     48.744 |  121 | [CSV](./details/application_test_features.csv)      |
+| `bureau.csv`                | Một khoản tín dụng tại tổ chức khác                  | `SK_ID_BUREAU`, `SK_ID_CURR`                   |  1.716.428 |   17 | [CSV](./details/bureau_features.csv)                |
+| `bureau_balance.csv`        | Một tháng của một khoản Credit Bureau                   | `SK_ID_BUREAU`, `MONTHS_BALANCE`               | 27.299.925 |    3 | [CSV](./details/bureau_balance_features.csv)        |
+| `previous_application.csv`  | Một đơn vay trước đây tại Home Credit                | `SK_ID_PREV`, `SK_ID_CURR`                     |  1.670.214 |   37 | [CSV](./details/previous_application_features.csv)  |
+| `POS_CASH_balance.csv`      | Một snapshot tháng của khoản POS/cash loan trước đây | `SK_ID_PREV`, `SK_ID_CURR`, `MONTHS_BALANCE` | 10.001.358 |    8 | [CSV](./details/pos_cash_balance_features.csv)      |
+| `credit_card_balance.csv`   | Một snapshot tháng của thẻ tín dụng trước đây      | `SK_ID_PREV`, `SK_ID_CURR`, `MONTHS_BALANCE` |  3.840.312 |   23 | [CSV](./details/credit_card_balance_features.csv)   |
+| `installments_payments.csv` | Một payment record/kỳ phải trả của khoản vay trước   | `SK_ID_PREV`, `SK_ID_CURR`                     | 13.605.401 |    8 | [CSV](./details/installments_payments_features.csv) |
+| `sample_submission.csv`     | Một prediction cho mỗi đơn trong test                    | `SK_ID_CURR`, `TARGET`                         |     48.744 |    2 | [CSV](./details/sample_submission_features.csv)     |
 
 `HomeCredit_columns_description.csv` là metadata nguồn, không phải bảng feature cho mô hình. Các file trong `details/` lấy **header CSV thực tế** làm chuẩn và dùng mô tả từ metadata này. Mô tả gốc được giữ bằng tiếng Anh để tránh làm lệch nghĩa; lỗi tên cột trong metadata như `SK_BUREAU_ID` và dấu cách thừa ở `SK_ID_PREV` đã được chuẩn hóa theo dữ liệu thật.
 

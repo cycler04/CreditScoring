@@ -1,182 +1,231 @@
-# Feature extraction của Home Aloan qua các leaderboard notebook
+# Giải thích chi tiết feature extraction của notebook Home Aloan top 1
 
-> **Câu hỏi chính:** ba notebook trong
-> `notebooks/leaderboard/home-credit-default-risk/01-home-aloan/` biến tám bảng Home
-> Credit Default Risk thành feature ở grain một dòng mỗi `SK_ID_CURR` như thế nào?
->
-> **Phạm vi:** phân tích tĩnh code và metadata local ngày 03/08/2026, đối chiếu với
-> write-up hạng nhất. Báo cáo tập trung vào feature extraction, không tái hiện toàn bộ
-> ensemble hoặc khẳng định metric khi notebook chưa được chạy lại.
+## 1. Mục tiêu và cách đọc
 
-## Kết luận ngắn
+**Verified từ code local.** Báo cáo này chỉ giải thích cách notebook
+[`02-lighgbm-with-selected-features.py`](../../../../notebooks/leaderboard/home-credit-default-risk/01-home-aloan/02-lighgbm-with-selected-features/lighgbm-with-selected-features.py)
+biến từng bảng Home Credit Default Risk thành feature. Đây là notebook duy nhất
+được dùng làm nguồn cho các công thức trong báo cáo.
 
-**Verified từ code local:** lớp feature extraction dùng một mẫu nhất quán:
+Đây là **feature dictionary của một public notebook**, không phải toàn bộ
+feature của winning solution Home Aloan. Những feature từ target, weak model,
+recent window hoặc ensemble được mô tả trong write-up nhưng không có implementation
+trong notebook này nên không được nhập vào dictionary.
 
-1. sửa một số sentinel và mã hóa category;
-2. tạo ratio có nghĩa nghiệp vụ trên bảng application và payment;
-3. biến category trong bảng lịch sử thành one-hot, rồi lấy tỷ lệ xuất hiện bằng
-   `mean`;
-4. aggregate mọi bảng one-to-many về `SK_ID_CURR` bằng `min`, `max`, `mean`, `sum`,
-   `var`, `size` hoặc `nunique`;
-5. tách các trạng thái quan trọng như active/closed và approved/refused;
-6. left join từng feature block vào application.
+Quy ước tên của notebook 02:
 
-Notebook giàu nhất trong ba file là `02-lighgbm-with-selected-features`: nó thêm ratio
-active/closed, approved/refused và loại 339 cột theo một danh sách importance được
-hard-code. Notebook `01-xgb-simple-features` giữ cùng kiến trúc nhưng giảm bớt phép
-aggregate và đổi model sang XGBoost. Notebook `03-good-fun-with-lightgbm` là baseline
-đơn giản hơn, chủ yếu lấy mean và count.
+```text
+<PREFIX>_<RAW_COLUMN>_<AGGREGATION>
+```
 
-**Giới hạn quan trọng:** thư mục mang nhãn đội hạng nhất Home Aloan, nhưng ba kernel
-không phải toàn bộ winning solution. Write-up hạng nhất còn mô tả nhiều feature theo
-cửa sổ thời gian/số lần gần nhất, weighted moving average, target-neighbor feature,
-weak-model out-of-fold feature và ensemble lớn; các phần đó không có trong ba file
-local. Vì vậy nên gọi đây là **các public building block của đội top 1**, không phải
-“full source code của giải nhất”.
+Ví dụ, `BURO_AMT_CREDIT_SUM_DEBT_MEAN` là trung bình
+`AMT_CREDIT_SUM_DEBT` trên các khoản bureau của một `SK_ID_CURR`. Các cột one-hot
+được tạo động theo category thực sự xuất hiện trong input, nên báo cáo ghi chính xác
+**mẫu tên và phép tính**, thay vì hard-code một schema category có thể thay đổi.
 
-## 1. Ba notebook thực sự đại diện cho điều gì?
-
-| File local                            | Kaggle owner/title từ metadata              | Vai trò đọc từ code          | Điểm khác biệt chính                                          |
-| ------------------------------------- | -------------------------------------------- | -------------------------------- | ------------------------------------------------------------------ |
-| `03-good-fun-with-lightgbm`         | `ogrellier/good-fun-with-ligthgbm`         | Baseline đa bảng               | Mean + count, ít domain feature                                   |
-| `02-lighgbm-with-selected-features` | `ogrellier/lighgbm-with-selected-features` | Extractor giàu nhất + LightGBM | Ratio, statistic rộng hơn, drop 339 feature                      |
-| `01-xgb-simple-features`            | `tunguz/xgb-simple-features`               | Biến thể XGBoost               | Feature set gọn hơn; chỉ train fold đầu trong code hiện tại |
-
-Thứ tự thư mục `01 → 02 → 03` không phải thứ tự phát triển. Theo độ phức tạp feature,
-cách đọc hữu ích hơn là `03 → 02`, rồi xem `01` như một nhánh model/feature khác.
-Metadata xác nhận cả ba kernel lấy nguồn competition `home-credit-default-risk`.
-Hai file mới hơn cũng tự ghi rằng chúng fork từ kernel simple-features của `jsaguiar`;
-do đó không nên gán toàn bộ ý tưởng trong code cho riêng đội Home Aloan.
-
-## 2. Kiến trúc feature extraction chung
+## 2. Luồng tổng quát
 
 ```mermaid
 flowchart TD
-    A[application_train + application_test]
-    A --> B[Sentinel + encoding]
-    B --> C[Application ratios<br/>EXT_SOURCE summaries<br/>document and contact summaries]
+    A[application train + test] --> B[20 feature NEW]
+    C[bureau_balance] --> D[Aggregate theo SK_ID_BUREAU]
+    D --> E[Join bureau]
+    E --> F[All / Active / Closed<br/>theo SK_ID_CURR]
+    G[previous_application] --> H[All / Approved / Refused]
+    I[POS_CASH_balance] --> J[Aggregate theo SK_ID_CURR]
+    K[installments_payments] --> L[Aggregate theo SK_ID_CURR]
+    M[credit_card_balance] --> N[Aggregate theo SK_ID_CURR]
 
-    D[bureau_balance] --> E[Aggregate by SK_ID_BUREAU]
-    E --> F[Join bureau]
-    F --> G[Aggregate by SK_ID_CURR<br/>all + active + closed]
-
-    H[previous_application] --> I[Aggregate by SK_ID_CURR<br/>all + approved + refused]
-    J[POS_CASH_balance] --> K[DPD + status + count]
-    L[installments_payments] --> M[Payment ratio + DPD/DBD + count]
-    N[credit_card_balance] --> O[Numeric moments + status + count]
-
-    C --> P[One row per SK_ID_CURR]
-    G --> P
-    I --> P
-    K --> P
-    M --> P
-    O --> P
-    P --> Q[Optional hard-coded feature removal]
-    Q --> R[LightGBM or XGBoost]
+    B --> O[Feature matrix]
+    F --> O
+    H --> O
+    J --> O
+    L --> O
+    N --> O
+    O --> P[Drop 339 tên hard-code]
 ```
 
-Điểm thiết kế đúng và quan trọng nhất là **đưa từng nhánh về đúng grain trước khi
-join**. POS, installments và credit card được aggregate trực tiếp theo `SK_ID_CURR`.
-Riêng `bureau_balance` cần hai tầng vì raw table chỉ có `SK_ID_BUREAU`.
+`mean` của một dummy 0/1 là tỷ lệ dòng thuộc category đó. Với các bảng snapshot,
+`mean` là trung bình theo dòng tháng, không phải trung bình cân bằng theo hợp đồng.
+Pandas bỏ qua `NaN` trong phần lớn phép aggregate; code không dùng safe divide nên
+một số ratio có thể sinh `inf` khi mẫu số bằng 0.
 
-```mermaid
-flowchart LR
-    A[bureau_balance<br/>một dòng mỗi loan-month]
-    A --> B[one-hot STATUS]
-    B --> C[group by SK_ID_BUREAU<br/>month extent + status rate]
-    C --> D[join bureau]
-    D --> E[group by SK_ID_CURR<br/>credit statistics]
-    E --> F[all credits]
-    E --> G[active only]
-    E --> H[closed only]
-    G --> I[active divided by closed]
-    H --> I
+## 3. `application_train/test`: 20 feature tạo trực tiếp
+
+Notebook 02 ghép train và competition test, bỏ bốn dòng train có
+`CODE_GENDER='XNA'`, thay `DAYS_EMPLOYED=365243` bằng missing, rồi tạo 20 cột sau:
+
+| Feature mới | Công thức | Ý nghĩa |
+| ----------- | --------- | ------- |
+| `NEW_CREDIT_TO_ANNUITY_RATIO` | `AMT_CREDIT / AMT_ANNUITY` | Quy mô khoản vay so với annuity. |
+| `NEW_CREDIT_TO_GOODS_RATIO` | `AMT_CREDIT / AMT_GOODS_PRICE` | Khoản vay so với giá trị hàng hóa. |
+| `NEW_DOC_IND_AVG` | mean theo hàng của `FLAG_DOC*` | Tỷ lệ cờ giấy tờ được bật. |
+| `NEW_DOC_IND_STD` | std theo hàng của `FLAG_DOC*` | Độ phân tán giữa các cờ giấy tờ. |
+| `NEW_DOC_IND_KURT` | kurtosis theo hàng của `FLAG_DOC*` | Hình dạng phân phối các cờ giấy tờ. |
+| `NEW_LIVE_IND_SUM` | sum theo hàng của nhóm cờ liên hệ/sống | Tổng số cờ liên hệ/sống được bật. |
+| `NEW_LIVE_IND_STD` | std theo hàng của nhóm cờ liên hệ/sống | Độ phân tán giữa các cờ. |
+| `NEW_LIVE_IND_KURT` | kurtosis theo hàng của nhóm cờ liên hệ/sống | Hình dạng phân phối các cờ. |
+| `NEW_INC_PER_CHLD` | `AMT_INCOME_TOTAL / (1 + CNT_CHILDREN)` | Thu nhập điều chỉnh theo số con. |
+| `NEW_INC_BY_ORG` | median `AMT_INCOME_TOTAL` theo `ORGANIZATION_TYPE` | Mức thu nhập điển hình của nhóm tổ chức. |
+| `NEW_EMPLOY_TO_BIRTH_RATIO` | `DAYS_EMPLOYED / DAYS_BIRTH` | Thâm niên làm việc tương đối với tuổi. |
+| `NEW_ANNUITY_TO_INCOME_RATIO` | `AMT_ANNUITY / (1 + AMT_INCOME_TOTAL)` | Gánh nặng annuity so với thu nhập. |
+| `NEW_SOURCES_PROD` | `EXT_SOURCE_1 * EXT_SOURCE_2 * EXT_SOURCE_3` | Interaction nhân của ba external score. |
+| `NEW_EXT_SOURCES_MEAN` | mean của `EXT_SOURCE_1/2/3` | External score trung tâm. |
+| `NEW_SCORES_STD` | std của `EXT_SOURCE_1/2/3` | Mức bất đồng giữa ba external score. |
+| `NEW_CAR_TO_BIRTH_RATIO` | `OWN_CAR_AGE / DAYS_BIRTH` | Tuổi xe tương đối với tuổi khách hàng. |
+| `NEW_CAR_TO_EMPLOY_RATIO` | `OWN_CAR_AGE / DAYS_EMPLOYED` | Tuổi xe tương đối với thâm niên làm việc. |
+| `NEW_PHONE_TO_BIRTH_RATIO` | `DAYS_LAST_PHONE_CHANGE / DAYS_BIRTH` | Độ cũ lần đổi điện thoại tương đối với tuổi. |
+| `NEW_PHONE_TO_EMPLOY_RATIO` | `DAYS_LAST_PHONE_CHANGE / DAYS_EMPLOYED` | Độ cũ lần đổi điện thoại tương đối với thâm niên. |
+| `NEW_CREDIT_TO_INCOME_RATIO` | `AMT_CREDIT / AMT_INCOME_TOTAL` | Khoản vay so với thu nhập. |
+
+`NEW_INC_BY_ORG` và giá trị fill cho `NEW_SCORES_STD` được học trên bảng train+test
+đã ghép. Đây là preprocessing transductive; không dùng `TARGET` nhưng vẫn lấy thông
+tin phân phối competition test.
+
+Sau đó `CODE_GENDER`, `FLAG_OWN_CAR`, `FLAG_OWN_REALTY` được factorize; các cột
+object còn lại được one-hot theo mẫu `<RAW_COLUMN>_<CATEGORY>`. Những dummy này giữ
+nguyên ở grain application, không cần aggregate.
+
+## 4. `bureau_balance` và `bureau`
+
+### 4.1. Cấp khoản bureau: `bureau_balance`
+
+`STATUS` được one-hot. Mỗi `SK_ID_BUREAU` tạo ba feature thời gian cố định và một
+feature cho mỗi category trạng thái:
+
+| Feature/pattern | Công thức theo `SK_ID_BUREAU` | Ý nghĩa |
+| --------------- | -------------------------------- | ------- |
+| `MONTHS_BALANCE_MIN` | `min(MONTHS_BALANCE)` | Tháng xa nhất trong lịch sử khoản. |
+| `MONTHS_BALANCE_MAX` | `max(MONTHS_BALANCE)` | Tháng gần application nhất. |
+| `MONTHS_BALANCE_SIZE` | `size(MONTHS_BALANCE)` | Số snapshot tháng. |
+| `STATUS_<VALUE>_MEAN` | `mean(I(STATUS=<VALUE>))` | Tỷ lệ tháng ở từng trạng thái, kể cả dummy missing. |
+
+Các feature này được join vào từng dòng `bureau` theo `SK_ID_BUREAU` trước khi
+tổng hợp lần hai về khách hàng.
+
+### 4.2. Numeric feature cấp khách hàng
+
+Bảng sau liệt kê toàn bộ cặp raw column–phép aggregate trong notebook 02:
+
+| Raw/intermediate column | Phép aggregate |
+| ----------------------- | -------------- |
+| `DAYS_CREDIT` | `min`, `max`, `mean`, `var` |
+| `DAYS_CREDIT_ENDDATE` | `min`, `max`, `mean` |
+| `DAYS_CREDIT_UPDATE` | `mean` |
+| `CREDIT_DAY_OVERDUE` | `max`, `mean` |
+| `AMT_CREDIT_MAX_OVERDUE` | `mean` |
+| `AMT_CREDIT_SUM` | `max`, `mean`, `sum` |
+| `AMT_CREDIT_SUM_DEBT` | `max`, `mean`, `sum` |
+| `AMT_CREDIT_SUM_OVERDUE` | `mean` |
+| `AMT_CREDIT_SUM_LIMIT` | `mean`, `sum` |
+| `AMT_ANNUITY` | `max`, `mean` |
+| `CNT_CREDIT_PROLONG` | `sum` |
+| `MONTHS_BALANCE_MIN` | `min` |
+| `MONTHS_BALANCE_MAX` | `max` |
+| `MONTHS_BALANCE_SIZE` | `mean`, `sum` |
+
+Danh sách trên tạo 27 cặp `<COLUMN>_<AGG>`. Mỗi cặp được materialize thành bốn
+view:
+
+| View | Tên feature | Cách tạo |
+| ---- | ----------- | ------- |
+| Toàn bộ khoản | `BURO_<COLUMN>_<AGG>` | Aggregate mọi dòng bureau của khách hàng. |
+| Khoản active | `ACTIVE_<COLUMN>_<AGG>` | Chỉ dùng dòng có `CREDIT_ACTIVE_Active=1`. |
+| Khoản closed | `CLOSED_<COLUMN>_<AGG>` | Chỉ dùng dòng có `CREDIT_ACTIVE_Closed=1`. |
+| Tỷ số active/closed | `NEW_RATIO_BURO_<COLUMN>_<AGG>` | `ACTIVE_<...> / CLOSED_<...>`. |
+
+Như vậy phần numeric tạo 27 feature `BURO_*`, 27 `ACTIVE_*`, 27 `CLOSED_*` và
+27 `NEW_RATIO_BURO_*`, tổng cộng 108 feature trước bước drop hard-code.
+
+### 4.3. Category composition
+
+Ba cột object của `bureau` là `CREDIT_ACTIVE`, `CREDIT_CURRENCY` và `CREDIT_TYPE`.
+Chúng được one-hot rồi lấy mean theo khách hàng:
+
+```text
+BURO_<RAW_COLUMN>_<CATEGORY>_MEAN
 ```
 
-## 3. Feature tạo từ từng bảng
+Các dummy `STATUS` đã aggregate ở cấp khoản cũng được lấy mean lần hai:
 
-### 3.1 `application_train/test`: sức trả nợ, vòng đời và external score
+```text
+BURO_STATUS_<VALUE>_MEAN_MEAN
+```
 
-Hai notebook simple-features ghép train và competition test trước khi tạo feature.
-Chúng bỏ bốn dòng train có `CODE_GENDER = XNA`, đổi `DAYS_EMPLOYED = 365243` thành
-missing, factorize ba category nhị phân và one-hot các category còn lại.
+Đây là trung bình không trọng số giữa các khoản bureau. Category column chỉ xuất
+hiện ở view `BURO_*`; view active/closed và ratio chỉ dùng 27 cặp numeric phía trên.
 
-Nhóm feature thủ công chính:
+## 5. `previous_application`
 
-| Ý nghĩa                          | Feature/công thức                                                                       |
-| ---------------------------------- | ----------------------------------------------------------------------------------------- |
-| Gánh nặng khoản vay             | `AMT_CREDIT / AMT_ANNUITY`, `AMT_CREDIT / AMT_INCOME_TOTAL`                           |
-| Giá trị tài sản/hàng hóa     | `AMT_CREDIT / AMT_GOODS_PRICE`                                                          |
-| Gánh nặng trả góp              | `AMT_ANNUITY / (1 + AMT_INCOME_TOTAL)`                                                  |
-| Thu nhập theo người phụ thuộc | `AMT_INCOME_TOTAL / (1 + CNT_CHILDREN)`                                                 |
-| Thâm niên tương đối tuổi    | `DAYS_EMPLOYED / DAYS_BIRTH`                                                            |
-| Tuổi xe tương đối             | `OWN_CAR_AGE / DAYS_BIRTH` và `/ DAYS_EMPLOYED`                                      |
-| Độ cũ số điện thoại         | `DAYS_LAST_PHONE_CHANGE / DAYS_BIRTH` và `/ DAYS_EMPLOYED`                           |
-| External score tổng hợp          | tích, mean và standard deviation của`EXT_SOURCE_1/2/3`                               |
-| Hồ sơ giấy tờ/liên hệ        | mean/std/kurtosis của`FLAG_DOCUMENT_*`; sum/std/kurtosis của các cờ liên hệ/sống |
-| Peer statistic                     | median thu nhập theo`ORGANIZATION_TYPE`                                                |
+### 5.1. Feature cấp dòng
 
-`02-lighgbm-with-selected-features` tạo 20 cột literal `NEW_*`; bản XGBoost tạo 16.
-Các ratio cho cây quyết định một tín hiệu “khả năng chi trả” trực tiếp hơn việc buộc
-model tự tìm interaction giữa hai cột amount. Các thống kê `EXT_SOURCE_*` nén ba score
-ngoài thành mức trung tâm, độ đồng thuận và interaction.
-
-### 3.2 `bureau_balance` + `bureau`: lịch sử tín dụng bên ngoài
-
-`STATUS` trong `bureau_balance` được one-hot. Với mỗi `SK_ID_BUREAU`, code lấy:
-
-- `MONTHS_BALANCE`: min, max và size;
-- mean của từng dummy `STATUS`: chính là tỷ lệ tháng ở trạng thái đó.
-
-Block này được join vào `bureau`, rồi aggregate lần hai theo `SK_ID_CURR`. Numeric
-feature gồm recency của credit, ngày kết thúc/cập nhật, overdue, tổng credit/debt/limit,
-annuity và số lần prolong. Dummy category của `CREDIT_ACTIVE`, `CREDIT_CURRENCY`,
-`CREDIT_TYPE` cũng được lấy mean, nên kết quả biểu diễn cơ cấu danh mục tín dụng.
-
-Ngoài aggregate toàn bộ khoản vay, code tách:
-
-- `ACTIVE_*`: chỉ khoản đang active;
-- `CLOSED_*`: chỉ khoản đã closed;
-- `NEW_RATIO_BURO_* = ACTIVE_* / CLOSED_*` trong notebook 02.
-
-Ratio cuối cùng thể hiện mức hiện tại so với lịch sử đã đóng, nhưng code không bảo vệ
-mẫu số bằng 0 và không chuẩn hóa `inf` sau phép chia.
-
-### 3.3 `previous_application`: hành vi xin vay trước đây tại Home Credit
-
-Năm cột ngày có sentinel `365243` được đổi thành missing. Domain feature duy nhất tạo
-trước aggregation là:
+Năm cột ngày `DAYS_FIRST_DRAWING`, `DAYS_FIRST_DUE`,
+`DAYS_LAST_DUE_1ST_VERSION`, `DAYS_LAST_DUE`, `DAYS_TERMINATION` đổi sentinel
+`365243` thành missing. Pipeline tạo thêm:
 
 ```text
 APP_CREDIT_PERC = AMT_APPLICATION / AMT_CREDIT
 ```
 
-Sau đó code aggregate amount, down payment, goods price, rate, giờ/ngày ra quyết định,
-số kỳ trả và dummy category theo khách hàng. Nó tạo ba view:
+### 5.2. Numeric feature cấp khách hàng
 
-- `PREV_*`: tất cả application trước;
-- `APPROVED_*`: chỉ hồ sơ được duyệt;
-- `REFUSED_*`: chỉ hồ sơ bị từ chối.
+| Raw/derived column | Phép aggregate |
+| ------------------ | -------------- |
+| `AMT_ANNUITY` | `min`, `max`, `mean` |
+| `AMT_APPLICATION` | `min`, `max`, `mean` |
+| `AMT_CREDIT` | `min`, `max`, `mean` |
+| `APP_CREDIT_PERC` | `min`, `max`, `mean`, `var` |
+| `AMT_DOWN_PAYMENT` | `min`, `max`, `mean` |
+| `AMT_GOODS_PRICE` | `min`, `max`, `mean` |
+| `HOUR_APPR_PROCESS_START` | `min`, `max`, `mean` |
+| `RATE_DOWN_PAYMENT` | `min`, `max`, `mean` |
+| `DAYS_DECISION` | `min`, `max`, `mean` |
+| `CNT_PAYMENT` | `mean`, `sum` |
 
-Notebook 02 còn tạo `NEW_RATIO_PREV_* = APPROVED_* / REFUSED_*`. Đây là cách biến
-trạng thái quy trình thành feature định lượng, nhưng vẫn có rủi ro chia cho 0 và ratio
-cực trị.
+Ba mươi cặp `<COLUMN>_<AGG>` được tạo ở bốn view:
 
-### 3.4 `POS_CASH_balance`: độ trễ của POS/cash loan
+| View | Tên feature | Cách tạo |
+| ---- | ----------- | ------- |
+| Tất cả application cũ | `PREV_<COLUMN>_<AGG>` | Aggregate toàn bộ lịch sử. |
+| Chỉ application approved | `APPROVED_<COLUMN>_<AGG>` | Lọc `NAME_CONTRACT_STATUS_Approved=1`. |
+| Chỉ application refused | `REFUSED_<COLUMN>_<AGG>` | Lọc `NAME_CONTRACT_STATUS_Refused=1`. |
+| Tỷ số approved/refused | `NEW_RATIO_PREV_<COLUMN>_<AGG>` | `APPROVED_<...> / REFUSED_<...>`. |
 
-Block này giữ rất ít tín hiệu nhưng đúng trọng tâm:
+Phần numeric vì vậy tạo 120 feature trước bước drop. Các tỷ số không chặn mẫu số
+0, nên có thể sinh giá trị vô hạn.
 
-- `MONTHS_BALANCE`: max, mean, size;
-- `SK_DPD`, `SK_DPD_DEF`: max và mean;
-- mean của dummy `NAME_CONTRACT_STATUS`;
-- `POS_COUNT`: số record lịch sử.
+### 5.3. Category composition
 
-Mean dummy là tỷ lệ thời gian ở từng trạng thái; `max DPD` đo sự kiện xấu nhất, còn
-`mean DPD` đo mức trễ điển hình.
+Mọi cột object của `previous_application` được one-hot. Mỗi dummy chỉ được
+aggregate trên toàn bộ lịch sử theo mẫu:
 
-### 3.5 `installments_payments`: mức trả và đúng hạn
+```text
+PREV_<RAW_COLUMN>_<CATEGORY>_MEAN
+```
 
-Đây là block có domain feature rõ nhất:
+Mean của dummy là tỷ lệ application cũ thuộc category đó. Các dummy không được
+tạo lại trong view approved/refused vì hai view này chỉ nhận numeric aggregation.
+
+## 6. `POS_CASH_balance`
+
+| Feature/pattern | Công thức | Ý nghĩa |
+| --------------- | --------- | ------- |
+| `POS_MONTHS_BALANCE_MAX` | `max(MONTHS_BALANCE)` | Snapshot gần application nhất. |
+| `POS_MONTHS_BALANCE_MEAN` | `mean(MONTHS_BALANCE)` | Mốc tháng trung bình. |
+| `POS_MONTHS_BALANCE_SIZE` | `size(MONTHS_BALANCE)` | Số snapshot có trong group. |
+| `POS_SK_DPD_MAX` | `max(SK_DPD)` | DPD lớn nhất. |
+| `POS_SK_DPD_MEAN` | `mean(SK_DPD)` | DPD trung bình theo snapshot. |
+| `POS_SK_DPD_DEF_MAX` | `max(SK_DPD_DEF)` | DPD có tolerance lớn nhất. |
+| `POS_SK_DPD_DEF_MEAN` | `mean(SK_DPD_DEF)` | DPD có tolerance trung bình. |
+| `POS_<NAME_CONTRACT_STATUS_CATEGORY>_MEAN` | mean dummy | Tỷ lệ snapshot ở từng trạng thái, kể cả missing. |
+| `POS_COUNT` | `groupby(SK_ID_CURR).size()` | Tổng số dòng POS/cash của khách hàng. |
+
+`POS_MONTHS_BALANCE_SIZE` và `POS_COUNT` đều bằng số dòng trong group ở
+implementation hiện tại; chúng khác tên nhưng mang cùng giá trị.
+
+## 7. `installments_payments`
+
+### 7.1. Feature cấp dòng
 
 ```text
 PAYMENT_PERC = AMT_PAYMENT / AMT_INSTALMENT
@@ -185,179 +234,108 @@ DPD = max(DAYS_ENTRY_PAYMENT - DAYS_INSTALMENT, 0)
 DBD = max(DAYS_INSTALMENT - DAYS_ENTRY_PAYMENT, 0)
 ```
 
-Sau đó code lấy các moment của DPD, DBD, tỷ lệ/chênh lệch thanh toán, amount và ngày
-trả; đếm số version kỳ trả bằng `nunique` và số record bằng `INSTAL_COUNT`.
+`DPD` đo trả trễ, `DBD` đo trả sớm, `PAYMENT_PERC < 1` biểu thị trả thiếu và
+`PAYMENT_DIFF > 0` biểu thị phần tiền còn thiếu trên dòng thanh toán.
 
-Ý nghĩa cần giữ đúng:
+### 7.2. Feature cấp khách hàng
 
-- `DPD > 0`: trả sau hạn;
-- `DBD > 0`: trả trước hạn;
-- `PAYMENT_PERC < 1`: trả thiếu ở record đó;
-- `PAYMENT_DIFF > 0`: số tiền còn thiếu so với kỳ phải trả.
+| Raw/derived column | Phép aggregate | Tên feature đầu ra |
+| ------------------ | -------------- | ------------------ |
+| `NUM_INSTALMENT_VERSION` | `nunique` | `INSTAL_NUM_INSTALMENT_VERSION_NUNIQUE` |
+| `DPD` | `max`, `mean`, `sum` | `INSTAL_DPD_<AGG>` |
+| `DBD` | `max`, `mean`, `sum` | `INSTAL_DBD_<AGG>` |
+| `PAYMENT_PERC` | `max`, `mean`, `sum`, `var` | `INSTAL_PAYMENT_PERC_<AGG>` |
+| `PAYMENT_DIFF` | `max`, `mean`, `sum`, `var` | `INSTAL_PAYMENT_DIFF_<AGG>` |
+| `AMT_INSTALMENT` | `max`, `mean`, `sum` | `INSTAL_AMT_INSTALMENT_<AGG>` |
+| `AMT_PAYMENT` | `min`, `max`, `mean`, `sum` | `INSTAL_AMT_PAYMENT_<AGG>` |
+| `DAYS_ENTRY_PAYMENT` | `max`, `mean`, `sum` | `INSTAL_DAYS_ENTRY_PAYMENT_<AGG>` |
+| Toàn bộ group | `size()` | `INSTAL_COUNT` |
 
-Code aggregate toàn lịch sử, chưa tạo cửa sổ gần đây như 3/6/12 tháng và chưa tách
-theo `SK_ID_PREV` trước khi về khách hàng.
+Phần này tạo 25 statistic feature và một count, tổng cộng 26 feature. Raw
+`installments_payments` không có cột object, nên vòng lặp category không tạo thêm
+dummy feature trên schema HCDR hiện tại.
 
-### 3.6 `credit_card_balance`: moment rộng, ít chọn lọc
+## 8. `credit_card_balance`
 
-Code bỏ `SK_ID_PREV`, one-hot status, rồi áp dụng `min`, `max`, `mean`, `sum`, `var`
-cho gần như mọi cột theo `SK_ID_CURR`; `CC_COUNT` là số snapshot. Cách này phủ rộng và
-nhanh, nhưng tạo nhiều cột thưa hoặc ít giá trị. Danh sách 339 feature bị bỏ ở notebook
-02 chứa rất nhiều biến `CC_*`, cho thấy chính block aggregate cơ học này sinh nhiều
-feature không hữu ích trong các lần importance trước đó.
+Notebook 02 one-hot `NAME_CONTRACT_STATUS`, bỏ `SK_ID_PREV`, rồi áp dụng đồng loạt
+`min`, `max`, `mean`, `sum`, `var` cho từng cột còn lại trong group
+`SK_ID_CURR`.
 
-## 4. Ba cấp độ extractor
+### 8.1. Hai mươi numeric column raw
 
-```mermaid
-flowchart TD
-    A[03 baseline]
-    A --> B[Mean category and numeric values]
-    B --> C[Counts per customer]
+Mỗi dòng dưới sinh năm feature theo mẫu `CC_<COLUMN>_{MIN|MAX|MEAN|SUM|VAR}`:
 
-    C --> D[02 richer extractor]
-    D --> E[Domain ratios]
-    E --> F[Min max sum var]
-    F --> G[Active closed<br/>approved refused]
-    G --> H[Drop 339 low-importance columns]
+| Raw column | Ý nghĩa nhóm feature |
+| ---------- | --------------------- |
+| `MONTHS_BALANCE` | Phân bố mốc thời gian của snapshot. |
+| `AMT_BALANCE` | Phân bố dư nợ thẻ. |
+| `AMT_CREDIT_LIMIT_ACTUAL` | Phân bố hạn mức thực tế. |
+| `AMT_DRAWINGS_ATM_CURRENT` | Số tiền rút ATM. |
+| `AMT_DRAWINGS_CURRENT` | Tổng số tiền giao dịch/rút. |
+| `AMT_DRAWINGS_OTHER_CURRENT` | Số tiền giao dịch loại khác. |
+| `AMT_DRAWINGS_POS_CURRENT` | Số tiền giao dịch POS. |
+| `AMT_INST_MIN_REGULARITY` | Khoản thanh toán tối thiểu định kỳ. |
+| `AMT_PAYMENT_CURRENT` | Khoản thanh toán hiện tại. |
+| `AMT_PAYMENT_TOTAL_CURRENT` | Tổng thanh toán hiện tại. |
+| `AMT_RECEIVABLE_PRINCIPAL` | Khoản phải thu gốc. |
+| `AMT_RECIVABLE` | Khoản phải thu, giữ nguyên spelling của raw. |
+| `AMT_TOTAL_RECEIVABLE` | Tổng khoản phải thu. |
+| `CNT_DRAWINGS_ATM_CURRENT` | Số lần rút ATM. |
+| `CNT_DRAWINGS_CURRENT` | Tổng số lần giao dịch/rút. |
+| `CNT_DRAWINGS_OTHER_CURRENT` | Số lần giao dịch loại khác. |
+| `CNT_DRAWINGS_POS_CURRENT` | Số lần giao dịch POS. |
+| `CNT_INSTALMENT_MATURE_CUM` | Số kỳ đã đáo hạn tích lũy. |
+| `SK_DPD` | Số ngày quá hạn. |
+| `SK_DPD_DEF` | Số ngày quá hạn có tolerance. |
 
-    C --> I[01 XGBoost branch]
-    I --> J[Reduced aggregation set]
-    J --> K[One-fold XGBoost in current code]
+Hai mươi cột × năm phép aggregate tạo 100 feature numeric.
+
+### 8.2. Status và count
+
+Mỗi dummy động của `NAME_CONTRACT_STATUS` cũng nhận đủ năm phép aggregate:
+
+```text
+CC_NAME_CONTRACT_STATUS_<CATEGORY>_{MIN|MAX|MEAN|SUM|VAR}
 ```
 
-### Baseline `03-good-fun-with-lightgbm`
+Với dummy 0/1, `mean` là tỷ lệ snapshot; `sum` là số snapshot; `min`/`max` cho biết
+category có xuất hiện ở tất cả hoặc ít nhất một snapshot hay không. `var` đo độ biến
+thiên của trạng thái. Cuối cùng:
 
-Baseline one-hot một phần category, thay ID lịch sử bằng count rồi lấy mean theo
-khách hàng. Cách này rẻ, dễ hiểu và cho một matrix đa bảng nhanh, nhưng làm mất tail,
-worst-case, volatility và recency.
-
-### Rich extractor `02-lighgbm-with-selected-features`
-
-Đây là file nên đọc làm reference chính. Nó giữ nhiều moment hơn, thêm segmentation
-theo trạng thái, tỷ số giữa segment và nhiều feature application. Trước modeling, nó
-drop đúng 339 tên trong `features_with_no_imp_at_least_twice`.
-
-Tên biến cho thấy các cột không có importance ít nhất hai lần, nhưng file không chứa
-code sinh danh sách, run log, threshold hay fold provenance. Vì vậy **verified** là
-“drop 339 cột hard-code”; “chúng đã được đánh giá zero-importance qua quy trình nào”
-vẫn là **unknown**.
-
-### XGBoost branch `01-xgb-simple-features`
-
-Extractor gần notebook 02 nhưng giảm một số `min/max/std` và không có ratio
-active/closed hoặc approved/refused. Dù gọi `kfold_xgb(..., num_folds=10, stratified=True)`, thân vòng lặp có `if n_fold == 0`, nên file hiện tại chỉ fit fold
-đầu và dùng model đó dự đoán test. Đây không phải 10-fold ensemble hoàn chỉnh.
-
-## 5. Phần top-1 nào không nằm trong ba notebook?
-
-Write-up hạng nhất của Home Aloan và các bản tóm lược dẫn lại nó mô tả một tầng feature rộng hơn:
-
-- aggregate theo cửa sổ gần hiện tại, ví dụ số ngày gần nhất hoặc N event gần nhất;
-- weighted moving average để ưu tiên lịch sử gần;
-- multiplication/division interaction rộng hơn giữa các feature;
-- `neighbors_target_mean_500`: target mean của 500 hàng xóm trong không gian gồm
-  `EXT_SOURCE_*` và credit/annuity ratio;
-- prediction out-of-fold từ weak model như Ridge/Logistic/FM/NN làm meta-feature;
-- feature selection và nhiều biến thể preprocessing/model để ensemble.
-
-Các kỹ thuật trên là **evidence từ write-up bên ngoài**, không phải runtime truth của
-ba file local. Đặc biệt, target-neighbor và weak-model feature chỉ an toàn khi giá trị
-train được tạo out-of-fold; tính trực tiếp trên cùng target sẽ leakage.
-
-## 6. Điểm mạnh có thể tái sử dụng
-
-1. **Aggregate theo grain trước khi join.** Đây là nguyên tắc quan trọng nhất để tránh
-   row explosion và giữ đúng một prediction mỗi `SK_ID_CURR`.
-2. **Kết hợp statistic tổng quát với domain feature.** Moment phủ rộng dữ liệu; ratio
-   credit/income, payment/installment và DPD/DBD đưa ý nghĩa nghiệp vụ vào matrix.
-3. **Tách trạng thái trước khi aggregate.** Active/closed và approved/refused giữ được
-   khác biệt mà một mean toàn cục sẽ che mất.
-4. **Mean của one-hot là tỷ lệ.** Đây là cách rẻ để biến lịch sử category thành cơ cấu
-   hành vi ở cấp khách hàng.
-5. **Giữ nhiều view của cùng lịch sử.** All-history, status-specific và recent-window
-   bổ sung cho nhau; top-1 không chỉ dựa vào một bảng aggregate duy nhất.
-
-## 7. Rủi ro và cải tiến cần làm trước khi dùng lại
-
-| Vấn đề trong notebook                                                                     | Tác động                                                                                                           | Cách triển khai an toàn hơn                                                                                      |
-| -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| Ghép train + competition test trước khi tính median theo organization và fill score std | Có thông tin phân phối test đi vào transform; đây là transductive preprocessing, không phải target leakage | Fit statistic trên train fold, apply sang valid/test                                                                |
-| Ratio không chặn mẫu số 0/near-zero                                                      | Sinh`inf` hoặc tail cực lớn                                                                                      | Safe divide, đổi non-finite thành missing, clip theo train                                                        |
-| Drop 339 tên hard-code                                                                      | Dễ lỗi khi schema/category đổi; thiếu provenance                                                                 | Lưu selection artifact theo input hash, fold, seed và criterion                                                    |
-| Aggregate toàn lịch sử                                                                    | Mất recency và trend                                                                                                | Thêm cửa sổ 3/6/12 tháng hoặc N event gần nhất                                                                |
-| Random KFold                                                                                 | Không chứng minh stability theo thời gian/population                                                               | Dùng split phù hợp deployment nếu có timestamp; HCDR application không cung cấp timestamp đủ cho OOT chuẩn |
-| One-hot toàn bộ category lịch sử                                                         | Matrix rất rộng, nhiều rare dummy                                                                                  | Gom rare category theo train, kiểm support và stability                                                            |
-| Bỏ bốn dòng`CODE_GENDER = XNA`                                                          | Thay đổi population và chỉ xảy ra phía train                                                                    | Chuẩn hóa thành missing/unknown và giữ anomaly flag                                                             |
-| XGBoost chỉ fit fold đầu                                                                  | OOF array phần lớn bằng 0; không phải CV đầy đủ                                                              | Bỏ điều kiện fold đầu, average đủ fold và lưu fold provenance                                              |
-| API pandas/LightGBM cũ                                                                      | Khó chạy lại trên môi trường hiện tại                                                                        | Port`append` sang `concat`, cập nhật callback/early stopping API, thêm smoke test                             |
-
-Ngoài benchmark, `CODE_GENDER`, family status, occupation và các proxy nhân khẩu cần
-fairness/legal review. AUC Kaggle không chứng minh feature phù hợp cho phê duyệt tín
-dụng production.
-
-## 8. Blueprint extractor nên kế thừa
-
-Một implementation mới nên giữ ý tưởng nhưng đổi contract:
-
-1. mỗi feature block khai báo `source_table`, raw grain, output grain và availability
-   time;
-2. mọi statistic học từ population chỉ fit trong train fold;
-3. mỗi ratio dùng safe divide và có missing/zero-denominator flag khi cần;
-4. history có ít nhất ba view: all-time, recent window và status-specific;
-5. sau mỗi aggregate/join, assert uniqueness của `SK_ID_CURR` và row count;
-6. feature selection lưu artifact thay vì nhúng danh sách không provenance;
-7. target-derived feature bắt buộc tạo OOF và tách hẳn khỏi deterministic extractor;
-8. ghi manifest gồm source hash, code hash, feature names, split và seed.
-
-```mermaid
-flowchart TD
-    A[Raw relational tables]
-    A --> B[Deterministic cleaning]
-    B --> C[All-history aggregates]
-    B --> D[Recent-window aggregates]
-    B --> E[Status-specific aggregates]
-    C --> F[Safe ratios + missing flags]
-    D --> F
-    E --> F
-    F --> G[One-row-per-customer contract]
-    G --> H[Fold-fitted transforms]
-    H --> I[OOF target/model features]
-    I --> J[Provenance-aware selection]
-    J --> K[Model matrix]
+```text
+CC_COUNT = groupby(SK_ID_CURR).size()
 ```
 
-## 9. Trạng thái bằng chứng
+Đây là block cơ học rộng nhất. Nó tạo nhiều feature tương quan hoặc ít biến thiên;
+nhiều tên `CC_*` sau đó xuất hiện trong danh sách 339 feature bị loại.
 
-- **Verified:** nội dung hàm, công thức, aggregation, 339 tên bị drop, metadata kernel
-  và lỗi chỉ chạy fold đầu được đọc trực tiếp từ file local.
-- **Verified:** cả ba script parse được bằng Python AST; có hai cảnh báo escape sequence
-  trong chuỗi plot của notebook 03, không ảnh hưởng feature extraction.
-- **Not rerun:** chưa chạy full notebook trên 3,2 GB raw CSV; không có metric hoặc
-  feature-importance artifact của chính các kernel để đối chiếu.
-- **Inferred:** notebook 03 là baseline khái niệm và notebook 02 là extractor giàu
-  nhất, dựa trên độ rộng phép aggregate và feature thủ công, không dựa trên timestamp
-  version của Kaggle.
-- **Unknown:** quy trình chính xác sinh danh sách 339 low-importance feature và phần
-  đóng góp riêng của mỗi kernel vào final blend hạng nhất.
+## 9. Feature được ghép như thế nào
 
-## 10. Nguồn
+Mỗi hàm trả về một DataFrame có index `SK_ID_CURR`. Notebook bắt đầu từ application
+rồi left join lần lượt các block bureau, previous, POS, installments và credit card.
+Khách hàng không có lịch sử trong một block vẫn được giữ và nhận missing ở các
+feature tương ứng.
 
-### Code và metadata local
+Code notebook không dùng `validate="one_to_one"` và không assert row count sau join.
+Tính đúng đắn dựa vào việc mỗi block `groupby(SK_ID_CURR)` tạo index duy nhất trước
+khi join. Trước modeling, notebook 02 loại đúng 339 tên trong
+`features_with_no_imp_at_least_twice`; danh sách là hard-code và không kèm quy trình
+sinh hoặc fold provenance.
 
-- [`01-xgb-simple-features.py`](../../../notebooks/leaderboard/home-credit-default-risk/01-home-aloan/01-xgb-simple-features/xgb-simple-features.py)
-- [`02-lighgbm-with-selected-features.py`](../../../notebooks/leaderboard/home-credit-default-risk/01-home-aloan/02-lighgbm-with-selected-features/lighgbm-with-selected-features.py)
-- [`03-good-fun-with-lightgbm.py`](../../../notebooks/leaderboard/home-credit-default-risk/01-home-aloan/03-good-fun-with-lightgbm/good-fun-with-ligthgbm.py)
-- `kernel-metadata.json` nằm cạnh từng script; đây là nguồn cho owner, title và
-  competition source.
-- Cấu trúc/grain raw table: [báo cáo cấu trúc HCDR](home_credit_default_risk_data_structure_report_vi.md).
+## 10. Giới hạn và lưu ý khi tái sử dụng
 
-### Nguồn ngoài
+- Các phép chia không bảo vệ mẫu số 0 và không chuẩn hóa `inf`.
+- `NEW_INC_BY_ORG` cùng fill value của `NEW_SCORES_STD` dùng phân phối train+test.
+- POS, installments và credit card aggregate theo dòng/snapshot, không qua
+  `SK_ID_PREV` trước.
+- Không có recent window 3/6/12 tháng hoặc N event gần nhất.
+- Exact dummy schema phụ thuộc category xuất hiện trong input và tùy chọn
+  `dummy_na`; schema cần được freeze nếu chuyển sang pipeline tái lập.
+- Danh sách drop 339 feature không có artifact giải thích cách được sinh.
+- Target-neighbor và weak-model prediction trong full winning solution không nằm
+  trong notebook này; nếu triển khai phải tạo OOF/fold-isolated để tránh leakage.
 
-- [Kaggle — 1st Place Solution, Home Aloan](https://www.kaggle.com/c/home-credit-default-risk/discussion/64821)
-- [Kaggle — Home Credit Default Risk](https://www.kaggle.com/competitions/home-credit-default-risk)
-- [Bojan Tunguz interview — xác nhận Home Aloan đứng hạng nhất](https://sia.hackernoon.com/interview-with-kaggle-grandmaster-dr-bojan-tunguz-726b28e601e)
-- [Bản tổng hợp kỹ thuật có liên kết ngược về write-up hạng nhất](https://medium.com/thecyphy/home-credit-default-risk-part-1-3bfe3c7ddd7a)
+## 11. Báo cáo liên quan
 
-Nguồn Kaggle là nguồn gốc cho danh tính solution. Hai bài tổng hợp chỉ được dùng để
-đối chiếu các kỹ thuật của full solution không hiện diện trong code local; chúng không
-thay thế bằng chứng từ notebook.
+- [Feature aggregate của pipeline HCDR local](historical-table-aggregation-features-report-vi.md).
+- [Cấu trúc các bảng HCDR](../home_credit_default_risk_data_structure_report_vi.md).
