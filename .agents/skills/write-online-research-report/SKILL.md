@@ -5,7 +5,7 @@ description: Research questions with live web search and online sources, verify 
 
 # Write online research report
 
-Đọc `.agents/workflows/03_write_online_research_report.md` và `.agents/03_conventions.md`
+Đọc `.agents/workflows/05_write_online_research_report.md` và `.agents/03_conventions.md`
 trước.
 
 ## Thực hiện
@@ -18,11 +18,13 @@ trước.
    tổng hợp để định hướng hoặc đối chiếu, không để thay thế nguồn chính khi nguồn chính có sẵn.
 4. Với tìm kiếm rộng hoặc tài liệu dài, dùng `.agents/agents/02_research_reader.md` để nhận
    evidence map ngắn.
-5. Gắn nguồn gần claim, ghi ngày/version khi thông tin dễ thay đổi, và tách rõ verified,
+5. Tổng hợp theo **Why → How**: xác lập vấn đề/gap/hậu quả trước, rồi giải thích mỗi lựa
+   chọn modeling, training và benchmark đang xử lý phần nào của vấn đề.
+6. Gắn nguồn gần claim, ghi ngày/version khi thông tin dễ thay đổi, và tách rõ verified,
    inferred, disputed, unknown.
-6. Mặc định ghi một file `.md`. Chỉ tách nhiều file khi các câu hỏi con độc lập hoặc evidence
+7. Mặc định ghi một file `.md`. Chỉ tách nhiều file khi các câu hỏi con độc lập hoặc evidence
    quá lớn; khi đó tạo một file tổng quan dẫn tới các file con.
-7. Kiểm tra lại URL, mức hỗ trợ của nguồn, mâu thuẫn, độ mới và tất cả file Markdown trước
+8. Kiểm tra lại URL, mức hỗ trợ của nguồn, mâu thuẫn, độ mới và tất cả file Markdown trước
    khi bàn giao.
 
 Paraphrase thay vì chép dài; quote chỉ khi câu chữ gốc cần thiết. Nếu không truy cập được

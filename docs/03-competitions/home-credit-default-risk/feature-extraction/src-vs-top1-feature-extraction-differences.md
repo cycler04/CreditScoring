@@ -36,24 +36,24 @@ flowchart TD
 
 ## So sánh trực tiếp
 
-| Khía cạnh | Pipeline `src/home_credit_default_rate` | Home Aloan public notebooks |
-|---|---|---|
-| Mục tiêu thiết kế | Pipeline benchmark có thể audit và tái lập | Kernel thi đấu, ưu tiên thử nhanh và leaderboard AUC |
-| Engine | DuckDB đọc CSV, giới hạn 6 GiB, cache ZSTD Parquet | pandas nạp và aggregate trực tiếp trong RAM |
-| Độ rộng feature | Stage C có 175 model feature đã kiểm chứng | Rộng hơn nhiều do one-hot và nhiều moment; chưa rerun nên không có số cột verified |
-| Application feature | 4 ratio, 3 anomaly flag; giữ raw application | Khoảng 16–20 `NEW_*`: thêm `EXT_SOURCE` mean/std/product, document/contact summaries, income-by-organization và age/car/phone ratios |
-| Sentinel/category lạ | Đổi thành missing và giữ anomaly flag | Đổi `DAYS_EMPLOYED`; bỏ bốn dòng `CODE_GENDER=XNA`, không giữ cờ |
-| Ý nghĩa `DAYS_*` | Chuẩn hóa sang trị tuyệt đối | Giữ dấu âm gốc và dùng trực tiếp trong ratio |
-| Bảng lịch sử | Chọn một tập nhỏ feature nghiệp vụ cho mỗi block | Áp dụng `min/max/mean/sum/var` rộng và mean của nhiều dummy category |
-| Segment trạng thái | Có active/closed và approved/refused ratio chọn lọc | Có các block all/active/closed, all/approved/refused và nhiều ratio tương ứng |
-| Installments | DPD/DBD, payment ratio, shortfall và count chọn lọc | Cùng domain feature nhưng aggregate nhiều moment hơn, gồm std/var và các amount/date statistic |
-| Credit card | Balance, utilization, DPD và count chọn lọc | Aggregate gần như toàn bộ numeric/dummy bằng nhiều moment |
-| Feature selection | Preprocessing/WoE fit trên train; raw tree model dùng feature stage đã định nghĩa | Notebook 02 drop danh sách hard-code 339 cột không có provenance đầy đủ |
-| Train/test boundary | Chỉ deterministic cleaning/aggregate làm trước split; transform học phân phối chỉ fit train | Ghép train + competition test trước khi tính median theo organization và fill score std |
-| Safe divide | Mẫu số 0 đổi thành missing | Nhiều phép chia không chặn zero hoặc non-finite |
-| Validation | Stratified random 60/20/20, membership được lưu | KFold trong LightGBM; file XGBoost hiện chỉ thực sự fit fold đầu |
-| Contract | Kiểm uniqueness, one-to-one join, row count, feature description | Ít assertion; phụ thuộc tên cột/category và API thư viện cũ |
-| Provenance/output | `source.json`, Stage A/B/C, cache, metrics, model, scorecard, submission | Script sinh submission/plot; không có manifest feature hoặc cache lineage |
+| Khía cạnh           | Pipeline`src/home_credit_default_rate`                                                            | Home Aloan public notebooks                                                                                                                 |
+| --------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Mục tiêu thiết kế | Pipeline benchmark có thể audit và tái lập                                                     | Kernel thi đấu, ưu tiên thử nhanh và leaderboard AUC                                                                                  |
+| Engine                | DuckDB đọc CSV, giới hạn 6 GiB, cache ZSTD Parquet                                              | pandas nạp và aggregate trực tiếp trong RAM                                                                                             |
+| Độ rộng feature    | Stage C có 175 model feature đã kiểm chứng                                                     | Rộng hơn nhiều do one-hot và nhiều moment; chưa rerun nên không có số cột verified                                               |
+| Application feature   | 4 ratio, 3 anomaly flag; giữ raw application                                                       | Khoảng 16–20`NEW_*`: thêm `EXT_SOURCE` mean/std/product, document/contact summaries, income-by-organization và age/car/phone ratios |
+| Sentinel/category lạ | Đổi thành missing và giữ anomaly flag                                                          | Đổi`DAYS_EMPLOYED`; bỏ bốn dòng `CODE_GENDER=XNA`, không giữ cờ                                                                 |
+| Ý nghĩa`DAYS_*`   | Chuẩn hóa sang trị tuyệt đối                                                                  | Giữ dấu âm gốc và dùng trực tiếp trong ratio                                                                                        |
+| Bảng lịch sử       | Chọn một tập nhỏ feature nghiệp vụ cho mỗi block                                             | Áp dụng`min/max/mean/sum/var` rộng và mean của nhiều dummy category                                                                 |
+| Segment trạng thái  | Có active/closed và approved/refused ratio chọn lọc                                             | Có các block all/active/closed, all/approved/refused và nhiều ratio tương ứng                                                        |
+| Installments          | DPD/DBD, payment ratio, shortfall và count chọn lọc                                              | Cùng domain feature nhưng aggregate nhiều moment hơn, gồm std/var và các amount/date statistic                                       |
+| Credit card           | Balance, utilization, DPD và count chọn lọc                                                      | Aggregate gần như toàn bộ numeric/dummy bằng nhiều moment                                                                             |
+| Feature selection     | Preprocessing/WoE fit trên train; raw tree model dùng feature stage đã định nghĩa            | Notebook 02 drop danh sách hard-code 339 cột không có provenance đầy đủ                                                             |
+| Train/test boundary   | Chỉ deterministic cleaning/aggregate làm trước split; transform học phân phối chỉ fit train | Ghép train + competition test trước khi tính median theo organization và fill score std                                                |
+| Safe divide           | Mẫu số 0 đổi thành missing                                                                     | Nhiều phép chia không chặn zero hoặc non-finite                                                                                        |
+| Validation            | Stratified random 60/20/20, membership được lưu                                                 | KFold trong LightGBM; file XGBoost hiện chỉ thực sự fit fold đầu                                                                      |
+| Contract              | Kiểm uniqueness, one-to-one join, row count, feature description                                   | Ít assertion; phụ thuộc tên cột/category và API thư viện cũ                                                                        |
+| Provenance/output     | `source.json`, Stage A/B/C, cache, metrics, model, scorecard, submission                          | Script sinh submission/plot; không có manifest feature hoặc cache lineage                                                                |
 
 ## Khác biệt quan trọng nhất trong feature extraction
 
@@ -61,8 +61,7 @@ flowchart TD
 
 Stage C hiện có 55 feature phát sinh được mô tả, đưa tổng số model feature lên 175.
 Mỗi bảng lịch sử chỉ giữ một số statistic có ý nghĩa rõ. Ngược lại, notebook biến
-nhiều category thành dummy rồi lấy mean, đồng thời áp dụng nhiều moment cho gần như
-toàn bộ credit-card và installment columns.
+nhiều category thành dummy rồi lấy mean, đồng thời áp dụng nhiều moment cho gần như toàn bộ credit-card và installment columns.
 
 Hệ quả:
 

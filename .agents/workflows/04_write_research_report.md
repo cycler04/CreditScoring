@@ -21,16 +21,25 @@ Các report đều viết bằng Tiếng Việt, dù prompt là Tiếng Anh
 Mỗi claim quan trọng cần có source URL hoặc local path/command. Ghi ngày truy cập cho thông
 tin dễ thay đổi. Không biến inference thành fact.
 
-## 3. Tổng hợp concept-first
+## 3. Tổng hợp theo Why → How
 
 Cấu trúc mặc định:
 
 1. câu trả lời ngắn hoặc ý tưởng chính;
-2. cơ chế/luồng dữ liệu;
-3. bằng chứng hoặc kết quả đo;
-4. giới hạn, unknown và bẫy;
-5. kết luận và bước kiểm chứng tiếp theo;
-6. nguồn.
+2. **Why — vấn đề cần xử lý:** bối cảnh, pain point/failure mode, gap của cách
+   hiện tại, hậu quả và tiêu chí thành công;
+3. **How — cách xử lý:** bản đồ problem → mechanism, sau đó là modeling,
+   training, benchmark/evaluation và system/inference khi phù hợp;
+4. bằng chứng hoặc kết quả đo và chúng chứng minh phần nào của vấn đề;
+5. giới hạn, unknown, bẫy và phần vấn đề còn chưa được xử lý;
+6. kết luận và bước kiểm chứng tiếp theo;
+7. nguồn.
+
+Trong phần How, không liệt kê component độc lập với mục tiêu. Với mỗi lựa chọn quan trọng,
+trả lời đủ ba câu: **nó sửa vấn đề nào, sửa bằng cơ chế gì, evidence nào cho thấy nó có
+hiệu quả**. Benchmark phải nêu câu hỏi được kiểm tra, baseline/protocol/metric và liệu kết
+quả đo trực tiếp pain point hay chỉ là proxy. Nếu một chi tiết không ánh xạ được về Why và
+không cần cho tái lập, lược bỏ nó.
 
 Chỉ thêm bảng khi cần so sánh nhiều field/model/dataset. Không chép parameter không ảnh hưởng
 hành vi. Với dataset, luôn ghi action/state semantics, timestamp, modalities và conversion loss; đừng chỉ ghi tên và dung lượng.
@@ -52,4 +61,5 @@ Dùng nhãn rõ khi có nguy cơ đọc nhầm:
 - Claim có bằng chứng gần nó không?
 - Có lặp sự thật đã nằm ở file khác không?
 - Tài liệu có nói quá năng lực code hiện tại không?
+- Mỗi phần modeling/training/benchmark có chỉ rõ nó xử lý vấn đề nào không?
 - Sáu tháng sau có biết đã chạy lệnh nào, trên input nào và giới hạn gì không?

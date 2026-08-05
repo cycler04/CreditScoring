@@ -8,6 +8,12 @@ description: Read and evaluate research papers or long technical documents with 
 Read [the paper-reading workflow](../../workflows/01_read_paper.md) completely
 and follow it.
 
+Structure the analysis around **Why → How**. Establish the concrete problem,
+failure or limitation first. Then explain every method, modeling, training and
+benchmark choice in terms of which part of that problem it addresses and what
+evidence shows that it works. Do not produce a component inventory detached
+from the paper's problem statement.
+
 For long PDFs or broad literature searches, isolate extraction in a subagent and
 return only page/section references, claims, evidence, and unresolved questions
 to the main context. Keep the final synthesis in the main task.

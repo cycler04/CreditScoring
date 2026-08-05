@@ -92,6 +92,17 @@ PREVIOUS_APPLICATION_CATEGORIES = [
 
 AMOUNT_COLUMNS = ["AMT_CREDIT", "AMT_INCOME_TOTAL", "AMT_GOODS_PRICE"]
 
+APPLICATION_PLOTS = Path("plots/application")
+APPLICATION_AMOUNT_PLOTS = APPLICATION_PLOTS / "amount_distributions"
+APPLICATION_CATEGORY_PLOTS = APPLICATION_PLOTS / "categorical_distributions"
+APPLICATION_BAD_RATE_PLOTS = APPLICATION_PLOTS / "categorical_bad_rates"
+APPLICATION_TARGET_PLOTS = APPLICATION_PLOTS / "target_distribution"
+APPLICATION_CORRELATION_PLOTS = APPLICATION_PLOTS / "correlations"
+PREVIOUS_APPLICATION_PLOTS = Path(
+    "plots/previous_application/categorical_distributions"
+)
+FEATURE_IMPORTANCE_PLOTS = Path("plots/feature_importance")
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -263,7 +274,9 @@ def write_application_eda(
     plt.ylabel("Percent of applications")
     plt.xlabel("TARGET")
     plt.title("Application target distribution")
-    save_figure(output_dir / "plots" / "application_target_distribution.png")
+    save_figure(
+        output_dir / APPLICATION_TARGET_PLOTS / "application_target_distribution.png"
+    )
 
     numeric = frame.select_dtypes(include=np.number)
     summary = numeric.describe(percentiles=[0.01, 0.05, 0.25, 0.5, 0.75, 0.95, 0.99]).T
@@ -281,7 +294,11 @@ def write_application_eda(
         plt.xlabel(column)
         plt.ylabel("Rows")
         plt.title(f"{column} distribution (clipped at p99={upper:,.2f})")
-        save_figure(output_dir / "plots" / f"application_{slug(column)}_distribution.png")
+        save_figure(
+            output_dir
+            / APPLICATION_AMOUNT_PLOTS
+            / f"application_{slug(column)}_distribution.png"
+        )
 
     all_distributions: list[pd.DataFrame] = []
     all_target_rates: list[pd.DataFrame] = []
@@ -292,7 +309,9 @@ def write_application_eda(
         plot_distribution_table(
             distribution,
             f"Application distribution: {column}",
-            output_dir / "plots" / f"application_{slug(column)}_distribution.png",
+            output_dir
+            / APPLICATION_CATEGORY_PLOTS
+            / f"application_{slug(column)}_distribution.png",
         )
     for column in APPLICATION_TARGET_CATEGORIES:
         rates = target_rate_table(frame, column)
@@ -301,7 +320,9 @@ def write_application_eda(
         plot_target_rates(
             rates,
             f"Application TARGET=1 rate: {column}",
-            output_dir / "plots" / f"application_{slug(column)}_bad_rate.png",
+            output_dir
+            / APPLICATION_BAD_RATE_PLOTS
+            / f"application_{slug(column)}_bad_rate.png",
         )
 
     distributions = pd.concat(all_distributions, ignore_index=True)
@@ -339,7 +360,11 @@ def write_application_eda(
     plt.yticks(range(len(heatmap)), heatmap.index, fontsize=7)
     plt.colorbar(image, fraction=0.03, pad=0.02, label="Pearson correlation")
     plt.title("Top numeric features by absolute correlation with TARGET")
-    save_figure(output_dir / "plots" / "application_pearson_correlation_heatmap.png")
+    save_figure(
+        output_dir
+        / APPLICATION_CORRELATION_PLOTS
+        / "application_pearson_correlation_heatmap.png"
+    )
     return target, target_correlations
 
 
@@ -352,7 +377,9 @@ def write_previous_application_eda(frame: pd.DataFrame, output_dir: Path) -> Non
         plot_distribution_table(
             distribution,
             f"Previous application distribution: {column}",
-            output_dir / "plots" / f"previous_{slug(column)}_distribution.png",
+            output_dir
+            / PREVIOUS_APPLICATION_PLOTS
+            / f"previous_{slug(column)}_distribution.png",
         )
     save_frame(
         pd.concat(distributions, ignore_index=True),
@@ -391,20 +418,60 @@ def write_feature_importance(
     plt.xlabel("Impurity-based feature importance")
     plt.title("Random Forest feature importance (notebook configuration, top 40)")
     plt.grid(axis="x", alpha=0.2)
-    save_figure(output_dir / "plots" / "random_forest_feature_importance.png")
+    save_figure(
+        output_dir / FEATURE_IMPORTANCE_PLOTS / "random_forest_feature_importance.png"
+    )
     return importance
 
 
 def notebook_analysis_map() -> pd.DataFrame:
     return pd.DataFrame(
         [
-            ("cells 7-41", "load tables and inspect missing data", "dataset_overview.csv; missing/*.csv; samples/*.csv"),
-            ("cells 44-48", "amount distributions", "plots/application_amt_*_distribution.png"),
-            ("cells 50-76", "application categorical distributions", "application/categorical_distributions.csv; plots/application_*_distribution.png"),
-            ("cells 80-92", "application outcomes by category", "application/categorical_bad_rates.csv; plots/application_*_bad_rate.png"),
-            ("cells 95-133", "previous-application distributions", "previous_application/categorical_distributions.csv; plots/previous_*_distribution.png"),
-            ("cell 135", "Pearson correlations", "application/pearson_correlation_matrix.csv; application/target_correlations.csv; plots/application_pearson_correlation_heatmap.png"),
-            ("cells 137-140", "Random Forest feature importance", "feature_importance/random_forest.csv; plots/random_forest_feature_importance.png"),
+            (
+                "cells 7-41",
+                "load tables and inspect missing data",
+                "dataset_overview.csv; missing/*.csv; samples/*.csv",
+            ),
+            (
+                "cells 44-48",
+                "amount distributions",
+                "plots/application/amount_distributions/"
+                "application_amt_*_distribution.png",
+            ),
+            (
+                "cells 50-76",
+                "application categorical distributions",
+                "application/categorical_distributions.csv; "
+                "plots/application/categorical_distributions/"
+                "application_*_distribution.png",
+            ),
+            (
+                "cells 80-92",
+                "application outcomes by category",
+                "application/categorical_bad_rates.csv; "
+                "plots/application/categorical_bad_rates/application_*_bad_rate.png",
+            ),
+            (
+                "cells 95-133",
+                "previous-application distributions",
+                "previous_application/categorical_distributions.csv; "
+                "plots/previous_application/categorical_distributions/"
+                "previous_*_distribution.png",
+            ),
+            (
+                "cell 135",
+                "Pearson correlations",
+                "application/pearson_correlation_matrix.csv; "
+                "application/target_correlations.csv; "
+                "plots/application/correlations/"
+                "application_pearson_correlation_heatmap.png",
+            ),
+            (
+                "cells 137-140",
+                "Random Forest feature importance",
+                "feature_importance/random_forest.csv; "
+                "plots/feature_importance/random_forest_feature_importance.png",
+            ),
         ],
         columns=["source_notebook_cells", "analysis", "generated_outputs"],
     )

@@ -102,12 +102,12 @@ Vì vậy, một bin có tỷ lệ thay đổi mạnh sẽ đóng góp lớn và
 
 Ví dụ:
 
-| Bin | Expected | Actual | Nhận xét |
-|---|---:|---:|---|
-| 1 | 10% | 10% | Không thay đổi |
-| 2 | 10% | 11% | Thay đổi nhỏ |
-| 3 | 10% | 20% | Thay đổi lớn |
-| 4 | 10% | 2% | Thay đổi rất lớn |
+| Bin | Expected | Actual | Nhận xét           |
+| --- | -------: | -----: | -------------------- |
+| 1   |      10% |    10% | Không thay đổi    |
+| 2   |      10% |    11% | Thay đổi nhỏ      |
+| 3   |      10% |    20% | Thay đổi lớn      |
+| 4   |      10% |     2% | Thay đổi rất lớn |
 
 Các bin 3 và 4 sẽ đóng góp PSI lớn hơn nhiều so với bin 2.
 
@@ -117,12 +117,12 @@ Các bin 3 và 4 sẽ đóng góp PSI lớn hơn nhiều so với bin 2.
 
 Một quy tắc thực hành phổ biến:
 
-| PSI | Diễn giải |
-|---:|---|
-| < 0.10 | Phân phối tương đối ổn định |
-| 0.10 – 0.25 | Có sự thay đổi đáng kể, cần theo dõi |
-| > 0.25 | Thay đổi lớn, cần điều tra |
-| > 0.50 | Drift rất mạnh, có thể có lỗi dữ liệu hoặc thay đổi cấu trúc |
+|          PSI | Diễn giải                                                               |
+| -----------: | ------------------------------------------------------------------------- |
+|       < 0.10 | Phân phối tương đối ổn định                                      |
+| 0.10 – 0.25 | Có sự thay đổi đáng kể, cần theo dõi                             |
+|       > 0.25 | Thay đổi lớn, cần điều tra                                          |
+|       > 0.50 | Drift rất mạnh, có thể có lỗi dữ liệu hoặc thay đổi cấu trúc |
 
 Các ngưỡng này chỉ là **rule of thumb**. Không nên áp dụng máy móc cho mọi mô hình.
 
@@ -188,12 +188,12 @@ Variable PSI giúp xác định nguyên nhân của score drift.
 
 Ví dụ:
 
-| Biến | PSI |
-|---|---:|
-| Age | 0.03 |
-| Income | 0.06 |
-| Loan Amount | 0.31 |
-| Debt-to-Income | 0.14 |
+| Biến             |  PSI |
+| ----------------- | ---: |
+| Age               | 0.03 |
+| Income            | 0.06 |
+| Loan Amount       | 0.31 |
+| Debt-to-Income    | 0.14 |
 | Delinquency Count | 0.05 |
 
 Trong ví dụ trên, `Loan Amount` là biến cần điều tra đầu tiên.
@@ -420,12 +420,12 @@ PSI_{total} = \sum_i PSI_i
 Giả sử điểm tín dụng được chia thành 5 bin.
 
 | Score bin | Expected count | Expected % | Actual count | Actual % |
-|---|---:|---:|---:|---:|
-| 0–200 | 2,000 | 20% | 1,500 | 15% |
-| 200–400 | 2,000 | 20% | 1,800 | 18% |
-| 400–600 | 2,000 | 20% | 2,500 | 25% |
-| 600–800 | 2,000 | 20% | 2,700 | 27% |
-| 800–1000 | 2,000 | 20% | 1,500 | 15% |
+| --------- | -------------: | ---------: | -----------: | -------: |
+| 0–200    |          2,000 |        20% |        1,500 |      15% |
+| 200–400  |          2,000 |        20% |        1,800 |      18% |
+| 400–600  |          2,000 |        20% |        2,500 |      25% |
+| 600–800  |          2,000 |        20% |        2,700 |      27% |
+| 800–1000 |          2,000 |        20% |        1,500 |      15% |
 
 Tính từng bin:
 
@@ -439,13 +439,13 @@ PSI_1 \approx 0.0144
 
 Tương tự cho các bin còn lại:
 
-| Bin | Expected % | Actual % | PSI contribution |
-|---|---:|---:|---:|
-| 0–200 | 0.20 | 0.15 | 0.0144 |
-| 200–400 | 0.20 | 0.18 | 0.0021 |
-| 400–600 | 0.20 | 0.25 | 0.0112 |
-| 600–800 | 0.20 | 0.27 | 0.0210 |
-| 800–1000 | 0.20 | 0.15 | 0.0144 |
+| Bin       | Expected % | Actual % | PSI contribution |
+| --------- | ---------: | -------: | ---------------: |
+| 0–200    |       0.20 |     0.15 |           0.0144 |
+| 200–400  |       0.20 |     0.18 |           0.0021 |
+| 400–600  |       0.20 |     0.25 |           0.0112 |
+| 600–800  |       0.20 |     0.27 |           0.0210 |
+| 800–1000 |       0.20 |     0.15 |           0.0144 |
 
 Tổng PSI xấp xỉ:
 
@@ -461,13 +461,13 @@ Theo ngưỡng thông thường, phân phối vẫn tương đối ổn định.
 
 Giả sử phân phối điểm thay đổi mạnh:
 
-| Score bin | Expected % | Actual % |
-|---|---:|---:|
-| Very high risk | 10% | 28% |
-| High risk | 20% | 30% |
-| Medium risk | 30% | 25% |
-| Low risk | 25% | 12% |
-| Very low risk | 15% | 5% |
+| Score bin      | Expected % | Actual % |
+| -------------- | ---------: | -------: |
+| Very high risk |        10% |      28% |
+| High risk      |        20% |      30% |
+| Medium risk    |        30% |      25% |
+| Low risk       |        25% |      12% |
+| Very low risk  |        15% |       5% |
 
 Trong trường hợp này, PSI có thể vượt 0.25.
 
@@ -525,20 +525,20 @@ Do đó, PSI phải được giám sát cùng các chỉ số khác.
 
 ## 11. PSI so với các metric khác
 
-| Metric | Mục tiêu |
-|---|---|
-| PSI | Đo thay đổi phân phối |
-| CSI | Đo thay đổi của characteristic hoặc biến đầu vào |
-| KS | Đo khả năng tách good và bad |
-| ROC-AUC | Đo khả năng xếp hạng rủi ro |
-| Gini | Chuyển đổi từ AUC để đo discrimination |
-| IV | Đo sức mạnh dự báo của biến |
-| WOE | Biểu diễn quan hệ giữa bin và bad rate |
-| Brier Score | Đo sai số xác suất |
-| Calibration slope/intercept | Đo độ hiệu chỉnh |
-| Bad rate | Đo tỷ lệ khách hàng xấu thực tế |
-| Approval rate | Đo tỷ lệ được phê duyệt |
-| Override rate | Đo tỷ lệ quyết định bị điều chỉnh thủ công |
+| Metric                      | Mục tiêu                                                |
+| --------------------------- | --------------------------------------------------------- |
+| PSI                         | Đo thay đổi phân phối                                |
+| CSI                         | Đo thay đổi của characteristic hoặc biến đầu vào |
+| KS                          | Đo khả năng tách good và bad                         |
+| ROC-AUC                     | Đo khả năng xếp hạng rủi ro                         |
+| Gini                        | Chuyển đổi từ AUC để đo discrimination             |
+| IV                          | Đo sức mạnh dự báo của biến                        |
+| WOE                         | Biểu diễn quan hệ giữa bin và bad rate               |
+| Brier Score                 | Đo sai số xác suất                                    |
+| Calibration slope/intercept | Đo độ hiệu chỉnh                                     |
+| Bad rate                    | Đo tỷ lệ khách hàng xấu thực tế                   |
+| Approval rate               | Đo tỷ lệ được phê duyệt                           |
+| Override rate               | Đo tỷ lệ quyết định bị điều chỉnh thủ công    |
 
 ### PSI và CSI
 
@@ -744,12 +744,12 @@ Có thể chọn:
 
 Một hệ thống cảnh báo có thể dùng:
 
-| Mức | Score PSI | Variable PSI | Hành động |
-|---|---:|---:|---|
-| Green | < 0.10 | < 0.10 | Tiếp tục theo dõi |
-| Amber | 0.10–0.25 | 0.10–0.25 | Phân tích nguyên nhân |
-| Red | > 0.25 | > 0.25 | Điều tra ngay |
-| Critical | > 0.50 | > 0.50 | Kiểm tra lỗi dữ liệu hoặc thay đổi cấu trúc |
+| Mức     |  Score PSI | Variable PSI | Hành động                                         |
+| -------- | ---------: | -----------: | ---------------------------------------------------- |
+| Green    |     < 0.10 |       < 0.10 | Tiếp tục theo dõi                                 |
+| Amber    | 0.10–0.25 |   0.10–0.25 | Phân tích nguyên nhân                            |
+| Red      |     > 0.25 |       > 0.25 | Điều tra ngay                                      |
+| Critical |     > 0.50 |       > 0.50 | Kiểm tra lỗi dữ liệu hoặc thay đổi cấu trúc |
 
 Nên bổ sung quy tắc:
 
@@ -1207,13 +1207,13 @@ PSI cao chưa đủ để kết luận mô hình cần retrain.
 
 ## 29. Mẫu bảng báo cáo PSI
 
-| Variable | PSI | Status | Largest-shift bin | Expected % | Actual % | Possible cause | Action |
-|---|---:|---|---|---:|---:|---|---|
-| Model Score | 0.08 | Green | 600–650 | 10.1% | 12.4% | Normal variation | Monitor |
-| Income | 0.14 | Amber | < 5M | 8.2% | 15.6% | New acquisition channel | Segment analysis |
-| Loan Amount | 0.31 | Red | > 200M | 5.0% | 16.8% | Product policy change | Immediate review |
-| Employment Type | 0.06 | Green | Self-employed | 22.0% | 25.1% | Seasonal variation | Monitor |
-| DTI | 0.27 | Red | > 60% | 4.5% | 13.2% | Data or policy shift | Validate pipeline |
+| Variable        |  PSI | Status | Largest-shift bin | Expected % | Actual % | Possible cause          | Action            |
+| --------------- | ---: | ------ | ----------------- | ---------: | -------: | ----------------------- | ----------------- |
+| Model Score     | 0.08 | Green  | 600–650          |      10.1% |    12.4% | Normal variation        | Monitor           |
+| Income          | 0.14 | Amber  | < 5M              |       8.2% |    15.6% | New acquisition channel | Segment analysis  |
+| Loan Amount     | 0.31 | Red    | > 200M            |       5.0% |    16.8% | Product policy change   | Immediate review  |
+| Employment Type | 0.06 | Green  | Self-employed     |      22.0% |    25.1% | Seasonal variation      | Monitor           |
+| DTI             | 0.27 | Red    | > 60%             |       4.5% |    13.2% | Data or policy shift    | Validate pipeline |
 
 ---
 
@@ -1253,4 +1253,3 @@ Một quy trình giám sát tốt không chỉ cảnh báo PSI cao, mà còn ph�
 3. Drift đến từ dữ liệu, policy hay thị trường.
 4. Drift có ảnh hưởng đến performance hay không.
 5. Hành động phù hợp là theo dõi, sửa dữ liệu, recalibrate hay retrain.
-

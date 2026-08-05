@@ -1,4 +1,4 @@
 interface:
   display_name: "Write Online Research Report"
   short_description: "Research the web and write sourced Markdown"
-  default_prompt: "Use $write-online-research-report to research this question online and save a source-backed Markdown report."
+  default_prompt: "Use $write-online-research-report to research why the problem exists and how each approach addresses it, then save a source-backed Markdown report."

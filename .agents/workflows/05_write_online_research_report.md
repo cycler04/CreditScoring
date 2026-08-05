@@ -45,6 +45,12 @@ con có ranh giới rõ. Agent tổng hợp cuối vẫn phải kiểm tra ngu�
 
 ## 4. Đánh giá và tổng hợp
 
+- Tổng hợp theo **Why → How**. Why phải xác lập vấn đề, gap/hạn chế hiện tại,
+  hậu quả và success criteria. How phải ánh xạ từng approach/component về phần
+  vấn đề mà nó xử lý.
+- Khi có modeling, training hoặc benchmark, với mỗi lựa chọn phải nêu vấn đề
+  được nhắm tới, cơ chế xử lý và evidence. Kiểm tra benchmark đo trực tiếp pain
+  point hay chỉ dùng một proxy thuận tiện.
 - Kiểm nguồn có thực sự hỗ trợ claim, đúng version/phạm vi và có đủ ngữ cảnh không.
 - Phân biệt ngày xuất bản với ngày sự kiện; ưu tiên nguồn cập nhật hơn chỉ khi nó có bằng
   chứng hoặc contract mới hơn.
@@ -61,11 +67,13 @@ Cấu trúc mặc định:
 
 1. câu hỏi, phạm vi và ngày nghiên cứu;
 2. câu trả lời ngắn hoặc ý tưởng chính;
-3. phát hiện theo câu hỏi con;
-4. so sánh hoặc cơ chế nếu cần;
-5. mâu thuẫn, giới hạn và unknown;
-6. kết luận và bước kiểm chứng tiếp theo;
-7. nguồn.
+3. **Why — vấn đề cần xử lý:** gap, hậu quả và tiêu chí thành công;
+4. **How — cách xử lý:** problem → mechanism map, rồi modeling/training/benchmark
+   hoặc system khi phù hợp;
+5. evidence cho từng ánh xạ và so sánh/đánh đổi;
+6. mâu thuẫn, giới hạn, unknown và phần vấn đề còn chưa được xử lý;
+7. kết luận và bước kiểm chứng tiếp theo;
+8. nguồn.
 
 Đặt citation Markdown gần claim dưới dạng link có nhãn mô tả. Phần nguồn cuối ghi title,
 tác giả/tổ chức, ngày/version nếu có, URL và ngày truy cập đối với nội dung dễ thay đổi.
@@ -80,6 +88,8 @@ Với các diagram mermaid, vẽ các biểu đồ có sử dụng nhiều row, 
 - Mọi claim quan trọng có nguồn gần nó và nguồn thực sự nói điều đó không?
 - Có ưu tiên nguồn gốc, kiểm version/date và search phản chứng chưa?
 - Fact, inference, disputed và unknown có bị trộn không?
+- Mỗi lựa chọn modeling/training/benchmark có chỉ rõ nó sửa vấn đề nào và evidence
+  có đo đúng vấn đề đó không?
 - Link có mở được, không phải search result, và file nội bộ có resolve không?
 - Có đoạn quote dài, nội dung lặp hoặc chi tiết không thay đổi kết luận không?
 - File overview có dẫn đủ file con và người đọc có biết nghiên cứu được thực hiện khi nào

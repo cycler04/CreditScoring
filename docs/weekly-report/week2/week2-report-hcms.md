@@ -47,11 +47,11 @@ năm cột base. Matrix C train chiếm khoảng 302 MB.
 
 Split áp dụng trên **92 tuần distinct**, không trên số dòng:
 
-| Tập | Tuần | Số tuần | Số hồ sơ | Bad rate |
-|---|---:|---:|---:|---:|
-| Train | 0–54 | 55 | 1.129.770 | 3,1254% |
-| Valid | 55–72 | 18 | 193.544 | 4,2548% |
-| Test | 73–91 | 19 | 203.345 | 2,1879% |
+| Tập  |  Tuần | Số tuần | Số hồ sơ | Bad rate |
+| ----- | -----: | --------: | ----------: | -------: |
+| Train |  0–54 |        55 |   1.129.770 |  3,1254% |
+| Valid | 55–72 |        18 |     193.544 |  4,2548% |
+| Test  | 73–91 |        19 |     203.345 |  2,1879% |
 
 55/18/19 gần 60/20/20 theo tuần, nhưng thành 74/13/13% theo dòng vì volume
 tuần không đều. `split_membership.csv` đã được kiểm: mỗi `WEEK_NUM` chỉ thuộc
@@ -89,11 +89,11 @@ theo chunk (proxy giới hạn RAM) và luôn giữ row count. Sau đó mỗi fa
 góp tối đa 10 feature có quan sát ở train;
 matrix C giữ 129 feature gốc, thành 244 cột sau missing indicators.
 
-| Tầng | Nội dung | LightGBM test AUC | Stability |
-|---|---|---:|---:|
-| A | static depth 0 | 0,7496 | 0,4682 |
-| B | A + depth 1 | 0,8074 | 0,5920 |
-| C | B + depth 2 | **0,8310** | **0,6322** |
+| Tầng | Nội dung      | LightGBM test AUC |        Stability |
+| ----- | -------------- | ----------------: | ---------------: |
+| A     | static depth 0 |            0,7496 |           0,4682 |
+| B     | A + depth 1    |            0,8074 |           0,5920 |
+| C     | B + depth 2    |  **0,8310** | **0,6322** |
 
 ![AUC và stability theo tầng](./assets-week2-stability/stage_auc_stability.png)
 
@@ -103,12 +103,12 @@ chúng tăng đồng thời discrimination và độ ổn định.
 
 ## 5. Bốn mô hình và gini stability
 
-| Mô hình | Train AUC | Valid AUC | Test AUC | Test Gini | Test KS | Stability |
-|---|---:|---:|---:|---:|---:|---:|
-| LightGBM | 0,8418 | 0,8151 | **0,8310** | **0,6620** | 0,5083 | **0,6322** |
-| XGBoost | 0,8270 | 0,8126 | 0,8287 | 0,6574 | **0,5104** | 0,6256 |
-| Logistic WoE | 0,7410 | 0,7455 | 0,7839 | 0,5677 | 0,4458 | 0,5296 |
-| Logistic raw | 0,6995 | 0,6830 | 0,6677 | 0,3354 | 0,2403 | 0,1491 |
+| Mô hình    | Train AUC | Valid AUC |         Test AUC |        Test Gini |          Test KS |        Stability |
+| ------------ | --------: | --------: | ---------------: | ---------------: | ---------------: | ---------------: |
+| LightGBM     |    0,8418 |    0,8151 | **0,8310** | **0,6620** |           0,5083 | **0,6322** |
+| XGBoost      |    0,8270 |    0,8126 |           0,8287 |           0,6574 | **0,5104** |           0,6256 |
+| Logistic WoE |    0,7410 |    0,7455 |           0,7839 |           0,5677 |           0,4458 |           0,5296 |
+| Logistic raw |    0,6995 |    0,6830 |           0,6677 |           0,3354 |           0,2403 |           0,1491 |
 
 ![Gini test theo tuần](./assets-week2-stability/gini_by_week.png)
 
@@ -128,10 +128,10 @@ hơn sẽ ổn định hơn” **không được hỗ trợ** trong cấu hình 
 Đối chứng dùng cùng LightGBM, cùng feature matrix và **khớp chính xác số dòng**
 train/valid/test với OOT:
 
-| Protocol | Test n | Test bad rate | Test AUC |
-|---|---:|---:|---:|
-| OOT, tuần 73–91 | 203.345 | 2,1879% | **0,8310** |
-| Stratified random | 203.345 | 3,1439% | 0,8183 |
+| Protocol          |  Test n | Test bad rate |         Test AUC |
+| ----------------- | ------: | ------------: | ---------------: |
+| OOT, tuần 73–91 | 203.345 |       2,1879% | **0,8310** |
+| Stratified random | 203.345 |       3,1439% |           0,8183 |
 
 Random thấp hơn OOT **0,0127 AUC**, trái với giả thuyết viết trước khi chạy.
 Kết quả này không chứng minh random validation “bảo thủ” nói chung: hai test
@@ -174,8 +174,7 @@ Kaggle version 3 chạy GPU trên toàn bộ 1.526.659 hồ sơ train, tạo 170
 Kaggle có đúng hai cột `case_id,score`, đúng 10 ID theo thứ tự sample, không null
 và score nằm trong `[0,1]`.
 
-Code submission ref **55130117** hoàn tất hidden scoring với public score
-**0,49961** và private score **0,39951**. Competition metric này là stability
+Code submission ref **55130117** hoàn tất hidden scoring với public score **0,49961** và private score **0,39951**. Competition metric này là stability
 score, không phải AUC; tên cột `public_auc/private_auc` chỉ được giữ để tương
 thích schema của báo cáo submission HCDR. Không có official leaderboard rank
 cho post-competition submission nên trường rank vẫn để trống.
@@ -184,18 +183,16 @@ quả xác nhận của version 3.
 
 ## 7. WoE, scorecard, cutoff và monitoring
 
-Feature WoE được tree-bin trên train, yêu cầu IV ≥ 0,02, WoE đơn điệu và hệ số
-biến thiên IV theo tuần ≤ 1. Sau sign filtering, scorecard giữ **7 feature**;
-mọi hệ số nằm trong **−0,693 tới −0,548**, không có hệ số sai dấu. Tổng điểm
-cực trị đúng **300–850**.
+Feature WoE được tree-bin trên train, yêu cầu IV ≥ 0,02, WoE đơn điệu và hệ số biến thiên IV theo tuần ≤ 1. Sau sign filtering, scorecard giữ **7 feature**;
+mọi hệ số nằm trong **−0,693 tới −0,548**, không có hệ số sai dấu. Tổng điểm cực trị đúng **300–850**.
 
 Cutoff được chốt trên valid rồi freeze cho test:
 
 | Approval mục tiêu valid | Cutoff | Approval test | Bad rate phần duyệt test |
-|---:|---:|---:|---:|
-| 60% | 391 | 65,70% | 1,21% |
-| 70% | 350 | 74,71% | 1,49% |
-| 80% | 326 | 82,52% | 1,77% |
+| ------------------------: | -----: | ------------: | -------------------------: |
+|                       60% |    391 |        65,70% |                      1,21% |
+|                       70% |    350 |        74,71% |                      1,49% |
+|                       80% |    326 |        82,52% |                      1,77% |
 
 Chênh mục tiêu đến từ score ties và population shift, không phải do lấy quantile
 trên test. Với policy 70%, approval theo tuần test chạy từ **73,00% tới 77,05%**.
