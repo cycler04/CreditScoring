@@ -31,10 +31,11 @@ class BenchmarkTableTests(unittest.TestCase):
             active_features={"logistic_raw": 10, "lightgbm": 8},
             stability={"logistic_raw": 0.2, "lightgbm": 0.6},
             monotonic_violations={"logistic_raw": None, "lightgbm": None},
+            explanation_times={"lightgbm": 0.25},
         )
 
         self.assertEqual(list(table.columns), BENCHMARK_COLUMNS)
-        self.assertEqual(table.loc[0, "Model"], "LightGBM")
+        self.assertEqual(table.loc[0, "Model"], "LightGBM + SHAP")
         self.assertEqual(table.loc[0, "Brier"], 0.07)
         self.assertTrue(table["Model"].str.contains("not implemented").any())
 
@@ -48,8 +49,11 @@ class BenchmarkTableTests(unittest.TestCase):
             )
             text = path.read_text(encoding="utf-8")
             self.assertIn("| Model | AUC | Brier | KS |", text)
-            self.assertIn("| LightGBM | 0.800000 | 0.070000 | 0.450000 | 8 |", text)
-            self.assertIn("Explanation time is N/A", text)
+            self.assertIn(
+                "| LightGBM + SHAP | 0.800000 | 0.070000 | 0.450000 | 8 |",
+                text,
+            )
+            self.assertIn("estimator-native local-attribution latency", text)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,20 @@
+[
+  {
+    "model": "gam",
+    "stability": 0.32955567473307196,
+    "mean_gini": 0.4070461079644493,
+    "slope": -0.0006018473190161941,
+    "residual_std": 0.049055738315904526,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  },
+  {
+    "model": "monotonic_lightgbm",
+    "stability": 0.5441924446414985,
+    "mean_gini": 0.5685920022448342,
+    "slope": 0.0034874575544895856,
+    "residual_std": 0.04879911520667135,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  }
+]

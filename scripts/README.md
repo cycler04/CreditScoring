@@ -191,8 +191,14 @@ uv run python scripts/pipelines/generate_hc_diagrams.py \
 Sinh bảng benchmark mở rộng cho cả HCDR và HCMS từ các model đã lưu:
 
 ```bash
+uv run python scripts/pipelines/train_interpretable_home_credit_benchmarks.py
 uv run python scripts/pipelines/generate_home_credit_benchmark_tables.py
 ```
+
+Lệnh đầu huấn luyện GAM spline-additive và monotonic LightGBM trên đúng split đã
+lưu; có thể bỏ qua khi các artifact `gam.joblib` và
+`monotonic_lightgbm.joblib` đã tồn tại. Lệnh sau dựng lại bảng và đo attribution
+latency mà không retrain.
 
 Mỗi competition nhận `benchmark_table.csv`, `benchmark_table.md` và
 `benchmark_protocol.json` trong `outputs/<dataset>/models/metrics/`. Bảng gồm AUC,

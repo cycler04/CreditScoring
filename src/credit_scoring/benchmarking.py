@@ -20,12 +20,14 @@ BENCHMARK_COLUMNS = [
 MODEL_LABELS = {
     "logistic_raw": "Logistic",
     "logistic_woe": "WoE scorecard",
-    "lightgbm": "LightGBM",
+    "lightgbm": "LightGBM + SHAP",
     "xgboost": "XGBoost",
     "random_forest": "Random Forest",
     "extra_trees": "Extra Trees",
     "hist_gradient_boosting": "HistGradientBoosting",
     "catboost": "CatBoost",
+    "gam": "GAM",
+    "monotonic_lightgbm": "Monotonic LightGBM",
     "ensemble_lightgbm_catboost": "LightGBM + CatBoost",
     "ensemble_lightgbm_xgboost_catboost": "LightGBM + XGBoost + CatBoost",
     "ensemble_lightgbm_catboost_extra_trees": (
@@ -37,8 +39,6 @@ MODEL_LABELS = {
 
 UNIMPLEMENTED_CANDIDATES = [
     "EBM (not implemented)",
-    "GAM (not implemented)",
-    "Monotonic LightGBM (not implemented)",
 ]
 
 
@@ -49,6 +49,7 @@ def build_benchmark_table(
     active_features: dict[str, int | None],
     stability: dict[str, float] | None,
     monotonic_violations: dict[str, int | None],
+    explanation_times: dict[str, float | None] | None = None,
 ) -> pd.DataFrame:
     """Combine measured test metrics with explicitly scoped diagnostics."""
     required = {"model", "split", "auc", "ks"}
@@ -64,6 +65,7 @@ def build_benchmark_table(
 
     rows = []
     stability = stability or {}
+    explanation_times = explanation_times or {}
     for row in selected.itertuples(index=False):
         model = row.model
         rows.append(
@@ -75,7 +77,7 @@ def build_benchmark_table(
                 "Active features": active_features.get(model),
                 "Stability": stability.get(model),
                 "Monotonic violations": monotonic_violations.get(model),
-                "Explanation time": None,
+                "Explanation time": explanation_times.get(model),
             }
         )
     table = pd.DataFrame(rows, columns=BENCHMARK_COLUMNS).sort_values(
@@ -131,10 +133,10 @@ def write_benchmark_report(
             f"- Stability: {stability_definition}",
             "- Monotonic violations are reported only for models whose monotonicity "
             "is enforced and auditable; other models are N/A.",
-            "- Explanation time is N/A because no common explainer, hardware warm-up, "
-            "or sample-size protocol has been benchmarked yet.",
-            "- EBM, GAM, and monotonic LightGBM are candidate rows only and are not "
-            "represented as measured models.",
+            "- Explanation time is median estimator-native local-attribution latency "
+            "in milliseconds per row on 100 model-ready test rows, after one warm-up "
+            "and across five measured runs; unsupported models and ensembles are N/A.",
+            "- EBM remains a candidate row and is not represented as a measured model.",
             "- Gini is omitted because it is exactly `2 * AUC - 1` in these pipelines.",
             "",
             header,

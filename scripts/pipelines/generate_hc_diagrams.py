@@ -263,6 +263,11 @@ def render_hcdr(output_dir: Path, *, with_predictions: bool = False) -> list[Pat
     """Render HCDR diagrams that can be reconstructed without model fitting."""
     rendered = _render_importance_tables(output_dir)
     metrics = pd.read_csv(output_dir / "models/metrics.csv")
+    interpretable_metrics = output_dir / "models/interpretable_metrics.csv"
+    if interpretable_metrics.exists():
+        metrics = pd.concat(
+            [metrics, pd.read_csv(interpretable_metrics)], ignore_index=True
+        )
     metrics_dir = output_dir / "models/metrics"
     metrics_dir.mkdir(parents=True, exist_ok=True)
     metrics.to_csv(metrics_dir / "metrics.csv", index=False)
@@ -309,6 +314,11 @@ def render_hcms(output_dir: Path, *, with_predictions: bool = False) -> list[Pat
     """Render HCMS metric, EDA, importance, and stability diagrams."""
     rendered = _render_importance_tables(output_dir)
     metrics = pd.read_csv(output_dir / "models/metrics.csv")
+    interpretable_metrics = output_dir / "models/interpretable_metrics.csv"
+    if interpretable_metrics.exists():
+        metrics = pd.concat(
+            [metrics, pd.read_csv(interpretable_metrics)], ignore_index=True
+        )
     metrics_dir = output_dir / "models/metrics"
     metrics_dir.mkdir(parents=True, exist_ok=True)
     metrics.to_csv(metrics_dir / "metrics.csv", index=False)
@@ -328,6 +338,14 @@ def render_hcms(output_dir: Path, *, with_predictions: bool = False) -> list[Pat
             title=f"Home Credit Model Stability — {label} benchmark",
         )
         rendered.append(benchmark_plot)
+
+    dashboard_plot = metrics_dir / "benchmark_dashboard.png"
+    write_benchmark_dashboard(
+        metrics,
+        dashboard_plot,
+        title="Home Credit Model Stability — benchmark dashboard",
+    )
+    rendered.append(dashboard_plot)
 
     bad_rate_week = pd.read_csv(output_dir / "eda/bad_rate_by_week.csv")
     bad_rate_plot = output_dir / "eda/bad_rate_by_week.png"

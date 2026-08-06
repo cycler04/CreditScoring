@@ -4,12 +4,17 @@
 from __future__ import annotations
 
 import json
+import time
 from pathlib import Path
+from statistics import median
+from typing import Callable
 
 import joblib
 import numpy as np
 import pandas as pd
 import polars as pl
+import xgboost as xgb
+from catboost import Pool
 from sklearn.metrics import brier_score_loss, roc_auc_score, roc_curve
 
 from credit_scoring.benchmarking import (
@@ -57,7 +62,31 @@ BASE_MODELS = [
     "hist_gradient_boosting",
     "catboost",
 ]
+INTERPRETABLE_MODELS = ["gam", "monotonic_lightgbm"]
+FITTED_MODELS = [*BASE_MODELS, "logistic_woe", *INTERPRETABLE_MODELS]
 METRIC_RECONSTRUCTION_TOLERANCE = 1e-5
+EXPLANATION_ROWS = 100
+EXPLANATION_REPEATS = 5
+
+
+def _timed_explanation(callback: Callable[[], object], rows: int) -> float:
+    callback()
+    durations = []
+    for _ in range(EXPLANATION_REPEATS):
+        started = time.perf_counter()
+        callback()
+        durations.append(time.perf_counter() - started)
+    return 1000.0 * median(durations) / rows
+
+
+def _linear_explanation_time(values: object, coefficients: np.ndarray) -> float:
+    sample = values[:EXPLANATION_ROWS]
+    callback = (
+        (lambda: sample.multiply(coefficients))
+        if hasattr(sample, "multiply")
+        else (lambda: np.asarray(sample) * coefficients)
+    )
+    return _timed_explanation(callback, len(sample))
 
 
 def _blend(predictions: dict[str, np.ndarray]) -> dict[str, np.ndarray]:
@@ -81,7 +110,7 @@ def _catboost_frame(
 def _importance_counts(dataset: str) -> dict[str, int | None]:
     directory = Path("outputs") / dataset / "models/feature_importance"
     counts: dict[str, int | None] = {}
-    for model in [*BASE_MODELS, "logistic_woe"]:
+    for model in FITTED_MODELS:
         stem = "lightgbm_C" if dataset == "hcms" and model == "lightgbm" else model
         path = directory / f"{stem}.csv"
         if not path.exists():
@@ -100,8 +129,9 @@ def _monotonic_violations(artifact_path: Path) -> dict[str, int | None]:
     violations = sum(
         not is_monotonic_woe(table) for table in artifact["tables"].values()
     )
-    result = {model: None for model in [*BASE_MODELS, *ENSEMBLE_MEMBERS]}
+    result = {model: None for model in [*FITTED_MODELS, *ENSEMBLE_MEMBERS]}
     result["logistic_woe"] = int(violations)
+    result["monotonic_lightgbm"] = 0
     return result
 
 
@@ -113,6 +143,7 @@ def _write_outputs(
     *,
     stability: dict[str, float] | None,
     stability_definition: str,
+    explanation_times: dict[str, float | None],
 ) -> None:
     measured = metrics.loc[metrics["split"].eq("test")].drop_duplicates(
         "model", keep="last"
@@ -147,6 +178,7 @@ def _write_outputs(
         monotonic_violations=_monotonic_violations(
             Path("outputs") / dataset / "scorecard/logistic_woe.joblib"
         ),
+        explanation_times=explanation_times,
     )
     output_dir.mkdir(parents=True, exist_ok=True)
     table.to_csv(output_dir / "benchmark_table.csv", index=False, na_rep="N/A")
@@ -174,9 +206,11 @@ def _write_outputs(
             "Counted only for models with enforced and auditable monotonicity."
         ),
         "explanation_time": (
-            "N/A until a common explainer, sample size, warm-up, and hardware "
-            "protocol is benchmarked."
+            "Median estimator-native exact local-attribution milliseconds per row "
+            "on 100 model-ready test rows, after one warm-up and five measured runs."
         ),
+        "explanation_rows": EXPLANATION_ROWS,
+        "explanation_repeats": EXPLANATION_REPEATS,
         "candidate_rows_are_measured": False,
         "metric_reconstruction_absolute_tolerance": (
             METRIC_RECONSTRUCTION_TOLERANCE
@@ -197,11 +231,24 @@ def build_hcdr() -> None:
     test = matrix.loc[matrix["SK_ID_CURR"].isin(test_ids)].copy()
     labels = test["TARGET"].astype("int8")
     predictions: dict[str, np.ndarray] = {}
+    explanation_times: dict[str, float | None] = {
+        model: None for model in [*FITTED_MODELS, *ENSEMBLE_MEMBERS]
+    }
     for model_name in BASE_MODELS:
         artifact = joblib.load(output / f"models/{model_name}.joblib")
         if model_name == "catboost":
             values = _catboost_frame(
                 test[artifact["features"]], artifact["categorical_features"]
+            )
+            pool = Pool(
+                values.iloc[:EXPLANATION_ROWS],
+                cat_features=artifact["categorical_features"],
+            )
+            explanation_times[model_name] = _timed_explanation(
+                lambda: artifact["model"].get_feature_importance(
+                    pool, type="ShapValues"
+                ),
+                pool.num_row(),
             )
         else:
             processor = artifact["preprocessor"]
@@ -210,15 +257,64 @@ def build_hcdr() -> None:
                 if hasattr(values, "toarray"):
                     values = values.toarray()
                 values = np.asarray(values, dtype="float32")
+            if model_name == "logistic_raw":
+                explanation_times[model_name] = _linear_explanation_time(
+                    values, artifact["model"].coef_[0]
+                )
+            elif model_name == "lightgbm":
+                sample = values[:EXPLANATION_ROWS]
+                explanation_times[model_name] = _timed_explanation(
+                    lambda: artifact["model"].predict(sample, pred_contrib=True),
+                    len(sample),
+                )
+            elif model_name == "xgboost":
+                sample = xgb.DMatrix(values[:EXPLANATION_ROWS])
+                explanation_times[model_name] = _timed_explanation(
+                    lambda: artifact["model"].get_booster().predict(
+                        sample, pred_contribs=True
+                    ),
+                    sample.num_row(),
+                )
         predictions[model_name] = artifact["model"].predict_proba(values)[:, 1]
     predictions.update(_blend(predictions))
     woe = joblib.load(output / "scorecard/logistic_woe.joblib")
-    predictions["logistic_woe"] = woe["model"].predict_proba(
-        hcdr_woe_transform(test, woe["bins"], woe["tables"])
-    )[:, 1]
+    woe_values = hcdr_woe_transform(test, woe["bins"], woe["tables"])
+    predictions["logistic_woe"] = woe["model"].predict_proba(woe_values)[:, 1]
+    explanation_times["logistic_woe"] = _linear_explanation_time(
+        woe_values, woe["model"].coef_[0]
+    )
+    for model_name in INTERPRETABLE_MODELS:
+        artifact = joblib.load(output / f"models/{model_name}.joblib")
+        if model_name == "gam":
+            features = artifact["features"]
+            values = test[features].replace([np.inf, -np.inf], np.nan).astype("float32")
+            predictions[model_name] = artifact["model"].predict_proba(values)[:, 1]
+            transformed = artifact["model"][:-1].transform(
+                values.iloc[:EXPLANATION_ROWS]
+            )
+            explanation_times[model_name] = _linear_explanation_time(
+                transformed, artifact["model"].named_steps["model"].coef_[0]
+            )
+        else:
+            values = hcdr_woe_transform(
+                test, artifact["bins"], artifact["tables"]
+            )
+            predictions[model_name] = artifact["model"].predict_proba(values)[:, 1]
+            sample = values.iloc[:EXPLANATION_ROWS]
+            explanation_times[model_name] = _timed_explanation(
+                lambda: artifact["model"].predict(sample, pred_contrib=True),
+                len(sample),
+            )
+    metrics = pd.concat(
+        [
+            pd.read_csv(output / "models/metrics.csv"),
+            pd.read_csv(output / "models/interpretable_metrics.csv"),
+        ],
+        ignore_index=True,
+    )
     _write_outputs(
         "hcdr",
-        pd.read_csv(output / "models/metrics.csv"),
+        metrics,
         labels,
         predictions,
         stability=None,
@@ -226,6 +322,7 @@ def build_hcdr() -> None:
             "N/A because HCDR has no time column and uses a stratified random split; "
             "the valid-test gap is not treated as temporal stability."
         ),
+        explanation_times=explanation_times,
     )
 
 
@@ -254,6 +351,9 @@ def build_hcms() -> None:
     )
     labels = test["target"].astype("int8")
     predictions: dict[str, np.ndarray] = {}
+    explanation_times: dict[str, float | None] = {
+        model: None for model in [*FITTED_MODELS, *ENSEMBLE_MEMBERS]
+    }
     for model_name, artifact in artifacts.items():
         features = artifact["features"]
         transformed = artifact["imputer"].transform(test[features]).astype("float32")
@@ -263,17 +363,81 @@ def build_hcms() -> None:
             values = artifact["scaler"].transform(values)
         elif "transformed_features" in artifact:
             values = values[artifact["transformed_features"]]
+        if model_name == "logistic_raw":
+            explanation_times[model_name] = _linear_explanation_time(
+                values, artifact["model"].coef_[0]
+            )
+        elif model_name == "lightgbm":
+            sample = values[:EXPLANATION_ROWS]
+            explanation_times[model_name] = _timed_explanation(
+                lambda: artifact["model"].predict(sample, pred_contrib=True),
+                len(sample),
+            )
+        elif model_name == "xgboost":
+            sample = xgb.DMatrix(values[:EXPLANATION_ROWS])
+            explanation_times[model_name] = _timed_explanation(
+                lambda: artifact["model"].get_booster().predict(
+                    sample, pred_contribs=True
+                ),
+                sample.num_row(),
+            )
+        elif model_name == "catboost":
+            pool = Pool(values[:EXPLANATION_ROWS])
+            explanation_times[model_name] = _timed_explanation(
+                lambda: artifact["model"].get_feature_importance(
+                    pool, type="ShapValues"
+                ),
+                pool.num_row(),
+            )
         predictions[model_name] = artifact["model"].predict_proba(values)[:, 1]
     predictions.update(_blend(predictions))
-    predictions["logistic_woe"] = woe["model"].predict_proba(
-        hcms_woe_transform(test, woe["bins"], woe["tables"])
-    )[:, 1]
+    woe_values = hcms_woe_transform(test, woe["bins"], woe["tables"])
+    predictions["logistic_woe"] = woe["model"].predict_proba(woe_values)[:, 1]
+    explanation_times["logistic_woe"] = _linear_explanation_time(
+        woe_values, woe["model"].coef_[0]
+    )
+    for model_name in INTERPRETABLE_MODELS:
+        artifact = joblib.load(output / f"models/{model_name}.joblib")
+        if model_name == "gam":
+            features = artifact["features"]
+            values = test[features].replace([np.inf, -np.inf], np.nan).astype("float32")
+            predictions[model_name] = artifact["model"].predict_proba(values)[:, 1]
+            transformed = artifact["model"][:-1].transform(
+                values.iloc[:EXPLANATION_ROWS]
+            )
+            explanation_times[model_name] = _linear_explanation_time(
+                transformed, artifact["model"].named_steps["model"].coef_[0]
+            )
+        else:
+            values = hcms_woe_transform(
+                test, artifact["bins"], artifact["tables"]
+            )
+            predictions[model_name] = artifact["model"].predict_proba(values)[:, 1]
+            sample = values.iloc[:EXPLANATION_ROWS]
+            explanation_times[model_name] = _timed_explanation(
+                lambda: artifact["model"].predict(sample, pred_contrib=True),
+                len(sample),
+            )
     stability_rows = json.loads(
         (output / "stability/stability_metric.json").read_text(encoding="utf-8")
     )
+    stability_rows.extend(
+        json.loads(
+            (output / "models/interpretable_stability.json").read_text(
+                encoding="utf-8"
+            )
+        )
+    )
+    metrics = pd.concat(
+        [
+            pd.read_csv(output / "models/metrics.csv"),
+            pd.read_csv(output / "models/interpretable_metrics.csv"),
+        ],
+        ignore_index=True,
+    )
     _write_outputs(
         "hcms",
-        pd.read_csv(output / "models/metrics.csv"),
+        metrics,
         labels,
         predictions,
         stability={row["model"]: float(row["stability"]) for row in stability_rows},
@@ -281,6 +445,7 @@ def build_hcms() -> None:
             "the week-based metric `mean(gini) + 88 * min(0, slope) - "
             "0.5 * residual_std` over 19 out-of-time test weeks."
         ),
+        explanation_times=explanation_times,
     )
 
 

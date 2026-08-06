@@ -1,0 +1,11 @@
+{
+  "rows": {
+    "train": 184506,
+    "valid": 61502,
+    "test": 61503
+  },
+  "fit_seconds": {
+    "gam": 3.1891658200001984,
+    "monotonic_lightgbm": 5.652927981000175
+  }
+}
