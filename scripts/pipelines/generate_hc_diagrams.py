@@ -268,6 +268,11 @@ def render_hcdr(output_dir: Path, *, with_predictions: bool = False) -> list[Pat
         metrics = pd.concat(
             [metrics, pd.read_csv(interpretable_metrics)], ignore_index=True
         )
+    external_metrics = output_dir / "kaggle_ft_transformer/metrics.csv"
+    if external_metrics.exists():
+        metrics = pd.concat(
+            [metrics, pd.read_csv(external_metrics)], ignore_index=True
+        )
     metrics_dir = output_dir / "models/metrics"
     metrics_dir.mkdir(parents=True, exist_ok=True)
     metrics.to_csv(metrics_dir / "metrics.csv", index=False)

@@ -55,6 +55,28 @@ class BenchmarkTableTests(unittest.TestCase):
             )
             self.assertIn("estimator-native local-attribution latency", text)
 
+    def test_external_metric_without_predictions_has_no_brier(self) -> None:
+        metrics = pd.DataFrame(
+            {
+                "model": ["ft_transformer"],
+                "split": ["test"],
+                "auc": [0.77],
+                "ks": [0.40],
+            }
+        )
+
+        table = build_benchmark_table(
+            metrics,
+            {},
+            active_features={},
+            stability=None,
+            monotonic_violations={},
+        )
+
+        measured = table.loc[table["Model"].eq("FT-Transformer")].iloc[0]
+        self.assertEqual(measured["AUC"], 0.77)
+        self.assertTrue(pd.isna(measured["Brier"]))
+
 
 if __name__ == "__main__":
     unittest.main()

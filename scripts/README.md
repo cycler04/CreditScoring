@@ -200,6 +200,17 @@ lưu; có thể bỏ qua khi các artifact `gam.joblib` và
 `monotonic_lightgbm.joblib` đã tồn tại. Lệnh sau dựng lại bảng và đo attribution
 latency mà không retrain.
 
+Kết quả FT-Transformer từ Kaggle được kéo vào
+`outputs/hcdr/kaggle_ft_transformer/`, kiểm tra provenance/schema bằng:
+
+```bash
+uv run python scripts/pipelines/validate_hcdr_ft_transformer_artifacts.py
+```
+
+Khi `metrics.csv` đã qua kiểm tra tồn tại trong thư mục này, lệnh sinh benchmark
+ở trên tự thêm FT-Transformer vào HCDR. Brier và explanation time giữ `N/A` vì
+run Kaggle không xuất held-out test probabilities hoặc attribution.
+
 Mỗi competition nhận `benchmark_table.csv`, `benchmark_table.md` và
 `benchmark_protocol.json` trong `outputs/<dataset>/models/metrics/`. Bảng gồm AUC,
 Brier, KS, số feature có global importance khác 0, stability, vi phạm monotonic

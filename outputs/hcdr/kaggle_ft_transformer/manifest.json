@@ -1,0 +1,53 @@
+{
+  "validated_at_utc": "2026-08-06T08:18:34.241342+00:00",
+  "kernel_id": "cyclerlol/hcdr-ft-transformer-stage-c",
+  "kernel_id_no": 129846755,
+  "kernel_version": 5,
+  "machine_shape": "NvidiaTeslaT4",
+  "dataset_sources": [
+    "cyclerlol/hcdr-stage-c-feature-matrix"
+  ],
+  "split": "precomputed stratified random 60/20/20; not out-of-time",
+  "epochs_completed": 13,
+  "best_epoch": 10,
+  "valid_auc": 0.7629285074050999,
+  "test_auc": 0.7689735413806298,
+  "test_gini": 0.5379470827612596,
+  "test_ks": 0.4031418913611453,
+  "submission_rows": 48744,
+  "checkpoint_bytes": 543296,
+  "files": {
+    "experiment_config.json": {
+      "bytes": 712,
+      "sha256": "a71e152371860191c4bec9e86651a345f4d216bd2a9eb5398e9271e1024b2ca6"
+    },
+    "ft_transformer_best.pt": {
+      "bytes": 543296,
+      "sha256": "80684e9336433f18b87d3bbc02a9116aa768f8dd9c221515d478e6fe4bb42071"
+    },
+    "hcdr-ft-transformer-stage-c.log": {
+      "bytes": 8922,
+      "sha256": "d20b36cff6c56d09465d0099bd57a5c345e7d3561e8d36b402baf6a676897d21"
+    },
+    "kernel-metadata.json": {
+      "bytes": 657,
+      "sha256": "b2160e8de73d8d65aa24a4016c0e5c1082ac0fc008179b702133794efd7aafb4"
+    },
+    "metrics.csv": {
+      "bytes": 243,
+      "sha256": "cecb13e4741591ad8e9cad6ff1b219797fd4aadd1e8bdd5276c35ef6413194fa"
+    },
+    "submission_ft_transformer.csv": {
+      "bytes": 859747,
+      "sha256": "4f9f3aa05b6c2c6e7f5b0ee6fe098f6b7711578a2f1eb7190bc7e025ea42490c"
+    },
+    "training_healthcheck.json": {
+      "bytes": 226,
+      "sha256": "74f90217ff169a8e64077daac83d9a1fb878776ddf4cb37f1da51fc9d435b4ab"
+    },
+    "training_history.csv": {
+      "bytes": 782,
+      "sha256": "d550378f6d234f9b3002b366b404a4bcfaf8556a74da64d68416f6b6d4f1a545"
+    }
+  }
+}

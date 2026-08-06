@@ -67,6 +67,9 @@ FITTED_MODELS = [*BASE_MODELS, "logistic_woe", *INTERPRETABLE_MODELS]
 METRIC_RECONSTRUCTION_TOLERANCE = 1e-5
 EXPLANATION_ROWS = 100
 EXPLANATION_REPEATS = 5
+HCDR_EXTERNAL_METRICS = Path(
+    "outputs/hcdr/kaggle_ft_transformer/metrics.csv"
+)
 
 
 def _timed_explanation(callback: Callable[[], object], rows: int) -> float:
@@ -148,7 +151,11 @@ def _write_outputs(
     measured = metrics.loc[metrics["split"].eq("test")].drop_duplicates(
         "model", keep="last"
     )
+    metrics_without_predictions = []
     for row in measured.itertuples(index=False):
+        if row.model not in predictions:
+            metrics_without_predictions.append(row.model)
+            continue
         scores = predictions[row.model]
         auc = float(roc_auc_score(labels, scores))
         false_positive, true_positive, _ = roc_curve(labels, scores)
@@ -212,6 +219,9 @@ def _write_outputs(
         "explanation_rows": EXPLANATION_ROWS,
         "explanation_repeats": EXPLANATION_REPEATS,
         "candidate_rows_are_measured": False,
+        "metrics_without_local_test_predictions": sorted(
+            metrics_without_predictions
+        ),
         "metric_reconstruction_absolute_tolerance": (
             METRIC_RECONSTRUCTION_TOLERANCE
         ),
@@ -305,13 +315,13 @@ def build_hcdr() -> None:
                 lambda: artifact["model"].predict(sample, pred_contrib=True),
                 len(sample),
             )
-    metrics = pd.concat(
-        [
-            pd.read_csv(output / "models/metrics.csv"),
-            pd.read_csv(output / "models/interpretable_metrics.csv"),
-        ],
-        ignore_index=True,
-    )
+    metric_tables = [
+        pd.read_csv(output / "models/metrics.csv"),
+        pd.read_csv(output / "models/interpretable_metrics.csv"),
+    ]
+    if HCDR_EXTERNAL_METRICS.exists():
+        metric_tables.append(pd.read_csv(HCDR_EXTERNAL_METRICS))
+    metrics = pd.concat(metric_tables, ignore_index=True)
     _write_outputs(
         "hcdr",
         metrics,

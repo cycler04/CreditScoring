@@ -1,0 +1,10 @@
+{
+  "status": "TRAINING_HEALTHCHECK_OK",
+  "epoch": 1,
+  "batch_size": 256,
+  "loss": 1.3692198991775513,
+  "logit_min": -0.5579851865768433,
+  "logit_max": 0.7313101291656494,
+  "gradients_finite": true,
+  "device": "cuda"
+}

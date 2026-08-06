@@ -26,6 +26,7 @@ MODEL_LABELS = {
     "extra_trees": "Extra Trees",
     "hist_gradient_boosting": "HistGradientBoosting",
     "catboost": "CatBoost",
+    "ft_transformer": "FT-Transformer",
     "gam": "GAM",
     "monotonic_lightgbm": "Monotonic LightGBM",
     "ensemble_lightgbm_catboost": "LightGBM + CatBoost",
@@ -59,10 +60,6 @@ def build_benchmark_table(
     if "level" in selected and selected["level"].nunique() > 1:
         selected = selected.loc[selected["level"].eq("C")]
     selected = selected.drop_duplicates("model", keep="last")
-    missing_brier = set(selected["model"]).difference(brier_by_model)
-    if missing_brier:
-        raise ValueError(f"Missing Brier scores for: {sorted(missing_brier)}")
-
     rows = []
     stability = stability or {}
     explanation_times = explanation_times or {}
@@ -72,7 +69,11 @@ def build_benchmark_table(
             {
                 "Model": MODEL_LABELS.get(model, model),
                 "AUC": float(row.auc),
-                "Brier": float(brier_by_model[model]),
+                "Brier": (
+                    float(brier_by_model[model])
+                    if model in brier_by_model
+                    else None
+                ),
                 "KS": float(row.ks),
                 "Active features": active_features.get(model),
                 "Stability": stability.get(model),
@@ -126,7 +127,9 @@ def write_benchmark_report(
             "",
             "## Metric contract",
             "",
-            "- AUC, Brier, and KS use the persisted held-out test split.",
+            "- AUC and KS use persisted held-out test metrics.",
+            "- Brier uses persisted held-out test predictions; it is N/A when an "
+            "external run did not export those probabilities.",
             "- Lower Brier is better; higher AUC, KS, and Stability are better.",
             "- Active features count non-zero persisted global-importance entries; "
             "ensembles and models without a native persisted importance are N/A.",

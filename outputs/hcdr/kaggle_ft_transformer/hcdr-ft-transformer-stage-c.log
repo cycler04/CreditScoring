@@ -1,0 +1,68 @@
+[{"stream_name":"stderr","time":8.486748847,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.48686513,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.486870668,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.486873589,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":9.20573374,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":9.205821462,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":9.205828961,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":9.20583406,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":18.774196959,"data":"{'python': '3.12.13', 'torch': '2.10.0+cu128', 'sklearn': '1.6.1', 'device': 'cuda', 'gpu': 'Tesla T4', 'gpu_arch': 'sm_75', 'torch_cuda_arches': ['sm_70', 'sm_75', 'sm_80', 'sm_86', 'sm_90', 'sm_100', 'sm_120'], 'cuda_compatible': True, 'smoke_test': False}\n"}
+,{"stream_name":"stdout","time":22.900952148000002,"data":"{'input': '/kaggle/input/hcdr-stage-c-feature-matrix', 'splits': {'train': 184506, 'valid': 61502, 'test': 61503, 'competition': 48744}, 'features': {'numeric': 159, 'categorical': 16}, 'bad_rate': 0.08072908198107379}\n"}
+,{"stream_name":"stdout","time":27.558367172,"data":"category cardinalities [3, 4, 3, 3, 9, 9, 6, 7, 7, 20, 8, 59, 6, 5, 9, 4]\n"}
+,{"stream_name":"stderr","time":27.831456934,"data":"/tmp/ipykernel_23/4098245871.py:49: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True\n"}
+,{"stream_name":"stderr","time":27.831510302,"data":"  self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=layers)\n"}
+,{"stream_name":"stderr","time":27.831518442,"data":"\n"}
+,{"stream_name":"stderr","time":27.831523588,"data":"/tmp/ipykernel_23/4098245871.py:49: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True\n"}
+,{"stream_name":"stderr","time":27.831529281999998,"data":"  self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=layers)\n"}
+,{"stream_name":"stdout","time":27.874948919,"data":"FTTransformer(\n"}
+,{"stream_name":"stdout","time":27.875015386,"data":"  (numeric_tokenizer): NumericalFeatureTokenizer()\n"}
+,{"stream_name":"stdout","time":27.875024208,"data":"  (categorical_tokenizer): CategoricalFeatureTokenizer(\n"}
+,{"stream_name":"stdout","time":27.875043255,"data":"    (embedding): Embedding(162, 64)\n"}
+,{"stream_name":"stdout","time":27.875048446,"data":"  )\n"}
+,{"stream_name":"stdout","time":27.875052952,"data":"  (encoder): TransformerEncoder(\n"}
+,{"stream_name":"stdout","time":27.875057802,"data":"    (layers): ModuleList(\n"}
+,{"stream_name":"stdout","time":27.875063249,"data":"      (0-2): 3 x TransformerEncoderLayer(\n"}
+,{"stream_name":"stdout","time":27.875068706,"data":"        (self_attn): MultiheadAttention(\n"}
+,{"stream_name":"stdout","time":27.875074122,"data":"          (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)\n"}
+,{"stream_name":"stdout","time":27.875079114000002,"data":"        )\n"}
+,{"stream_name":"stdout","time":27.875084026,"data":"        (linear1): Linear(in_features=64, out_features=128, bias=True)\n"}
+,{"stream_name":"stdout","time":27.875089009,"data":"        (dropout): Dropout(p=0.1, inplace=False)\n"}
+,{"stream_name":"stdout","time":27.875113667,"data":"        (linear2): Linear(in_features=128, out_features=64, bias=True)\n"}
+,{"stream_name":"stdout","time":27.875118667,"data":"        (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n"}
+,{"stream_name":"stdout","time":27.87512341,"data":"        (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n"}
+,{"stream_name":"stdout","time":27.875127793,"data":"        (dropout1): Dropout(p=0.1, inplace=False)\n"}
+,{"stream_name":"stdout","time":27.875132017,"data":"        (dropout2): Dropout(p=0.1, inplace=False)\n"}
+,{"stream_name":"stdout","time":27.875136429,"data":"      )\n"}
+,{"stream_name":"stdout","time":27.875140389,"data":"    )\n"}
+,{"stream_name":"stdout","time":27.875144418,"data":"  )\n"}
+,{"stream_name":"stdout","time":27.875148263,"data":"  (head): Sequential(\n"}
+,{"stream_name":"stdout","time":27.875152314,"data":"    (0): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n"}
+,{"stream_name":"stdout","time":27.875155981,"data":"    (1): ReLU()\n"}
+,{"stream_name":"stdout","time":27.875160014,"data":"    (2): Linear(in_features=64, out_features=1, bias=True)\n"}
+,{"stream_name":"stdout","time":27.875164674,"data":"  )\n"}
+,{"stream_name":"stdout","time":27.875168699,"data":")\n"}
+,{"stream_name":"stdout","time":27.875172632,"data":"trainable parameters 131393\n"}
+,{"stream_name":"stdout","time":35.145589245,"data":"TRAINING_HEALTHCHECK_OK {'status': 'TRAINING_HEALTHCHECK_OK', 'epoch': 1, 'batch_size': 256, 'loss': 1.3692198991775513, 'logit_min': -0.5579851865768433, 'logit_max': 0.7313101291656494, 'gradients_finite': True, 'device': 'cuda'}\n"}
+,{"stream_name":"stdout","time":111.367567013,"data":"EPOCH {'epoch': 1, 'train_loss': 1.15829015483872, 'valid_auc': 0.742249402716267, 'seconds': 77.64020863400037}\n"}
+,{"stream_name":"stdout","time":191.39751656,"data":"EPOCH {'epoch': 2, 'train_loss': 1.1093774198337014, 'valid_auc': 0.7539382251988338, 'seconds': 80.00593954099986}\n"}
+,{"stream_name":"stdout","time":274.345367893,"data":"EPOCH {'epoch': 3, 'train_loss': 1.089374232590415, 'valid_auc': 0.7586718790202731, 'seconds': 82.9362676969995}\n"}
+,{"stream_name":"stdout","time":357.491572194,"data":"EPOCH {'epoch': 4, 'train_loss': 1.0797084531113355, 'valid_auc': 0.7605717194602093, 'seconds': 83.13511886499964}\n"}
+,{"stream_name":"stdout","time":440.751479873,"data":"EPOCH {'epoch': 5, 'train_loss': 1.0759187178552418, 'valid_auc': 0.761465780565841, 'seconds': 83.24813934099984}\n"}
+,{"stream_name":"stdout","time":524.237523392,"data":"EPOCH {'epoch': 6, 'train_loss': 1.0709174619814674, 'valid_auc': 0.7586906032233951, 'seconds': 83.47423044699917}\n"}
+,{"stream_name":"stdout","time":607.689397781,"data":"EPOCH {'epoch': 7, 'train_loss': 1.068912311361929, 'valid_auc': 0.7627993830774065, 'seconds': 83.44621579799968}\n"}
+,{"stream_name":"stdout","time":690.944755971,"data":"EPOCH {'epoch': 8, 'train_loss': 1.0637691900449544, 'valid_auc': 0.7619504652560137, 'seconds': 83.23605935999967}\n"}
+,{"stream_name":"stdout","time":774.257016637,"data":"EPOCH {'epoch': 9, 'train_loss': 1.062864811492442, 'valid_auc': 0.7618978533089428, 'seconds': 83.3153439889993}\n"}
+,{"stream_name":"stdout","time":857.781749823,"data":"EPOCH {'epoch': 10, 'train_loss': 1.059416294625764, 'valid_auc': 0.7629285074050999, 'seconds': 83.52157763499963}\n"}
+,{"stream_name":"stdout","time":941.441114351,"data":"EPOCH {'epoch': 11, 'train_loss': 1.0556800879155488, 'valid_auc': 0.7627389711602562, 'seconds': 83.64328222099994}\n"}
+,{"stream_name":"stdout","time":1024.979318141,"data":"EPOCH {'epoch': 12, 'train_loss': 1.052902679984119, 'valid_auc': 0.7617742240503733, 'seconds': 83.53469583600054}\n"}
+,{"stream_name":"stdout","time":1108.129428707,"data":"EPOCH {'epoch': 13, 'train_loss': 1.0513753418601803, 'valid_auc': 0.7624404953926829, 'seconds': 83.15036760200019}\n"}
+,{"stream_name":"stdout","time":1108.130543232,"data":"EARLY_STOPPING {'epoch': 13, 'best_valid_auc': 0.7629285074050999}\n"}
+,{"stream_name":"stderr","time":1129.758050388,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1129.758105694,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1129.949718178,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1129.949752532,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1130.678340849,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":1131.06040226,"data":"[NbConvertApp] Writing 33932 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":1133.842907994,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1134.909010949,"data":"[NbConvertApp] Writing 373445 bytes to __results__.html\n"}
+]

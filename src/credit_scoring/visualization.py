@@ -411,6 +411,7 @@ def _benchmark_model_labels(model_names: pd.Index) -> list[str]:
         label.replace("Lightgbm", "LightGBM")
         .replace("Xgboost", "XGBoost")
         .replace("Catboost", "CatBoost")
+        .replace("Ft Transformer", "FT-Transformer")
         .replace("Woe", "WoE")
         for label in labels
     ]

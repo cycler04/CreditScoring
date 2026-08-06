@@ -8,5 +8,8 @@
   "explanation_rows": 100,
   "explanation_repeats": 5,
   "candidate_rows_are_measured": false,
+  "metrics_without_local_test_predictions": [
+    "ft_transformer"
+  ],
   "metric_reconstruction_absolute_tolerance": 1e-05
 }

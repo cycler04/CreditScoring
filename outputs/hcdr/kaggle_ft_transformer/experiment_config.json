@@ -1,0 +1,42 @@
+{
+  "model": "FT-Transformer",
+  "model_config": {
+    "token_dim": 64,
+    "layers": 3,
+    "heads": 8,
+    "dropout": 0.1,
+    "batch_size": 256,
+    "max_epochs": 15,
+    "patience": 3,
+    "learning_rate": 0.0001,
+    "weight_decay": 1e-05
+  },
+  "parameter_count": 131393,
+  "random_state": 42,
+  "split": "precomputed stratified random 60/20/20; not out-of-time",
+  "feature_count": 175,
+  "numeric_count": 159,
+  "categorical_count": 16,
+  "category_cardinalities": [
+    3,
+    4,
+    3,
+    3,
+    9,
+    9,
+    6,
+    7,
+    7,
+    20,
+    8,
+    59,
+    6,
+    5,
+    9,
+    4
+  ],
+  "best_valid_auc": 0.7629285074050999,
+  "device": "cuda",
+  "torch_version": "2.10.0+cu128",
+  "smoke_test": false
+}
