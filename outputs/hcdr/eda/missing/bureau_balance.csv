@@ -1,0 +1,4 @@
+column,dtype,missing_count,missing_percent,non_null_count
+MONTHS_BALANCE,int64,0,0.0,27299925
+SK_ID_BUREAU,int64,0,0.0,27299925
+STATUS,str,0,0.0,27299925

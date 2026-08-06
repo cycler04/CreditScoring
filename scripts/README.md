@@ -87,6 +87,28 @@ Output chính:
 GiveMeSomeCredit không có cột thời gian. Pipeline dùng stratified random split
 60/20/20; kết quả không phải out-of-time validation.
 
+## Benchmark Home Credit Model Stability
+
+Chạy đầy đủ pipeline theo split tuần out-of-time:
+
+```bash
+uv run python scripts/pipelines/run_hcms_pipeline.py
+```
+
+Pipeline benchmark LightGBM, XGBoost, Logistic Regression, WoE Logistic,
+Random Forest, Extra Trees, HistGradientBoosting, CatBoost và năm ensemble
+equal-weight. Nếu phần diagnostic cuối bị dừng sau khi model đã được lưu vì giới
+hạn RAM, dựng lại metric, stability, chart và submission mà không retrain bằng:
+
+```bash
+uv run python scripts/pipelines/finalize_hcms_model_benchmarks.py
+uv run python scripts/pipelines/generate_hc_diagrams.py \
+  --dataset hcms --with-predictions
+```
+
+Artifact chính nằm tại `outputs/hcms/models/metrics/`,
+`outputs/hcms/stability/` và `outputs/hcms/submissions/`.
+
 ## Tải Kaggle notebooks tham khảo
 
 ```bash
@@ -165,6 +187,17 @@ KS, feature importance và các biểu đồ EDA/stability vào cây `outputs/` 
 uv run python scripts/pipelines/generate_hc_diagrams.py \
   --dataset all --with-predictions
 ```
+
+Sinh bảng benchmark mở rộng cho cả HCDR và HCMS từ các model đã lưu:
+
+```bash
+uv run python scripts/pipelines/generate_home_credit_benchmark_tables.py
+```
+
+Mỗi competition nhận `benchmark_table.csv`, `benchmark_table.md` và
+`benchmark_protocol.json` trong `outputs/<dataset>/models/metrics/`. Bảng gồm AUC,
+Brier, KS, số feature có global importance khác 0, stability, vi phạm monotonic
+và thời gian giải thích; ô không có định nghĩa hợp lệ được ghi rõ là `N/A`.
 
 ## EDA chi tiết HCDR từ notebook tham khảo
 

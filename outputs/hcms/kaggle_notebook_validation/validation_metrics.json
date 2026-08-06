@@ -1,0 +1,19 @@
+{
+  "best_iteration": 428,
+  "competition": "home-credit-credit-risk-model-stability",
+  "device_used": "gpu",
+  "feature_count": 168,
+  "mode": "local_smoke",
+  "score_max": 0.10459963330322544,
+  "score_min": 0.003793196441330933,
+  "submission_columns": [
+    "case_id",
+    "score"
+  ],
+  "submission_rows": 10,
+  "test_rows": 10,
+  "train_rows": 209941,
+  "validation_auc": 0.7522916198196916,
+  "validation_rows": 40059,
+  "validation_start_week": 73
+}

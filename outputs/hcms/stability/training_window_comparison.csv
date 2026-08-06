@@ -1,0 +1,3 @@
+training_window,model,stability,mean_gini,slope,residual_std,eligible_weeks,excluded_weeks
+all_train_weeks,lightgbm,0.6322465585149754,0.6532534916461551,0.0025422338539012597,0.042013866262359395,19,0
+recent_half_train_weeks,lightgbm_recent,0.6322185362598918,0.6539360640745387,0.0026968770701998415,0.04343505562929402,19,0

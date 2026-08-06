@@ -14,7 +14,7 @@ import xgboost as xgb
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import roc_auc_score, roc_curve
+from sklearn.metrics import brier_score_loss, roc_auc_score, roc_curve
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
@@ -27,6 +27,7 @@ from credit_scoring.scorecard import (
     woe_iv,
 )
 from credit_scoring.visualization import (
+    normalize_feature_importance,
     write_cutoff_plot,
     write_eda_overview,
     write_feature_importance_plot,
@@ -211,6 +212,7 @@ def _metrics(
         "n": len(y_true),
         "bad_rate": float(y_true.mean()),
         "auc": auc,
+        "brier": float(brier_score_loss(y_true, score)),
         "gini": 2 * auc - 1,
         "ks": _ks(y_true, score),
     }
@@ -447,6 +449,7 @@ def _fit_raw_models(
         importance_table = pd.DataFrame(
             {"feature": feature_names, "importance": importance}
         )
+        importance_table = normalize_feature_importance(importance_table)
         importance_table = importance_table.sort_values(
             "importance", ascending=False
         )
@@ -538,16 +541,16 @@ def _fit_woe(
     pd.concat(tables.values(), ignore_index=True).to_csv(
         output_dir / "woe_iv_detail.csv", index=False
     )
-    coefficient_table = pd.DataFrame(
+    coefficient_table = normalize_feature_importance(pd.DataFrame(
         {
             "feature": transformed_train.columns,
             "coefficient": model.coef_[0],
             "importance": np.abs(model.coef_[0]),
         }
-    ).sort_values("importance", ascending=False)
+    )).sort_values("importance", ascending=False)
     coefficient_table.to_csv(output_dir / "coefficients.csv", index=False)
     importance_dir.mkdir(parents=True, exist_ok=True)
-    coefficient_table[["feature", "importance"]].to_csv(
+    coefficient_table[["feature", "importance", "importance_pct"]].to_csv(
         importance_dir / "logistic_woe.csv", index=False
     )
     write_feature_importance_plot(

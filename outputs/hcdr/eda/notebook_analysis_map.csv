@@ -1,0 +1,8 @@
+source_notebook_cells,analysis,generated_outputs
+cells 7-41,load tables and inspect missing data,dataset_overview.csv; missing/*.csv; samples/*.csv
+cells 44-48,amount distributions,plots/application/amount_distributions/application_amt_*_distribution.png
+cells 50-76,application categorical distributions,application/categorical_distributions.csv; plots/application/categorical_distributions/application_*_distribution.png
+cells 80-92,application outcomes by category,application/categorical_bad_rates.csv; plots/application/categorical_bad_rates/application_*_bad_rate.png
+cells 95-133,previous-application distributions,previous_application/categorical_distributions.csv; plots/previous_application/categorical_distributions/previous_*_distribution.png
+cell 135,Pearson correlations,application/pearson_correlation_matrix.csv; application/target_correlations.csv; plots/application/correlations/application_pearson_correlation_heatmap.png
+cells 137-140,Random Forest feature importance,feature_importance/random_forest.csv; plots/feature_importance/random_forest_feature_importance.png

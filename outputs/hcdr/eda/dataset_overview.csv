@@ -1,0 +1,9 @@
+table,source_file,rows_analyzed,columns,missing_cells,columns_with_missing,memory_bytes,source_bytes
+application_train,application_train.csv,307511,122,9152465,67,341013218,166133370
+application_test,application_test.csv,48744,121,1404419,64,53648227,26567651
+POS_CASH_balance,POS_CASH_balance.csv,10001358,8,52158,2,702426702,392703158
+bureau_balance,bureau_balance.csv,27299925,3,0,0,682498257,375592889
+previous_application,previous_application.csv,1670214,37,11109336,16,704445304,404973293
+installments_payments,installments_payments.csv,13605401,8,5810,2,870745796,723118349
+credit_card_balance,credit_card_balance.csv,3840312,23,5877356,9,730049784,424582605
+bureau,bureau.csv,1716428,17,3939947,7,284672138,170016717

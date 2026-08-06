@@ -1,0 +1,10 @@
+{
+  "dataset": "hcdr",
+  "evaluation_split": "stratified random test",
+  "active_features": "Count of non-zero persisted global-importance entries; N/A when the saved estimator has no native importance or for ensembles.",
+  "stability": "N/A because HCDR has no time column and uses a stratified random split; the valid-test gap is not treated as temporal stability.",
+  "monotonic_violations": "Counted only for models with enforced and auditable monotonicity.",
+  "explanation_time": "N/A until a common explainer, sample size, warm-up, and hardware protocol is benchmarked.",
+  "candidate_rows_are_measured": false,
+  "metric_reconstruction_absolute_tolerance": 1e-05
+}

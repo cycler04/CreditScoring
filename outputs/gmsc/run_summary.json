@@ -1,0 +1,15 @@
+{
+  "raw_csv": "datasets/raw/give-me-some-credit/cs-training.csv",
+  "rows": 150000,
+  "original_feature_count": 10,
+  "model_feature_count": 13,
+  "split": {
+    "train": 90000,
+    "valid": 30000,
+    "test": 30000
+  },
+  "validation_note": "Dataset has no time column; stratified random split is used. This is not out-of-time validation.",
+  "score_psi_first_vs_second_train_half": 0.0005575707629011105,
+  "score_min_possible_from_card": 300,
+  "score_max_possible_from_card": 850
+}

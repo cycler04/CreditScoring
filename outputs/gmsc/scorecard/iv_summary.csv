@@ -1,0 +1,11 @@
+feature,tree_depth,n_bins_including_missing,monotonic_woe,iv,iv_flag
+RevolvingUtilizationOfUnsecuredLines,4,7,True,1.0970213230137902,suspicious_gt_0.5
+NumberOfTimes90DaysLate,4,3,True,0.8504330062098014,suspicious_gt_0.5
+NumberOfTime30-59DaysPastDueNotWorse,4,4,True,0.7149036296525035,suspicious_gt_0.5
+age,4,7,True,0.22837808078127955,medium
+MonthlyIncome,2,5,True,0.07728908389825179,weak
+NumberOfOpenCreditLinesAndLoans,1,3,True,0.07107815856802968,weak
+NumberRealEstateLoansOrLines,1,3,True,0.0394804871729319,weak
+NumberOfTime60-89DaysPastDueNotWorse,4,2,True,0.036098311620533605,weak
+NumberOfDependents,4,5,True,0.0356791719375512,weak
+DebtRatio,1,3,True,0.02002452301097183,weak

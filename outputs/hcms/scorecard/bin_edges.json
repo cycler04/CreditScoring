@@ -1,0 +1,63 @@
+{
+  "STATIC_0__avgdpdtolclosure24_3658938P": [
+    -Infinity,
+    0.5,
+    1.5,
+    4.5,
+    Infinity
+  ],
+  "CREDIT_BUREAU_A_2__pmts_dpd_1073P__MEAN": [
+    -Infinity,
+    0.01809991803020239,
+    0.06920498237013817,
+    0.41136181354522705,
+    0.9880235195159912,
+    3.8228758573532104,
+    Infinity
+  ],
+  "CREDIT_BUREAU_A_2__pmts_dpd_303P__MEAN": [
+    -Infinity,
+    0.3313431143760681,
+    0.7088259756565094,
+    2.1966512203216553,
+    4.567950487136841,
+    226.3384780883789,
+    Infinity
+  ],
+  "PERSON_1__birth_259D__MAX_GAP": [
+    -Infinity,
+    9064.5,
+    9918.5,
+    11249.5,
+    16739.5,
+    20720.5,
+    Infinity
+  ],
+  "PERSON_1__birth_259D__MIN_GAP": [
+    -Infinity,
+    9064.5,
+    9918.5,
+    11249.5,
+    16739.5,
+    20720.5,
+    Infinity
+  ],
+  "STATIC_CB_0__days360_512L": [
+    -Infinity,
+    2.5,
+    5.5,
+    7.5,
+    9.5,
+    14.5,
+    Infinity
+  ],
+  "APPLPREV_1__ROW_COUNT": [
+    -Infinity,
+    1.5,
+    2.5,
+    5.5,
+    6.5,
+    8.5,
+    Infinity
+  ]
+}

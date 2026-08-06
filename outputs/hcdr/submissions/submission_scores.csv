@@ -1,0 +1,5 @@
+model_rank,model,file_name,submission_id,status,public_auc,private_auc,official_leaderboard_rank,hypothetical_public_rank,hypothetical_top_bracket,public_leaderboard_teams,hypothetical_top_percent
+1,xgboost,xgboost.csv,55127023,COMPLETE,0.77517,0.77228,,4300,top_4300,7180,59.89
+2,lightgbm,lightgbm.csv,55127022,COMPLETE,0.77191,0.77019,,4453,top_4500,7180,62.02
+3,logistic_raw,logistic_raw.csv,55127021,COMPLETE,0.75848,0.75117,,4913,top_5000,7180,68.43
+4,logistic_woe,logistic_woe.csv,55127027,COMPLETE,0.7392,0.72919,,5602,top_5700,7180,78.02

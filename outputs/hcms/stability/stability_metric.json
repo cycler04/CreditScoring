@@ -1,0 +1,119 @@
+[
+  {
+    "model": "lightgbm",
+    "stability": 0.6322456202404193,
+    "mean_gini": 0.6532515297319654,
+    "slope": 0.002542168837856224,
+    "residual_std": 0.04201181898309218,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  },
+  {
+    "model": "logistic_raw",
+    "stability": 0.14912337907552428,
+    "mean_gini": 0.3364357348821279,
+    "slope": -0.0018351755838267717,
+    "residual_std": 0.05163380885969543,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  },
+  {
+    "model": "xgboost",
+    "stability": 0.6269876070351417,
+    "mean_gini": 0.6487127388600947,
+    "slope": 0.0028383625404005894,
+    "residual_std": 0.04345026364990613,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  },
+  {
+    "model": "random_forest",
+    "stability": 0.5970774434305209,
+    "mean_gini": 0.6197836780907936,
+    "slope": 0.0029133990360442744,
+    "residual_std": 0.04541246932054539,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  },
+  {
+    "model": "extra_trees",
+    "stability": 0.30739988655916883,
+    "mean_gini": 0.45121543309321577,
+    "slope": -0.0014195571819587477,
+    "residual_std": 0.03778902904335428,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  },
+  {
+    "model": "hist_gradient_boosting",
+    "stability": 0.6288040370319558,
+    "mean_gini": 0.6504416277248742,
+    "slope": 0.002730910959311621,
+    "residual_std": 0.04327518138583699,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  },
+  {
+    "model": "catboost",
+    "stability": 0.6209845958643584,
+    "mean_gini": 0.6435072066783741,
+    "slope": 0.002752563482821113,
+    "residual_std": 0.045045221628031415,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  },
+  {
+    "model": "logistic_woe",
+    "stability": 0.529584154560552,
+    "mean_gini": 0.5556867529275811,
+    "slope": 0.003048969584436993,
+    "residual_std": 0.0522051967340583,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  },
+  {
+    "model": "ensemble_lightgbm_catboost",
+    "stability": 0.6304727301686484,
+    "mean_gini": 0.6521697496137037,
+    "slope": 0.0026859013024659933,
+    "residual_std": 0.04339403889011062,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  },
+  {
+    "model": "ensemble_lightgbm_xgboost_catboost",
+    "stability": 0.630391755626724,
+    "mean_gini": 0.6520731664181948,
+    "slope": 0.002750295072334459,
+    "residual_std": 0.04336282158294157,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  },
+  {
+    "model": "ensemble_lightgbm_catboost_extra_trees",
+    "stability": 0.589728180329887,
+    "mean_gini": 0.6085413182194437,
+    "slope": 0.001974068321036132,
+    "residual_std": 0.03762627577911321,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  },
+  {
+    "model": "ensemble_boosting",
+    "stability": 0.6309521186760805,
+    "mean_gini": 0.6525670992403951,
+    "slope": 0.0027504287194726703,
+    "residual_std": 0.04322996112862932,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  },
+  {
+    "model": "ensemble_all_trees",
+    "stability": 0.6196038442817088,
+    "mean_gini": 0.6405434459049437,
+    "slope": 0.0025838986085557135,
+    "residual_std": 0.04187920324646991,
+    "eligible_weeks": 19,
+    "excluded_weeks": 0
+  }
+]

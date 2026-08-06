@@ -1,0 +1,56 @@
+{
+  "competition": "home-credit-credit-risk-model-stability",
+  "competition_deadline": "2024-05-27T23:59:00",
+  "attempted_at_utc": "2026-07-31T06:38:19.828104+00:00",
+  "file_upload_attempts": {
+    "lightgbm": {
+      "file": "lightgbm.csv",
+      "http_status": 400,
+      "submission_id": null
+    },
+    "xgboost": {
+      "file": "xgboost.csv",
+      "http_status": 400,
+      "submission_id": null
+    },
+    "logistic_woe": {
+      "file": "logistic_woe.csv",
+      "http_status": 400,
+      "submission_id": null
+    },
+    "logistic_raw": {
+      "file": "logistic_raw.csv",
+      "http_status": 400,
+      "submission_id": null
+    }
+  },
+  "code_submission_probe_http_status": 403,
+  "kaggle_submissions_after_attempt": [
+    {
+      "kernel_version": 2,
+      "model": "lightgbm_kaggle_notebook_v2",
+      "file_name": "submission.csv",
+      "submission_id": "55129859",
+      "status": "FORMAT_ERROR",
+      "public_auc": "",
+      "private_auc": "",
+      "official_leaderboard_rank": "",
+      "local_oot_auc": 0.7522916198196916,
+      "submitted_at_utc": "2026-07-31T06:51:57.340000+00:00",
+      "note": "Kaggle scoring rejected version 2: its remote fixture emitted synthetic case IDs instead of the official public sample IDs."
+    },
+    {
+      "kernel_version": 3,
+      "model": "lightgbm_kaggle_notebook_v3",
+      "file_name": "submission.csv",
+      "submission_id": "55130117",
+      "status": "COMPLETE",
+      "public_auc": 0.49961,
+      "private_auc": 0.39951,
+      "official_leaderboard_rank": "",
+      "local_oot_auc": 0.8211844169656919,
+      "submitted_at_utc": "2026-07-31T07:04:47.947000+00:00",
+      "note": "Corrected version 3 ran against the real Kaggle competition mount and its output exactly matched the official public sample IDs, schema, row order, numeric score type, and probability bounds. Kaggle completed hidden scoring successfully."
+    }
+  ]
+}

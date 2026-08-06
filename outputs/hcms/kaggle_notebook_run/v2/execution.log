@@ -1,0 +1,161 @@
+[{"stream_name":"stderr","time":6.711347915,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.711404441,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.711409971,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.711413036,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":7.294671523,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.294717185,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.294725831,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.294730274,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":16.255028194,"data":"Competition files are not mounted in this normal post-deadline Kaggle run; using a deterministic schema fixture to validate the remote environment.\n"}
+,{"stream_name":"stdout","time":16.255065587,"data":"Data root: /kaggle/working/hcms-remote-validation-fixture\n"}
+,{"stream_name":"stdout","time":16.255072764,"data":"Mode: remote validation fixture, public_test=True, train_limit=None\n"}
+,{"stream_name":"stdout","time":16.255078594,"data":"{'python': '3.12.13', 'polars': '1.35.2', 'pandas': '2.3.3', 'lightgbm': '4.6.0'}\n"}
+,{"stream_name":"stdout","time":16.645585313,"data":"train: (20000, 20) built in 0.2s\n"}
+,{"stream_name":"stdout","time":16.645625431,"data":"test: (10, 19) built in 0.0s\n"}
+,{"stream_name":"stdout","time":16.645630563,"data":"Usable numeric features: 13\n"}
+,{"stream_name":"stderr","time":17.280601938,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.476105771,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.483004433,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.483034877,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.483042402,"data":"\n"}
+,{"stream_name":"stderr","time":17.483048719,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.483055362,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.560584896,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.661577247,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.763294031,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.763321519,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.763327656,"data":"\n"}
+,{"stream_name":"stderr","time":17.763331899,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.763336216,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.770662793,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.874366275,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.973530331,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.973566269,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.973571363,"data":"\n"}
+,{"stream_name":"stderr","time":17.973574982,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.973578504,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":17.976241611,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.056734772,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.15295355,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.178835718,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.178865952,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.178869315,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.178871728,"data":"\n"}
+,{"stream_name":"stderr","time":18.178874242,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.17887688,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.1788935,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.252439467,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.33541744,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.437829866,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.455305498,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.455331096,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.455335207,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.455338839,"data":"\n"}
+,{"stream_name":"stderr","time":18.455342312,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.455345893,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.455349742,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.53638967,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.641429685,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.737443507000002,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.739256125,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.739278464,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.739282833,"data":"\n"}
+,{"stream_name":"stderr","time":18.739286233,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.739291441,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.830946627,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.93592215,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.939772153,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.939791264,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.939795322,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.93979873,"data":"\n"}
+,{"stream_name":"stderr","time":18.939802113,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.939806161,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":18.93980978,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.027123979,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.114308139,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.211979064,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.229407042,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.229429197,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.229433227,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.229436785,"data":"\n"}
+,{"stream_name":"stderr","time":19.229440045,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.22944347,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.229446861,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.302547809,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.394042973,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.485900045,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.505225661,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.505249909,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.505254041,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.505280075,"data":"\n"}
+,{"stream_name":"stderr","time":19.505283349,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.505287003,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.50529026,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.58563436,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.677240748,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.770963857,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.788538163,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.788573759,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.788579023,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.788582854,"data":"\n"}
+,{"stream_name":"stderr","time":19.788586878,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.788592998,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.78859685,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.868436759,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":19.977989851,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.070876652,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.070909786,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.070914903,"data":"\n"}
+,{"stream_name":"stderr","time":20.07091895,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.070923195,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.073553313,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.169944632,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.268494158,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.276237908,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.276264008,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.276268575,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.276272188,"data":"\n"}
+,{"stream_name":"stderr","time":20.276281275,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.27628385,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.276286153,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.364172965,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.460374055,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.566531498,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.566558261,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.566563083,"data":"\n"}
+,{"stream_name":"stderr","time":20.566566860000002,"data":"1 warning generated.\n"}
+,{"stream_name":"stderr","time":20.566570462,"data":"1 warning generated.\n"}
+,{"stream_name":"stdout","time":20.812764327,"data":"Training until validation scores don't improve for 80 rounds\n"}
+,{"stream_name":"stdout","time":20.812804456,"data":"[50]\tvalid_0's auc: 0.486743\tvalid_0's binary_logloss: 0.15773\n"}
+,{"stream_name":"stdout","time":20.94938447,"data":"Early stopping, best iteration is:\n"}
+,{"stream_name":"stdout","time":20.949422136,"data":"[1]\tvalid_0's auc: 0.489372\tvalid_0's binary_logloss: 0.152815\n"}
+,{"stream_name":"stdout","time":20.949426534,"data":"Validation AUC=0.489372; device=gpu; best_iteration=1\n"}
+,{"stream_name":"stdout","time":21.010805208,"data":"{\n"}
+,{"stream_name":"stdout","time":21.010832529,"data":"  \"best_iteration\": 1,\n"}
+,{"stream_name":"stdout","time":21.01083825,"data":"  \"competition\": \"home-credit-credit-risk-model-stability\",\n"}
+,{"stream_name":"stdout","time":21.010842733,"data":"  \"device_used\": \"gpu\",\n"}
+,{"stream_name":"stdout","time":21.01084705,"data":"  \"feature_count\": 13,\n"}
+,{"stream_name":"stdout","time":21.010851524,"data":"  \"mode\": \"remote_validation_fixture\",\n"}
+,{"stream_name":"stdout","time":21.010856827,"data":"  \"score_max\": 0.030000434201595403,\n"}
+,{"stream_name":"stdout","time":21.010861507,"data":"  \"score_min\": 0.02942530267430585,\n"}
+,{"stream_name":"stdout","time":21.010865758,"data":"  \"submission_columns\": [\n"}
+,{"stream_name":"stdout","time":21.010870015,"data":"    \"case_id\",\n"}
+,{"stream_name":"stdout","time":21.010874809,"data":"    \"score\"\n"}
+,{"stream_name":"stdout","time":21.010878918,"data":"  ],\n"}
+,{"stream_name":"stdout","time":21.010883264,"data":"  \"submission_rows\": 10,\n"}
+,{"stream_name":"stdout","time":21.010888014,"data":"  \"test_rows\": 10,\n"}
+,{"stream_name":"stdout","time":21.010891935,"data":"  \"train_rows\": 15877,\n"}
+,{"stream_name":"stdout","time":21.010896004,"data":"  \"validation_auc\": 0.4893717168565039,\n"}
+,{"stream_name":"stdout","time":21.010900179,"data":"  \"validation_rows\": 4123,\n"}
+,{"stream_name":"stdout","time":21.010904335,"data":"  \"validation_start_week\": 73\n"}
+,{"stream_name":"stdout","time":21.010908669,"data":"}\n"}
+,{"stream_name":"stdout","time":21.013438819,"data":"Wrote submission.csv, validation_metrics.json, and feature_importance.csv\n"}
+,{"stream_name":"stderr","time":24.750178474,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":24.750218574,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":24.903851549,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":24.903880923,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":25.588866719,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":25.922978051,"data":"[NbConvertApp] Writing 32016 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":28.556660508,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":29.500437634,"data":"[NbConvertApp] Writing 370165 bytes to __results__.html\n"}
+]

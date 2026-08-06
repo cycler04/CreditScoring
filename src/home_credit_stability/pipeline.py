@@ -12,9 +12,15 @@ import numpy as np
 import pandas as pd
 import polars as pl
 import xgboost as xgb
+from catboost import CatBoostClassifier
+from sklearn.ensemble import (
+    ExtraTreesClassifier,
+    HistGradientBoostingClassifier,
+    RandomForestClassifier,
+)
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import roc_auc_score, roc_curve
+from sklearn.metrics import brier_score_loss, roc_auc_score, roc_curve
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
@@ -26,6 +32,7 @@ from credit_scoring.scorecard import (
     woe_iv,
 )
 from credit_scoring.visualization import (
+    normalize_feature_importance,
     write_bad_rate_by_period_plot,
     write_cutoff_plot,
     write_feature_importance_plot,
@@ -41,6 +48,33 @@ from .split import split_by_week
 from .stability import StabilityResult, stability_metric
 
 RANDOM_STATE = 42
+ENSEMBLE_MEMBERS = {
+    "ensemble_lightgbm_catboost": ("lightgbm", "catboost"),
+    "ensemble_lightgbm_xgboost_catboost": (
+        "lightgbm",
+        "xgboost",
+        "catboost",
+    ),
+    "ensemble_lightgbm_catboost_extra_trees": (
+        "lightgbm",
+        "catboost",
+        "extra_trees",
+    ),
+    "ensemble_boosting": (
+        "lightgbm",
+        "xgboost",
+        "catboost",
+        "hist_gradient_boosting",
+    ),
+    "ensemble_all_trees": (
+        "lightgbm",
+        "xgboost",
+        "catboost",
+        "hist_gradient_boosting",
+        "random_forest",
+        "extra_trees",
+    ),
+}
 EXCLUDED_FEATURES = {
     ID_COLUMN,
     TARGET,
@@ -73,9 +107,37 @@ def _metric_row(
         "n": len(y_true),
         "bad_rate": float(y_true.mean()),
         "auc": auc,
+        "brier": float(brier_score_loss(y_true, score)),
         "gini": 2.0 * auc - 1.0,
         "ks": _ks(y_true, score),
     }
+
+
+def _ordered_submission(
+    case_ids: pd.Series,
+    scores: np.ndarray,
+    sample: pd.DataFrame,
+) -> pd.DataFrame:
+    """Align finite model scores to the official sample-submission ID order."""
+    if list(sample.columns) != [ID_COLUMN, "score"]:
+        raise ValueError("HCMS sample submission must contain case_id,score")
+    scored = pd.DataFrame(
+        {ID_COLUMN: case_ids.astype(int).to_numpy(), "score": scores}
+    )
+    if scored[ID_COLUMN].duplicated().any():
+        raise ValueError("HCMS competition predictions contain duplicate case_id")
+    ordered = sample[[ID_COLUMN]].merge(
+        scored,
+        on=ID_COLUMN,
+        how="left",
+        validate="one_to_one",
+        sort=False,
+    )
+    if ordered["score"].isna().any() or not np.isfinite(ordered["score"]).all():
+        raise ValueError("HCMS submission contains missing or non-finite scores")
+    if not ordered["score"].between(0.0, 1.0).all():
+        raise ValueError("HCMS submission scores must be probabilities in [0, 1]")
+    return ordered
 
 
 def _week_mapping(frame: pd.DataFrame) -> tuple[pd.Series, dict[str, list[int]]]:
@@ -228,6 +290,166 @@ def _prepare_numeric(
             index=competition.index,
         ),
     )
+
+
+def _equal_weight_ensembles(
+    predictions: dict[str, dict[str, np.ndarray]],
+) -> dict[str, dict[str, np.ndarray]]:
+    """Blend predefined probabilities without tuning on future test weeks."""
+    if not predictions:
+        raise ValueError("Base predictions cannot be empty")
+    splits = tuple(next(iter(predictions.values())))
+    ensembles: dict[str, dict[str, np.ndarray]] = {}
+    for ensemble_name, members in ENSEMBLE_MEMBERS.items():
+        missing = set(members).difference(predictions)
+        if missing:
+            raise ValueError(
+                f"{ensemble_name} is missing base predictions: {sorted(missing)}"
+            )
+        ensembles[ensemble_name] = {
+            split: np.mean(
+                [predictions[member][split] for member in members], axis=0
+            )
+            for split in splits
+        }
+    return ensembles
+
+
+def _write_importance(
+    model_name: str,
+    feature_names: list[str],
+    importance: np.ndarray,
+    output_dir: Path,
+) -> None:
+    table = normalize_feature_importance(pd.DataFrame(
+        {"feature": feature_names, "importance": importance}
+    )).sort_values("importance", ascending=False)
+    importance_dir = output_dir / "feature_importance"
+    importance_dir.mkdir(parents=True, exist_ok=True)
+    table.to_csv(importance_dir / f"{model_name}.csv", index=False)
+    write_feature_importance_plot(
+        table,
+        importance_dir / f"{model_name}.png",
+        title=f"{model_name} — top feature importance",
+    )
+
+
+def _fit_additional_tree_models(
+    x_train: pd.DataFrame,
+    y_train: pd.Series,
+    x_valid: pd.DataFrame,
+    y_valid: pd.Series,
+    x_test: pd.DataFrame,
+    x_competition: pd.DataFrame,
+    benchmark_features: list[str],
+    raw_features: list[str],
+    imputer: SimpleImputer,
+    output_dir: Path,
+) -> tuple[dict[str, dict[str, np.ndarray]], dict[str, str]]:
+    """Fit bounded CPU tree benchmarks on a shared top-feature subset."""
+    split_values = {
+        "train": x_train[benchmark_features],
+        "valid": x_valid[benchmark_features],
+        "test": x_test[benchmark_features],
+        "competition": x_competition[benchmark_features],
+    }
+    models = {
+        "random_forest": RandomForestClassifier(
+            n_estimators=200,
+            max_depth=12,
+            min_samples_leaf=100,
+            max_features="sqrt",
+            class_weight="balanced_subsample",
+            n_jobs=-1,
+            random_state=RANDOM_STATE,
+        ),
+        "extra_trees": ExtraTreesClassifier(
+            n_estimators=200,
+            max_depth=12,
+            min_samples_leaf=100,
+            max_features="sqrt",
+            class_weight="balanced",
+            n_jobs=-1,
+            random_state=RANDOM_STATE,
+        ),
+        "hist_gradient_boosting": HistGradientBoostingClassifier(
+            learning_rate=0.05,
+            max_iter=250,
+            max_leaf_nodes=31,
+            min_samples_leaf=100,
+            l2_regularization=1.0,
+            early_stopping=True,
+            random_state=RANDOM_STATE,
+        ),
+    }
+    predictions: dict[str, dict[str, np.ndarray]] = {}
+    devices: dict[str, str] = {}
+    for model_name, model in models.items():
+        model.fit(split_values["train"], y_train)
+        predictions[model_name] = {
+            split: model.predict_proba(values)[:, 1]
+            for split, values in split_values.items()
+        }
+        if hasattr(model, "feature_importances_"):
+            _write_importance(
+                model_name,
+                benchmark_features,
+                np.asarray(model.feature_importances_),
+                output_dir,
+            )
+        joblib.dump(
+            {
+                "features": raw_features,
+                "transformed_features": benchmark_features,
+                "imputer": imputer,
+                "model": model,
+                "device": "cpu",
+            },
+            output_dir / f"{model_name}.joblib",
+        )
+        devices[model_name] = "cpu"
+
+    catboost_model = CatBoostClassifier(
+        iterations=500,
+        learning_rate=0.04,
+        depth=7,
+        l2_leaf_reg=3.0,
+        loss_function="Logloss",
+        eval_metric="AUC",
+        random_seed=RANDOM_STATE,
+        thread_count=-1,
+        allow_writing_files=False,
+        verbose=False,
+    )
+    catboost_model.fit(
+        split_values["train"],
+        y_train,
+        eval_set=(split_values["valid"], y_valid),
+        early_stopping_rounds=60,
+        verbose=False,
+    )
+    predictions["catboost"] = {
+        split: catboost_model.predict_proba(values)[:, 1]
+        for split, values in split_values.items()
+    }
+    _write_importance(
+        "catboost",
+        benchmark_features,
+        np.asarray(catboost_model.feature_importances_),
+        output_dir,
+    )
+    joblib.dump(
+        {
+            "features": raw_features,
+            "transformed_features": benchmark_features,
+            "imputer": imputer,
+            "model": catboost_model,
+            "device": "cpu",
+        },
+        output_dir / "catboost.joblib",
+    )
+    devices["catboost"] = "cpu"
+    return predictions, devices
 
 
 def _woe_transform(
@@ -518,9 +740,9 @@ def run_pipeline(
         stage_by_week = stage_result.by_week.copy()
         stage_by_week.insert(0, "level", level)
         stage_gini_parts.append(stage_by_week)
-        importance_table = pd.DataFrame(
+        importance_table = normalize_feature_importance(pd.DataFrame(
             {"feature": x_train.columns, "importance": model.feature_importances_}
-        )
+        ))
         importance_table = importance_table.sort_values(
             "importance", ascending=False
         )
@@ -643,13 +865,13 @@ def run_pipeline(
         },
         output_dir / "models/logistic_raw.joblib",
     )
-    logistic_importance = pd.DataFrame(
+    logistic_importance = normalize_feature_importance(pd.DataFrame(
         {
             "feature": x_train.columns,
             "coefficient": logistic.coef_[0],
             "importance": np.abs(logistic.coef_[0]),
         }
-    ).sort_values("importance", ascending=False)
+    )).sort_values("importance", ascending=False)
     logistic_importance.to_csv(
         output_dir / "models/feature_importance/logistic_raw.csv", index=False
     )
@@ -727,12 +949,12 @@ def run_pipeline(
         },
         output_dir / "models/xgboost.joblib",
     )
-    xgboost_importance = pd.DataFrame(
+    xgboost_importance = normalize_feature_importance(pd.DataFrame(
         {
             "feature": xgboost_features,
             "importance": xgboost_model.feature_importances_,
         }
-    ).sort_values("importance", ascending=False)
+    )).sort_values("importance", ascending=False)
     xgboost_importance.to_csv(
         output_dir / "models/feature_importance/xgboost.csv", index=False
     )
@@ -741,6 +963,20 @@ def run_pipeline(
         output_dir / "models/feature_importance/xgboost.png",
         title="xgboost — top feature importance",
     )
+
+    additional_predictions, additional_devices = _fit_additional_tree_models(
+        x_train,
+        train[TARGET],
+        x_valid,
+        valid[TARGET],
+        x_test,
+        x_competition,
+        xgboost_features,
+        final["features"],
+        final["imputer"],
+        output_dir / "models",
+    )
+    predictions.update(additional_predictions)
 
     importance_order = (
         pd.DataFrame(
@@ -767,13 +1003,15 @@ def run_pipeline(
         name: woe_model.predict_proba(values)[:, 1]
         for name, values in transformed.items()
     }
-    woe_importance = pd.DataFrame(
+    ensemble_predictions = _equal_weight_ensembles(predictions)
+    predictions.update(ensemble_predictions)
+    woe_importance = normalize_feature_importance(pd.DataFrame(
         {
             "feature": transformed["train"].columns,
             "coefficient": woe_model.coef_[0],
             "importance": np.abs(woe_model.coef_[0]),
         }
-    ).sort_values("importance", ascending=False)
+    )).sort_values("importance", ascending=False)
     woe_importance.to_csv(
         output_dir / "models/feature_importance/logistic_woe.csv", index=False
     )
@@ -996,13 +1234,21 @@ def run_pipeline(
     metrics_table.to_csv(
         output_dir / "models/metrics/metrics.csv", index=False
     )
-    submission = pd.DataFrame(
-        {
-            ID_COLUMN: competition[ID_COLUMN].astype(int),
-            "score": predictions["lightgbm"]["competition"],
-        }
-    )
-    submission.to_csv(output_dir / "submissions/submission.csv", index=False)
+    sample_submission = pd.read_csv(raw_dir / "sample_submission.csv")
+    for model_name, model_predictions in predictions.items():
+        submission = _ordered_submission(
+            competition[ID_COLUMN],
+            model_predictions["competition"],
+            sample_submission,
+        )
+        submission.to_csv(
+            output_dir / f"submissions/{model_name}.csv", index=False
+        )
+    _ordered_submission(
+        competition[ID_COLUMN],
+        predictions["lightgbm"]["competition"],
+        sample_submission,
+    ).to_csv(output_dir / "submissions/submission.csv", index=False)
     run_summary = {
         "dataset": {
             key: value for key, value in inventory.items() if key != "files"
@@ -1028,7 +1274,14 @@ def run_pipeline(
             "xgboost": xgboost_device,
             "logistic_raw": "cpu",
             "logistic_woe": "cpu",
+            **additional_devices,
         },
+        "benchmark_protocol": (
+            "Added tree models use the same top 80 LightGBM-ranked transformed "
+            "features and out-of-time week split; ensembles use fixed equal "
+            "weights without test-week tuning."
+        ),
+        "ensemble_members": ENSEMBLE_MEMBERS,
         "stage_metrics": stage_rows,
         "stage_stability": stage_stability_rows,
         "metrics": metrics,

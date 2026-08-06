@@ -51,11 +51,11 @@ Ma trận có:
 `TARGET=1` biểu diễn khách hàng có khó khăn thanh toán; `TARGET=0` là các trường hợp
 còn lại. Population có nhãn được stratify theo target rồi chia ngẫu nhiên 60/20/20:
 
-| Split | Số hồ sơ | Mục đích |
-|---|---:|---|
-| Train | 184.506 | Học bin, WoE, chọn biến và fit model |
-| Validation | 61.502 | Đánh giá ngoài train |
-| Test | 61.503 | Đánh giá cuối và tạo cutoff trong implementation hiện tại |
+| Split      | Số hồ sơ | Mục đích                                                       |
+| ---------- | ----------: | ----------------------------------------------------------------- |
+| Train      |     184.506 | Học bin, WoE, chọn biến và fit model                          |
+| Validation |      61.502 | Đánh giá ngoài train                                          |
+| Test       |      61.503 | Đánh giá cuối và tạo cutoff trong implementation hiện tại |
 
 Đây là random split, không phải out-of-time validation.
 
@@ -150,9 +150,9 @@ diễn log-ratio, đồng thời làm cho contribution của từng bin có th�
 Không phải tất cả 175 feature đều được đưa vào scorecard. Một numeric feature chỉ
 được xem xét tiếp khi:
 
-- IV tối thiểu bằng 0,02;
+- **IV tối thiểu bằng 0,02;**
 - WoE của các bin không missing là monotonic;
-- feature nằm trong nhóm tối đa 25 IV cao nhất.
+- **feature nằm trong nhóm tối đa 25 IV cao nhất.**
 
 Monotonicity yêu cầu khi giá trị feature tăng qua các bin, WoE chỉ đi theo một
 chiều. Ràng buộc này hy sinh một phần khả năng fit để đổi lấy quan hệ rủi ro ổn định
@@ -272,10 +272,10 @@ $$
 Kết quả hiện tại:
 
 | Approval mục tiêu | Cutoff | Approval thực tế | Bad rate trong nhóm approved |
-|---:|---:|---:|---:|
-| 60% | 603 | 60,34% | 3,66% |
-| 70% | 586 | 70,06% | 4,22% |
-| 80% | 565 | 80,13% | 5,01% |
+| ------------------: | -----: | -----------------: | ----------------------------: |
+|                 60% |    603 |             60,34% |                         3,66% |
+|                 70% |    586 |             70,06% |                         4,22% |
+|                 80% |    565 |             80,13% |                         5,01% |
 
 Khi approval target tăng, cutoff giảm và bad rate của nhóm approved tăng. Approval
 thực tế hơi lệch target vì nhiều hồ sơ có cùng integer score tại cutoff.
@@ -284,12 +284,12 @@ thực tế hơi lệch target vì nhiều hồ sơ có cùng integer score tạ
 
 Trên test split, các kết quả đã lưu là:
 
-| Model | AUC | Vai trò |
-|---|---:|---|
+| Model        |      AUC | Vai trò                      |
+| ------------ | -------: | ----------------------------- |
 | Logistic-WoE | 0,745614 | Tạo PD, scorecard và cutoff |
-| Logistic raw | 0,765819 | Baseline tuyến tính |
-| LightGBM | 0,780945 | Challenger phi tuyến |
-| XGBoost | 0,782472 | Challenger phi tuyến |
+| Logistic raw | 0,765819 | Baseline tuyến tính         |
+| LightGBM     | 0,780945 | Challenger phi tuyến         |
+| XGBoost      | 0,782472 | Challenger phi tuyến         |
 
 Scorecard WoE có AUC thấp hơn hai boosting model, nhưng mỗi quyết định có thể phân rã
 thành bin, WoE, hệ số và điểm. Đây là trade-off giữa khả năng giải thích và năng lực
@@ -302,10 +302,8 @@ gian vì dataset không cung cấp một monitoring timeline phù hợp.
 
 ## 12. Giới hạn phương pháp
 
-1. **Không phải FICO chính thức.** Dải 300–850 chỉ là lựa chọn scale; model và dữ
-   liệu hoàn toàn khác FICO.
-2. **Không phải out-of-time validation.** Random split không kiểm tra drift theo
-   thời gian.
+1. **Không phải FICO chính thức.** Dải 300–850 chỉ là lựa chọn scale; model và dữ liệu hoàn toàn khác FICO.
+2. **Không phải out-of-time validation.** Random split không kiểm tra drift theo thời gian.
 3. **Cutoff được chọn trên test.** Quy trình chặt chẽ hơn nên chọn cutoff trên
    validation, đóng băng policy rồi chỉ đánh giá trên test.
 4. **Cutoff chưa tối ưu lợi nhuận.** Các mức 60/70/80% chưa sử dụng margin, exposure,

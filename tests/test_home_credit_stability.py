@@ -9,6 +9,11 @@ import pandas as pd
 
 from home_credit_stability.split import split_by_week
 from home_credit_stability.stability import selfcheck, stability_metric
+from home_credit_stability.pipeline import (
+    ENSEMBLE_MEMBERS,
+    _equal_weight_ensembles,
+    _ordered_submission,
+)
 
 
 def _scores_for_strength(
@@ -77,6 +82,42 @@ class WeekSplitTests(unittest.TestCase):
             membership.loc[membership["split"].eq("train"), "WEEK_NUM"].max(),
             membership.loc[membership["split"].eq("valid"), "WEEK_NUM"].min(),
         )
+
+
+class EnsembleTests(unittest.TestCase):
+    def test_equal_weight_ensembles_average_declared_members(self) -> None:
+        base_models = sorted(
+            {member for members in ENSEMBLE_MEMBERS.values() for member in members}
+        )
+        predictions = {
+            model: {
+                split: np.array([index, index + 0.5], dtype=float)
+                for split in ("train", "valid", "test", "competition")
+            }
+            for index, model in enumerate(base_models)
+        }
+
+        ensembles = _equal_weight_ensembles(predictions)
+
+        for name, members in ENSEMBLE_MEMBERS.items():
+            expected = np.mean(
+                [predictions[member]["test"] for member in members], axis=0
+            )
+            np.testing.assert_allclose(ensembles[name]["test"], expected)
+
+    def test_submission_is_aligned_to_official_sample_order(self) -> None:
+        sample = pd.DataFrame(
+            {"case_id": [2, 1], "score": [0.5, 0.5]}
+        )
+
+        result = _ordered_submission(
+            pd.Series([1, 2]),
+            np.array([0.1, 0.2]),
+            sample,
+        )
+
+        self.assertEqual(result["case_id"].tolist(), [2, 1])
+        self.assertEqual(result["score"].tolist(), [0.2, 0.1])
 
 
 if __name__ == "__main__":

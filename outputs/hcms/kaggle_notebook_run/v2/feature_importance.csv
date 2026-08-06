@@ -1,0 +1,14 @@
+feature,gain,split
+s0__amt_annuity_100A,53.01991033554077,6
+s0__dayspastdue_300P,51.82204055786133,4
+cbb2__max_dpd,41.55022048950195,4
+person__max_income,39.61201095581055,4
+scb0__bureau_debt_500A,27.67827081680298,2
+s0__amt_income_200A,22.762100219726562,2
+scb0__bureau_dpd_600P,21.78598976135254,3
+decision_month,18.509510040283203,2
+cbb2__max_overdue,17.44570016860962,2
+s0__active_400L,11.48449993133545,1
+MONTH,0.0,0
+person__self_employed,0.0,0
+cbb2__dpd_over_31,0.0,0

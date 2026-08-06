@@ -1,0 +1,10 @@
+{
+  "dataset": "hcms",
+  "evaluation_split": "out-of-time test",
+  "active_features": "Count of non-zero persisted global-importance entries; N/A when the saved estimator has no native importance or for ensembles.",
+  "stability": "the week-based metric `mean(gini) + 88 * min(0, slope) - 0.5 * residual_std` over 19 out-of-time test weeks.",
+  "monotonic_violations": "Counted only for models with enforced and auditable monotonicity.",
+  "explanation_time": "N/A until a common explainer, sample size, warm-up, and hardware protocol is benchmarked.",
+  "candidate_rows_are_measured": false,
+  "metric_reconstruction_absolute_tolerance": 1e-05
+}

@@ -1,0 +1,4 @@
+feature,rule,count,bad_rate,action
+DAYS_EMPLOYED,value == 365243,55374,0.05399646043269404,create DAYS_EMPLOYED_ANOMALY; replace with NaN
+CODE_GENDER,value == 'XNA',4,0.0,create CODE_GENDER_ANOMALY; replace with missing
+NAME_FAMILY_STATUS,value == 'Unknown',2,0.0,create NAME_FAMILY_STATUS_ANOMALY; replace with missing

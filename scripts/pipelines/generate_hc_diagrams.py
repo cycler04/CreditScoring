@@ -12,15 +12,19 @@ import pandas as pd
 import polars as pl
 
 from credit_scoring.visualization import (
+    normalize_feature_importance,
     write_bad_rate_by_period_plot,
+    write_benchmark_dashboard,
     write_cutoff_plot,
     write_feature_importance_plot,
     write_gini_by_period_plot,
     write_gini_curve,
     write_ks_curve,
     write_metrics_comparison_plot,
+    write_ranked_metric_benchmark_plot,
     write_roc_auc_curve,
 )
+from home_credit_stability.pipeline import _equal_weight_ensembles
 
 HCDR_ID = "SK_ID_CURR"
 HCMS_ID = "case_id"
@@ -70,7 +74,9 @@ def _write_saved_importance(
     output_dir: Path,
     model_name: str,
 ) -> list[Path]:
-    table = table.sort_values("importance", ascending=False)
+    table = normalize_feature_importance(table).sort_values(
+        "importance_pct", ascending=False
+    )
     csv_path = output_dir / f"{model_name}.csv"
     png_path = output_dir / f"{model_name}.png"
     table.to_csv(csv_path, index=False)
@@ -133,7 +139,15 @@ def _render_hcms_metric_curves(output_dir: Path) -> list[Path]:
     )
     artifacts = {
         model_name: joblib.load(output_dir / f"models/{model_name}.joblib")
-        for model_name in ["lightgbm", "logistic_raw", "xgboost"]
+        for model_name in [
+            "lightgbm",
+            "logistic_raw",
+            "xgboost",
+            "random_forest",
+            "extra_trees",
+            "hist_gradient_boosting",
+            "catboost",
+        ]
     }
     woe_artifact = joblib.load(output_dir / "scorecard/logistic_woe.joblib")
     raw_features = sorted(
@@ -160,9 +174,18 @@ def _render_hcms_metric_curves(output_dir: Path) -> list[Path]:
         values = pd.DataFrame(transformed, columns=names, index=test.index)
         if model_name == "logistic_raw":
             values = artifact["scaler"].transform(values)
-        elif model_name == "xgboost":
+        elif "transformed_features" in artifact:
             values = values[artifact["transformed_features"]]
         predictions[model_name] = artifact["model"].predict_proba(values)[:, 1]
+    ensemble_input = {
+        name: {"test": scores} for name, scores in predictions.items()
+    }
+    predictions.update(
+        {
+            name: scores["test"]
+            for name, scores in _equal_weight_ensembles(ensemble_input).items()
+        }
+    )
     predictions["logistic_woe"] = woe_artifact["model"].predict_proba(
         _woe_transform(test, woe_artifact["bins"], woe_artifact["tables"])
     )[:, 1]
@@ -220,11 +243,11 @@ def _render_importance_tables(output_dir: Path) -> list[Path]:
     rendered = []
     for csv_path in sorted((output_dir / "models/feature_importance").glob("*.csv")):
         table = pd.read_csv(csv_path)
-        value_column = (
-            "importance" if "importance" in table else "importance_value"
-        )
+        value_column = "importance" if "importance" in table else "importance_value"
         if not {"feature", value_column}.issubset(table.columns):
             continue
+        table = normalize_feature_importance(table, value_column=value_column)
+        table.to_csv(csv_path, index=False)
         png_path = csv_path.with_suffix(".png")
         write_feature_importance_plot(
             table,
@@ -250,6 +273,22 @@ def render_hcdr(output_dir: Path, *, with_predictions: bool = False) -> list[Pat
         title="Home Credit Default Risk model metrics",
     )
     rendered.append(metrics_plot)
+    for metric, label in [("auc", "ROC AUC"), ("gini", "Gini"), ("ks", "KS")]:
+        benchmark_plot = metrics_dir / f"{metric}_benchmark.png"
+        write_ranked_metric_benchmark_plot(
+            metrics,
+            benchmark_plot,
+            metric=metric,
+            title=f"Home Credit Default Risk — {label} benchmark",
+        )
+        rendered.append(benchmark_plot)
+    dashboard_plot = metrics_dir / "benchmark_dashboard.png"
+    write_benchmark_dashboard(
+        metrics,
+        dashboard_plot,
+        title="Home Credit Default Risk — benchmark dashboard",
+    )
+    rendered.append(dashboard_plot)
 
     cutoffs = pd.read_csv(output_dir / "scorecard/cutoffs.csv")
     cutoff_plot = output_dir / "scorecard/approval_bad_rate.png"
@@ -280,6 +319,15 @@ def render_hcms(output_dir: Path, *, with_predictions: bool = False) -> list[Pat
         title="Home Credit Model Stability model metrics",
     )
     rendered.append(metrics_plot)
+    for metric, label in [("auc", "ROC AUC"), ("gini", "Gini"), ("ks", "KS")]:
+        benchmark_plot = metrics_dir / f"{metric}_benchmark.png"
+        write_ranked_metric_benchmark_plot(
+            metrics,
+            benchmark_plot,
+            metric=metric,
+            title=f"Home Credit Model Stability — {label} benchmark",
+        )
+        rendered.append(benchmark_plot)
 
     bad_rate_week = pd.read_csv(output_dir / "eda/bad_rate_by_week.csv")
     bad_rate_plot = output_dir / "eda/bad_rate_by_week.png"
