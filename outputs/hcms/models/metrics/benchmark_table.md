@@ -2,7 +2,8 @@
 
 ## Metric contract
 
-- AUC, Brier, and KS use the persisted held-out test split.
+- AUC and KS use persisted held-out test metrics.
+- Brier uses persisted held-out test predictions; it is N/A when an external run did not export those probabilities.
 - Lower Brier is better; higher AUC, KS, and Stability are better.
 - Active features count non-zero persisted global-importance entries; ensembles and models without a native persisted importance are N/A.
 - Stability: the week-based metric `mean(gini) + 88 * min(0, slope) - 0.5 * residual_std` over 19 out-of-time test weeks.
@@ -13,19 +14,19 @@
 
 | Model | AUC | Brier | KS | Active features | Stability | Monotonic violations | Explanation time |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| LightGBM + SHAP | 0.830983 | 0.020465 | 0.508261 | 172 | 0.632246 | N/A | 2.277964 |
-| Boosting ensemble | 0.830825 | 0.020362 | 0.512455 | N/A | 0.630952 | N/A | N/A |
-| LightGBM + XGBoost + CatBoost | 0.830632 | 0.020354 | 0.512998 | N/A | 0.630392 | N/A | N/A |
-| LightGBM + CatBoost | 0.830582 | 0.020342 | 0.512503 | N/A | 0.630473 | N/A | N/A |
-| HistGradientBoosting | 0.829695 | 0.020441 | 0.512187 | N/A | 0.628804 | N/A | N/A |
-| XGBoost | 0.829087 | 0.020434 | 0.511671 | 80 | 0.626988 | N/A | 0.379502 |
-| CatBoost | 0.826387 | 0.020329 | 0.503434 | 79 | 0.620985 | N/A | 12.012315 |
-| All-tree ensemble | 0.824513 | 0.042043 | 0.500359 | N/A | 0.619604 | N/A | N/A |
-| Random Forest | 0.815398 | 0.169593 | 0.487949 | 80 | 0.597077 | N/A | N/A |
-| LightGBM + CatBoost + Extra Trees | 0.806599 | 0.046275 | 0.484218 | N/A | 0.589728 | N/A | N/A |
-| Monotonic LightGBM | 0.789966 | 0.020734 | 0.449310 | 7 | 0.544192 | 0 | 0.241708 |
-| WoE scorecard | 0.783872 | 0.020888 | 0.445760 | 7 | 0.529584 | 0 | 0.002747 |
-| Extra Trees | 0.726580 | 0.232020 | 0.346843 | 80 | 0.307400 | N/A | N/A |
-| GAM | 0.707505 | 0.021247 | 0.320953 | 7 | 0.329556 | N/A | 0.000065 |
-| Logistic | 0.667722 | 0.021540 | 0.240345 | 244 | 0.149123 | N/A | 0.000289 |
+| LightGBM + SHAP | 0.830990 | 0.020464 | 0.508316 | 171 | 0.632235 | N/A | 2.151808 |
+| Boosting ensemble | 0.830895 | 0.020398 | 0.511410 | N/A | 0.631343 | N/A | N/A |
+| LightGBM + XGBoost + CatBoost | 0.830579 | 0.020401 | 0.511543 | N/A | 0.630623 | N/A | N/A |
+| LightGBM + CatBoost | 0.830391 | 0.020387 | 0.511740 | N/A | 0.630360 | N/A | N/A |
+| HistGradientBoosting | 0.829881 | 0.020450 | 0.509605 | N/A | 0.629417 | N/A | N/A |
+| XGBoost | 0.829274 | 0.020487 | 0.509198 | 156 | 0.627646 | N/A | 0.245751 |
+| CatBoost | 0.826199 | 0.020401 | 0.503209 | 179 | 0.621252 | N/A | 12.862400 |
+| All-tree ensemble | 0.813377 | 0.043158 | 0.478653 | N/A | 0.599673 | N/A | N/A |
+| Random Forest | 0.804711 | 0.179692 | 0.458930 | 216 | 0.578134 | N/A | N/A |
+| Monotonic LightGBM | 0.789966 | 0.020734 | 0.449310 | 7 | 0.544192 | 0 | 0.226033 |
+| LightGBM + CatBoost + Extra Trees | 0.787630 | 0.046939 | 0.471654 | N/A | 0.552685 | N/A | N/A |
+| WoE scorecard | 0.783872 | 0.020888 | 0.445760 | 7 | 0.529584 | 0 | 0.003239 |
+| GAM | 0.707505 | 0.021247 | 0.320953 | 7 | 0.329556 | N/A | 0.000072 |
+| Extra Trees | 0.688772 | 0.236052 | 0.305198 | 226 | 0.349000 | N/A | N/A |
+| Logistic | 0.667722 | 0.021540 | 0.240345 | 244 | 0.149123 | N/A | 0.000171 |
 | EBM (not implemented) | N/A | N/A | N/A | N/A | N/A | N/A | N/A |

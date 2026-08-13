@@ -5,7 +5,7 @@
     "test": 61503
   },
   "fit_seconds": {
-    "gam": 3.1891658200001984,
-    "monotonic_lightgbm": 5.652927981000175
+    "gam": 5.011864039999637,
+    "monotonic_lightgbm": 9.295696610999585
   }
 }

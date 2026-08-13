@@ -4,7 +4,7 @@ set -euo pipefail
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 REMOTE_HOST="vinrobotics"
 REMOTE_ROOT="~/Dung_Workspace/testing"
-DIRECTORIES=(docs notebooks datasets outputs)
+DIRECTORIES=(docs)
 
 for command in rsync ssh; do
   if ! command -v "${command}" >/dev/null 2>&1; then

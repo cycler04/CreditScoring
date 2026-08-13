@@ -346,7 +346,7 @@ def _fit_additional_tree_models(
     imputer: SimpleImputer,
     output_dir: Path,
 ) -> tuple[dict[str, dict[str, np.ndarray]], dict[str, str]]:
-    """Fit bounded CPU tree benchmarks on a shared top-feature subset."""
+    """Fit bounded CPU tree benchmarks on the full transformed feature set."""
     split_values = {
         "train": x_train[benchmark_features],
         "valid": x_valid[benchmark_features],
@@ -881,17 +881,7 @@ def run_pipeline(
         title="logistic_raw — absolute coefficient importance",
     )
 
-    xgboost_features = (
-        pd.DataFrame(
-            {
-                "feature": x_train.columns,
-                "importance": lightgbm_model.feature_importances_,
-            }
-        )
-        .sort_values("importance", ascending=False)["feature"]
-        .head(80)
-        .tolist()
-    )
+    xgboost_features = list(x_train.columns)
     xgboost_parameters = {
         "n_estimators": 400,
         "learning_rate": 0.04,
@@ -1277,9 +1267,9 @@ def run_pipeline(
             **additional_devices,
         },
         "benchmark_protocol": (
-            "Added tree models use the same top 80 LightGBM-ranked transformed "
-            "features and out-of-time week split; ensembles use fixed equal "
-            "weights without test-week tuning."
+            "All tree models use the full set of transformed features (244 columns) "
+            "and out-of-time week split; ensembles use fixed equal weights without "
+            "test-week tuning."
         ),
         "ensemble_members": ENSEMBLE_MEMBERS,
         "stage_metrics": stage_rows,

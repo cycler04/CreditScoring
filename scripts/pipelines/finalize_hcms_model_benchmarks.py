@@ -211,7 +211,7 @@ def main() -> None:
         "catboost": "cpu",
     }
     summary["benchmark_protocol"] = (
-        "Added tree models use the same top 80 LightGBM-ranked transformed features "
+        "All tree models use the full set of transformed features (244 columns) "
         "and out-of-time week split; ensembles use fixed equal weights without "
         "test-week tuning."
     )

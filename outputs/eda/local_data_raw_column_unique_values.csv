@@ -1,0 +1,42 @@
+﻿column_index,column_name,domain_table,description,data_type,total_rows,non_null_count,null_count,null_percentage,unique_count,unique_values
+1,user_id,id,User ID,str,10,10,0,0.0%,10,f4529fcafc3a408c | 3403c899a4b50adf | f0d1444bfbb38743 | 215654b14680e104 | 5e224db784711726 | 17ff2ac3fd85ad5e | a19cc489f740a392 | 2c0c010a9b1fdba9 | 3b149ac68ff2adb3 | 8ebfa18d2e5b7441
+2,age_group,customer_profile,Nhóm tuổi,str,10,10,0,0.0%,5,23-30 | 18-23 | 31-40 | 41-50 | 60++
+3,gender,customer_profile,Giới tính,str,10,10,0,0.0%,2,Nam | Nữ
+4,city,customer_profile,Tỉnh thành,str,10,8,2,20.0%,6,Tỉnh Đồng Nai | Tỉnh Quảng Ninh | Thành phố Hà Nội | Tỉnh Bình Định | Tỉnh Đắk Lắk | Tỉnh Đồng Tháp
+5,household_type,customer_profile,Loại nhà ở (theo nguồn HĐ Internet),str,10,10,0,0.0%,2,Nhà thường | Công ty
+6,income_band_est,customer_profile,Nhóm thu nhập (ước tính từ sử dụng dịch vụ),str,10,8,2,20.0%,3,Trên 18trđ đến 32trđ | Trên 10trđ đến 18trđ | Trên 5trđ đến 10trđ
+7,active_domain_count,customer_profile,Số dịch vụ FPT đã dùng,str,10,10,0,0.0%,2,2-3 services | 4+ services
+8,tenure_group,customer_profile,Thâm niên dùng dịch dịch FPT,str,10,10,0,0.0%,2,3-5 năm | >5 năm
+9,recency_group,customer_profile,Thời gian gần đây có sử dụng dịch vụ FPT,str,10,10,0,0.0%,5,1-2 năm | <3 tháng | 3-6 tháng | 2-3 năm | 3-5 năm
+10,app_count_group,customer_profile,Số App đã đăng ký,str,10,4,6,60.0%,1,1 app
+11,app_tenure_group,customer_profile,Thâm niên dùng App,str,10,4,6,60.0%,2,3-6 tháng | <3 tháng
+12,app_recency_days,customer_profile,Thời gian gần đâu có dùng App,str,10,4,6,60.0%,3,>90 ngày | 31-90 ngày | <7 ngày
+13,loyalty_points,customer_profile,Nhóm điểm Loyalty hiện tại,str,10,6,4,40.0%,4,150-400 | Trên 850 | 400-850 | Đến 150
+14,loyalty_tier,customer_profile,Nhóm điểm Loyalty từng đạt,str,10,6,4,40.0%,4,Đến 250 | Trên 1.500 | 250-700 | 700-1.500
+15,telco_install_date,telco_feature,Ngày lắp đặt Internet,datetime64[us],10,5,5,50.0%,5,2022-06-11 | 2013-07-15 | 2016-02-18 | 2022-09-20 | 2013-04-01
+16,telco_package_code,telco_feature,Gói cước hiện tại,str,10,5,5,50.0%,4,Giga | FTTH - Super100 | Sky | FTTH - Super80
+17,telco_contract_status,telco_feature,Trạng thái HĐ Internet,str,10,5,5,50.0%,1,Huy
+18,telco_cancel_date,telco_feature,Ngày huỷ HĐ Internet,datetime64[us],10,5,5,50.0%,5,2024-06-17 | 2022-04-29 | 2023-05-31 | 2023-08-25 | 2022-03-17
+19,telco_inbound_count_180d,telco_feature,Tổng số cuộc gọi Inbound,str,10,5,5,50.0%,1,Không có
+20,telco_outbound_count_180d,telco_feature,Tổng số cuộc gọi Outbound,str,10,5,5,50.0%,1,Không có
+21,telco_ticket_count_180d,telco_feature,Tổng số ticket hỗ trợ,str,10,5,5,50.0%,1,Không có
+22,telco_internet_usage_group,telco_feature,Nhu cầu sử dụng Internet,str,10,3,7,70.0%,3,Trên 350GB/tháng | 220 - 350GB/tháng | 120 - 220GB/tháng
+23,telco_internet_trend_group,telco_feature,Xu hướng dùng Internet,str,10,3,7,70.0%,3,Tăng | Giảm | Ổn định
+24,telco_payment_method,telco_feature,Phương thức thanh toán Internet,str,10,1,9,90.0%,1,Khác
+25,telco_monetary_group,telco_feature,Nhóm tiền thanh toán Internet,str,10,3,7,70.0%,2,1M - 2M | 2M - 4M
+26,retail_last_order_date,retail_feature,Đơn hàng gần nhất,float64,10,0,10,100.0%,0,Không có dữ liệu (100% missing)
+27,retail_order_count_12m,retail_feature,Số đơn đã mua,float64,10,0,10,100.0%,0,Không có dữ liệu (100% missing)
+28,retail_gmv_12m,retail_feature,Tổng giá trị mua,float64,10,0,10,100.0%,0,Không có dữ liệu (100% missing)
+29,retail_aov_12m,retail_feature,Giá trị trung bình môi đơn,float64,10,0,10,100.0%,0,Không có dữ liệu (100% missing)
+30,retail_max_device_product_category_segment_24m,retail_feature,Ngành hàng giá trị đã mua,float64,10,0,10,100.0%,0,Không có dữ liệu (100% missing)
+31,retail_max_device_product_price_segment_24m,retail_feature,Giá trị thiết bị đã mua,float64,10,0,10,100.0%,0,Không có dữ liệu (100% missing)
+32,retail_first_phone_order_date_12m,retail_feature,Có mua điện thoại,float64,10,0,10,100.0%,0,Không có dữ liệu (100% missing)
+33,retail_tradein_count_24m,retail_feature,Có mua thu cũ đỗi mới,float64,10,0,10,100.0%,0,Không có dữ liệu (100% missing)
+34,retail_utility_recency_group,retail_feature,Khoảng cách thanh toán điện nước,float64,10,0,10,100.0%,0,Không có dữ liệu (100% missing)
+35,retail_utility_frequency_group,retail_feature,Tần suất thanh toán điện nước,float64,10,0,10,100.0%,0,Không có dữ liệu (100% missing)
+36,healthcare_last_order_date,pharmacy_feature,Đơn hành gần nhất,str,10,6,4,40.0%,2,1-3 tháng | Trong 30 ngày
+37,healthcare_order_count_6m,pharmacy_feature,Số đơn đã mua,str,10,6,4,40.0%,3,1 đơn | Trên 6 đơn | 4-6 đơn
+38,healthcare_spend_6m,pharmacy_feature,Tổng giá trị mua,str,10,6,4,40.0%,3,"200-500K | Trên 1,5tr | 500K-1,5tr"
+39,healthcare_aov_6m,pharmacy_feature,Giá trị trung bình môi đơn,str,10,6,4,40.0%,3,100-250K | Trên 250K | Đến 100K
+40,healthcare_repeat_purchase_rate_6m,pharmacy_feature,Tầng suất mua lại,str,10,6,4,40.0%,2,Không có | 20-40
+41,healthcare_vaccine_visit_count_12m,pharmacy_feature,Số lần tiêm vaccine,str,10,6,4,40.0%,2,Không có | 1 lần
